@@ -1,12 +1,17 @@
 import { useState } from "react";
 import "./App.css";
+import Shell from "./components/shell/Shell";
+import Router from "./components/routes/Routes";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div> 
-      <div className="App">Hello</div>
+    <div>
+      <BrowserRouter>
+        <Shell view={<Router />} />
+      </BrowserRouter>
     </div>
   );
 }
