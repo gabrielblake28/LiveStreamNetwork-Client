@@ -1,3 +1,3 @@
 export default function EventScrollPage() {
-  return <div>Hello</div>;
+  return <div style={{ color: "white"}}></div>;
 }
