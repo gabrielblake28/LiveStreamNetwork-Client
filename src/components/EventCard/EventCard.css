@@ -1,0 +1,54 @@
+.card-row-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-column-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.event-card-details {
+  display: flex;
+  flex-direction: row;
+  color: white;
+}
+
+.event-card {
+  margin: 5px;
+  width: 325px;
+  height: 185px;
+}
+
+.title-creator-timestamp {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-avatar {
+  margin: 2px;
+}
+
+.event-title {
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: small;
+  color: #ffffff;
+}
+
+.event-creator-name {
+  font-size: small;
+  margin: 5px 0 5px 5px;
+  color: #aaaaaa;
+}
+
+.event-timestamp {
+  font-size: small;
+  margin-left: 5px;
+  color: #aaaaaa;
+}
+
+@media screen and (min-width: 1450px) {
+  .event-card {
+    margin: 20px;
+  }
+}

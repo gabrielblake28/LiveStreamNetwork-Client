@@ -1,9 +1,7 @@
 // import Avatar from "@mui/material/Avatar";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import EventNoteIcon from "@mui/icons-material/EventNote";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
@@ -23,13 +21,23 @@ import {
   ListItemIcon,
   createTheme,
   ThemeProvider,
+  makeStyles,
+  Theme,
 } from "@mui/material";
 import { useState } from "react";
 import { ClassNames } from "@emotion/react";
 
-// const CustomizedMenu = styled(Menu)`
-//   background-color: red;
-// `;
+const theme = createTheme({
+  components: {
+    MuiMenu: {
+      styleOverrides: {
+        list: {
+          backgroundColor: "#18181b",
+        },
+      },
+    },
+  },
+});
 
 export default function TopNav() {
   const [auth, setAuth] = useState(true);
@@ -56,7 +64,6 @@ export default function TopNav() {
           />
         </div>
         <Typography variant="h5">Name</Typography>
-
         <div className="top-nav-followers-link"></div>
       </div>
       <div className="top-nav-center-layout">
@@ -95,61 +102,67 @@ export default function TopNav() {
           </Tooltip>
         </div>
         <div className="top-nav-user-avatar">
-          <IconButton onClick={handleMenu}>
+          <IconButton style={{ color: "#00C8AF" }} onClick={handleMenu}>
             <Avatar
-              style={{ color: "black", backgroundColor: "#00C8AF" }}
-              sx={{ width: "30px", height: "30px" }}
+              sx={{
+                width: "30px",
+                height: "30px",
+                backgroundColor: "#00C8AF",
+                color: "black",
+              }}
             />
           </IconButton>
-          {/* <ThemeProvider theme={theme}> */}
-          <Menu
-            sx={{ mt: "35px" }}
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <PermIdentityOutlinedIcon
-                  sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-                />
-              </ListItemIcon>
-              <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-                Profile
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <StarBorderOutlinedIcon
-                  sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-                />
-              </ListItemIcon>
-              <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-                Subscriptions
-              </Typography>
-            </MenuItem>
-
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <LogoutOutlinedIcon
-                  sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-                />
-              </ListItemIcon>
-              <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-                Logout
-              </Typography>
-            </MenuItem>
-          </Menu>
-          {/* </ThemeProvider> */}
+          <ThemeProvider theme={theme}>
+            <Menu
+              sx={{
+                mt: "45px",
+              }}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <PermIdentityOutlinedIcon
+                    sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
+                  />
+                </ListItemIcon>
+                <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
+                  Profile
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <StarBorderOutlinedIcon
+                    sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
+                  />
+                </ListItemIcon>
+                <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
+                  Subscriptions
+                </Typography>
+              </MenuItem>
+              <Divider variant="middle" color="white" />
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <LogoutOutlinedIcon
+                    sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
+                  />
+                </ListItemIcon>
+                <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
+                  Logout
+                </Typography>
+              </MenuItem>
+            </Menu>
+          </ThemeProvider>
         </div>
       </div>
     </div>
