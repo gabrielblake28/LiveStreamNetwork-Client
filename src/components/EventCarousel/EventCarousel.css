@@ -1,5 +1,6 @@
 .carousel {
   width: 100%;
+  height: 100%;
 }
 
 .slick-slide > div {
@@ -10,13 +11,66 @@
   margin: 0 -10px;
 }
 
-.slick-prev {
-  left: 2% !important;
-  top: 105% !important;
+.carousel:hover .next {
+  display: block;
+}
+
+.carousel:hover .prev {
+  display: block;
+}
+
+.carousel:hover .section-title {
+  color: #ffffff;
+}
+
+.section-title {
+  margin: 30px 0 5px 15px;
+  color: #e5e5e5;
+}
+
+/* .section-title:hover {
+  color: #ffffff;
+  cursor: default;
+} */
+
+.arrow {
+  position: absolute;
+  cursor: pointer;
+}
+
+.arrow svg {
+  /* transition: color 300ms; */
+  color: #a265fd;
+  background-size: 30px;
+  width: 20px;
+  height: 20px;
+}
+
+.arrow svg:hover {
+  /* transition: 0.5s ease-out; */
+  color: #a970ff;
+  width: 22px;
+  height: 22px;
+}
+
+.next {
+  display: none;
+  right: 3%;
+  top: 100%;
   z-index: 1;
 }
-.slick-next {
-  right: 2% !important;
-  top: 105% !important;
+
+.prev {
+  display: none;
+  left: 3%;
+  top: 100%;
   z-index: 1;
+}
+
+.event-card-divider {
+  background-color: #464648;
+}
+
+.slider-margin {
+  margin-bottom: 30px;
 }

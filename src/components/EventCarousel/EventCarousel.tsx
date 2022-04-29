@@ -4,9 +4,11 @@ import schooled from "../../assets/schooled.jpg";
 import mizkif from "../../assets/mizkif.jpg";
 import awards from "../../assets/awards.jpg";
 import qt from "../../assets/qt.jpg";
-import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import { IconButton } from "@mui/material";
+// import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+// import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import { Divider, IconButton, Typography } from "@mui/material";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
 import "./EventCarousel.css";
@@ -131,7 +133,7 @@ const EventCards = [
 const NextArrow = ({ onClick }) => {
   return (
     <div className="arrow next" onClick={onClick}>
-      <FaArrowRight />
+      <ArrowForwardIosRoundedIcon />
     </div>
   );
 };
@@ -139,22 +141,24 @@ const NextArrow = ({ onClick }) => {
 const PrevArrow = ({ onClick }) => {
   return (
     <div className="arrow prev" onClick={onClick}>
-      <FaArrowLeft />
+      <ArrowBackIosNewRoundedIcon />
     </div>
   );
 };
 
-export default function EventCarousel() {
+export default function EventCarousel(props) {
   const settings = {
     swipe: false,
     dots: false,
     infinite: false,
     speed: 300,
     slidesToShow: 7,
-    slidesToScroll: 2,
+    slidesToScroll: 4,
     initialSlide: 0,
     arrows: true,
     accessability: true,
+    nextArrow: <NextArrow onClick={onclick} />,
+    prevArrow: <PrevArrow onClick={onclick} />,
     responsive: [
       {
         breakpoint: 2500,
@@ -207,23 +211,34 @@ export default function EventCarousel() {
   };
   return (
     <div className="carousel">
-      <h2 style={{ color: "white" }}>Sponsored Events</h2>
-      <Slider
-        // beforeChange={(current, next) => setImageIndex(next)}
-        {...settings}
-      >
-        {EventCards.map((eventCard) => (
-          <div>
-            <EventCard
-              eventTitle={eventCard.eventTitle}
-              creatorName={eventCard.creatorName}
-              eventTime={eventCard.eventTime}
-              eventImg={eventCard.eventImg}
-              profilePic={eventCard.profilePic}
-            ></EventCard>
-          </div>
-        ))}
-      </Slider>
+      <div className="section-title">
+        <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
+          {props.sectionTitle}
+        </Typography>
+      </div>
+      <div className="slider-margin">
+        <Slider
+          // beforeChange={(current, next) => setImageIndex(next)}
+          {...settings}
+        >
+          {EventCards.map((eventCard) => (
+            <div>
+              <EventCard
+                eventTitle={eventCard.eventTitle}
+                creatorName={eventCard.creatorName}
+                eventTime={eventCard.eventTime}
+                eventImg={eventCard.eventImg}
+                profilePic={eventCard.profilePic}
+              ></EventCard>
+            </div>
+          ))}
+        </Slider>
+      </div>
+      <Divider
+        className="event-card-divider"
+        color="primary"
+        variant="middle"
+      />
     </div>
   );
 }
