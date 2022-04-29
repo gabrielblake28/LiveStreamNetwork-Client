@@ -1,15 +1,15 @@
-.center-event-card {
+/* .center-event-card {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-@media screen and (min-width: 1450px) {
+/* @media screen and (min-width: 1450px) {
   .center-event-card {
     margin-top: 100px;
   }
-}
+} */
 
 .event-card-divider {
   background-color: #464648;

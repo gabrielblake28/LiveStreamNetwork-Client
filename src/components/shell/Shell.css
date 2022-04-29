@@ -3,6 +3,7 @@
   width: 100vw;
   height: auto;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .twe-shell-header {

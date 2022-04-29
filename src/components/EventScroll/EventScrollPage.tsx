@@ -1,6 +1,18 @@
 import { Divider } from "@mui/material";
 import EventCard from "../EventCard/EventCard";
 import "./EventScrollPage.css";
+import mizkif from "../../assets/mizkif.jpg";
+import mock1 from "../../assets/mockTN1.jpg";
+import mock2 from "../../assets/mockTN2.jpg";
+import mock3 from "../../assets/mockTN3.jpg";
+import schooled from "../../assets/schooled.jpg";
+import awards from "../../assets/awards.jpg";
+import qt from "../../assets/qt.jpg";
+import maya from "../../assets/maya.jpg";
+import alveus from "../../assets/alveus.jpg";
+import asmon from "../../assets/asmon.jpg";
+import transmog from "../../assets/transmog.jpg";
+import EventCarousel from "../EventCarousel/EventCarousel";
 
 // const queryString = window.location.search;
 
@@ -14,24 +26,27 @@ console.log(document.location.hash);
 export default function EventScrollPage() {
   return (
     <div>
-      <div style={{ color: "white" }}>
-        {" "}
-        <a href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3500/auth/twitch/callback&scope=user:read:email&claims=%7B%22id_token%22%3A%7B%22email%22%3Anull%2C%22email_verified%22%3Anull%7D%2C%22userinfo%22%3A%7B%22picture%22%3Anull%7D%7D">
-          Connect with Twitch
-        </a>
-      </div>
-      <div className="center-event-card">
-        <EventCard />
-      </div>
+      <EventCarousel></EventCarousel>
+
       <Divider
         className="event-card-divider"
-        // style={{ marginTop: "20px" }}
         color="primary"
         variant="middle"
       />
-      <div className="center-event-card">
-        <EventCard />
-      </div>
+      <EventCarousel></EventCarousel>
+
+      <Divider
+        className="event-card-divider"
+        color="primary"
+        variant="middle"
+      />
+      <EventCarousel></EventCarousel>
+
+      <Divider
+        className="event-card-divider"
+        color="primary"
+        variant="middle"
+      />
     </div>
   );
 }

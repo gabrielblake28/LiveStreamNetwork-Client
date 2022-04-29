@@ -6,6 +6,8 @@ import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { styled } from "@mui/material/styles";
+import FormHelperTexts from "@mui/material/FormHelperText";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 // import { makeStyles } from "@material-ui/core/styles";
 import "./TopNav.css";
 import {
@@ -23,6 +25,12 @@ import {
   ThemeProvider,
   makeStyles,
   Theme,
+  Modal,
+  Button,
+  Box,
+  TextField,
+  FormHelperText,
+  TextareaAutosize,
 } from "@mui/material";
 import { useState } from "react";
 import { ClassNames } from "@emotion/react";
@@ -42,6 +50,9 @@ const theme = createTheme({
 export default function TopNav() {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
+  const handleModalOpen = () => setOpen(true);
+  const handleModalClose = () => setOpen(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
@@ -54,6 +65,26 @@ export default function TopNav() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const CssTextField = styled(TextField)({
+    "& label.Mui-focused": {
+      color: "#aaaaaa",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "green",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "red",
+      },
+      "&:hover fieldset": {
+        borderColor: "#aaaaaa",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "black",
+      },
+    },
+  });
 
   return (
     <div className="top-nav-wrapper">
@@ -96,7 +127,11 @@ export default function TopNav() {
       <div className="top-nav-right-layout">
         <div className="top-nav-notifications">
           <Tooltip title="Create Event">
-            <IconButton style={{ color: "#ffffff" }} aria-label="delete">
+            <IconButton
+              style={{ color: "#ffffff" }}
+              aria-label="Create-Event"
+              onClick={handleModalOpen}
+            >
               <AddBoxOutlinedIcon sx={{ width: "22px", height: "22px" }} />
             </IconButton>
           </Tooltip>
@@ -162,6 +197,82 @@ export default function TopNav() {
                 </Typography>
               </MenuItem>
             </Menu>
+            <div>
+              <Modal open={open} onClose={handleModalClose}>
+                <div className="create-event-modal-wrapper">
+                  <div className="create-event-header-wrapper">
+                    <div className="create-event-header">
+                      <Typography color="#aaaaaa" variant="h5">
+                        Create an Event
+                      </Typography>
+                    </div>
+                    <div className="create-event-close-button">
+                      <IconButton>
+                        <CloseRoundedIcon
+                          sx={{
+                            width: "20px",
+                            height: "20px",
+                            color: "#aaaaaa",
+                            minHeight: 0,
+                            minWidth: 0,
+                            padding: 0,
+                          }}
+                        ></CloseRoundedIcon>
+                      </IconButton>
+                    </div>
+                  </div>
+                  <div className="create-event-title">
+                    <TextField
+                      autoComplete="off"
+                      sx={{
+                        "& label.Mui-focused": {
+                          color: "red",
+                        },
+                        "& .MuiInput-underline:before": {
+                          borderBottomColor: "#aaaaaa",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "red",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                          "&.Mui-focused fieldset": {
+                            borderColor: "white",
+                          },
+                        },
+
+                        input: { color: "#c2c2c2", fontSize: "small" },
+                        label: { color: "#aaaaaa" },
+                      }}
+                      hiddenLabel
+                      variant="standard"
+                    />
+                    <FormHelperTexts>
+                      <Typography color="#aaaaaa" variant="caption">
+                        Event Title
+                      </Typography>
+                    </FormHelperTexts>
+                    <div className="create-event-description">
+                      <TextareaAutosize
+                        aria-label="minimum height"
+                        minRows={3}
+                        // placeholder="Description"
+                        style={{
+                          width: 450,
+                          background: "transparent",
+                          color: "#c2c2c2",
+                          marginTop: "20px",
+                        }}
+                      />
+                      <FormHelperTexts>
+                        <Typography color="#aaaaaa" variant="caption">
+                          Description
+                        </Typography>
+                      </FormHelperTexts>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            </div>
           </ThemeProvider>
         </div>
       </div>

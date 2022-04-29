@@ -1,0 +1,22 @@
+.carousel {
+  width: 100%;
+}
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+.slick-prev {
+  left: 2% !important;
+  top: 105% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 2% !important;
+  top: 105% !important;
+  z-index: 1;
+}

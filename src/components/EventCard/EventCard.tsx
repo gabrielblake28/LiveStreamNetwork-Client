@@ -12,117 +12,54 @@ import {
 } from "@mui/material";
 import "./EventCard.css";
 import image2 from "../../assets/img2.jpg";
+// import mizkif from "../../assets/mizkif.jpg";
+import mock1 from "../../assets/mockTN1.jpg";
+import mock2 from "../../assets/mockTN2.jpg";
+import mock3 from "../../assets/mockTN3.jpg";
 
-export default function EventCard() {
+type EventCardProps = {
+  eventTitle: string;
+  creatorName: string;
+  eventTime: string;
+  eventImg: string;
+  profilePic: string;
+};
+
+export default function EventCard({
+  eventTitle,
+  creatorName,
+  eventTime,
+  eventImg,
+  profilePic,
+}: EventCardProps) {
   return (
-    <div className="card-row-wrapper">
-      <div className="card-column-wrapper">
-        <div>
-          <Card className="event-card">
-            <CardActionArea>
-              <CardMedia component="img" height="185" image={image2} />
-            </CardActionArea>
-          </Card>
-        </div>
-        <div className="event-card-details">
-          <div className="event-avatar">
-            <IconButton style={{ color: "#00C8AF" }}>
-              <Avatar
-                sx={{
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "#00C8AF",
-                  color: "black",
-                }}
-              />
-            </IconButton>
-          </div>
-          <div className="title-creator-timestamp">
-            <div className="event-title">OTK Schooled ft. Mizkif</div>
-            <div className="event-creator-name">Mizkif</div>
-            <div className="event-timestamp">10:00 AM - 1:00 PM PST</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <Card className="event-card">
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              Word of the Day
-            </Typography>
-            <Typography variant="h5" component="div">
-              {/* be{bull}nev{bull}o{bull}lent */}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              adjective
-            </Typography>
-            <Typography variant="body2">
-              well meaning and kindly.
-              <br />
-              {'"a benevolent smile"'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            {/* <Button size="small">Learn More</Button> */}
-          </CardActions>
-        </Card>
-      </div>
-      <div>
-        <Card className="event-card">
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              Word of the Day
-            </Typography>
-            <Typography variant="h5" component="div">
-              {/* be{bull}nev{bull}o{bull}lent */}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              adjective
-            </Typography>
-            <Typography variant="body2">
-              well meaning and kindly.
-              <br />
-              {'"a benevolent smile"'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            {/* <Button size="small">Learn More</Button> */}
-          </CardActions>
-        </Card>
-      </div>
-      <div>
+    <div className="card-column-wrapper">
+      <div className="card-hover-translate">
         <Card className="event-card">
           <CardActionArea>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Word of the Day
-              </Typography>
-              <Typography variant="h5" component="div">
-                {/* be{bull}nev{bull}o{bull}lent */}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                adjective
-              </Typography>
-              <Typography variant="body2">
-                well meaning and kindly.
-                <br />
-                {'"a benevolent smile"'}
-              </Typography>
-            </CardContent>
+            <CardMedia component="img" height="185" image={eventImg} />
           </CardActionArea>
         </Card>
+      </div>
+      <div className="event-card-details">
+        <div className="event-avatar">
+          <IconButton style={{ color: "#A970FF" }}>
+            <Avatar
+              src={profilePic}
+              sx={{
+                width: "40px",
+                height: "40px",
+                // backgroundColor: "#00C8AF",
+                // color: "black",
+              }}
+            />
+          </IconButton>
+        </div>
+        <div className="title-creator-timestamp">
+          <div className="event-title">{eventTitle}</div>
+          <div className="event-creator-name">{creatorName}</div>
+          <div className="event-timestamp">{eventTime}</div>
+        </div>
       </div>
     </div>
   );
