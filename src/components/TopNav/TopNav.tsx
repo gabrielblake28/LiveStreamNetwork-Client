@@ -8,6 +8,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { styled } from "@mui/material/styles";
 import FormHelperTexts from "@mui/material/FormHelperText";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import CreateEventModal from "../CreateEventModal/CreateEventModal";
 // import { makeStyles } from "@material-ui/core/styles";
 import "./TopNav.css";
 import {
@@ -200,7 +201,8 @@ export default function TopNav() {
             <div>
               <Modal open={open} onClose={handleModalClose}>
                 <div className="create-event-modal-wrapper">
-                  <div className="create-event-header-wrapper">
+                  <CreateEventModal />
+                  {/* <div className="create-event-header-wrapper">
                     <div className="create-event-header">
                       <Typography color="#aaaaaa" variant="h5">
                         Create an Event
@@ -269,7 +271,7 @@ export default function TopNav() {
                         </Typography>
                       </FormHelperTexts>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </Modal>
             </div>

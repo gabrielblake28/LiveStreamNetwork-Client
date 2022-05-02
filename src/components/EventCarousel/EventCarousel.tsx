@@ -165,7 +165,7 @@ export default function EventCarousel(props) {
         settings: {
           slidesToShow: 7,
           slidesToScroll: 4,
-          infinite: true,
+          // infinite: true,
         },
       },
       {
@@ -173,7 +173,6 @@ export default function EventCarousel(props) {
         settings: {
           slidesToShow: 6,
           slidesToScroll: 3,
-          initialSlide: 0,
         },
       },
       {
@@ -188,7 +187,6 @@ export default function EventCarousel(props) {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 2,
-          initialSlide: 0,
         },
       },
       {
@@ -196,7 +194,6 @@ export default function EventCarousel(props) {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 2,
-          initialSlide: 0,
         },
       },
       {
@@ -204,7 +201,6 @@ export default function EventCarousel(props) {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 0,
         },
       },
     ],

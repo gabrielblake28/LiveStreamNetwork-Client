@@ -26,27 +26,13 @@ console.log(document.location.hash);
 export default function EventScrollPage() {
   return (
     <div>
-      <EventCarousel sectionTitle={"Featured Live"}></EventCarousel>
-
-      {/* <Divider
-        className="event-card-divider"
-        color="primary"
-        variant="middle"
-      /> */}
+      <div className="center-event-carousel">
+        <EventCarousel sectionTitle={"Featured Live"}></EventCarousel>
+      </div>
       <EventCarousel sectionTitle={"Upcoming Events"}></EventCarousel>
 
-      {/* <Divider
-        className="event-card-divider"
-        color="primary"
-        variant="middle"
-      /> */}
       <EventCarousel sectionTitle={"Sponsored"}></EventCarousel>
-
-      {/* <Divider
-        className="event-card-divider"
-        color="primary"
-        variant="middle"
-      /> */}
+      <EventCarousel sectionTitle={"All"}></EventCarousel>
     </div>
   );
 }

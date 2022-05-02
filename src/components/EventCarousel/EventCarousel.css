@@ -4,12 +4,18 @@
 }
 
 .slick-slide > div {
-  margin: 0 10px;
+  margin: 0 13px;
 }
 
-.slick-list {
-  margin: 0 -10px;
-}
+/* .slick-slide > div {
+  display: grid;
+  place-items: center;
+  width: 95%;
+  margin-top: 50px;
+  margin: 0 10px;
+  height: 500px;
+  padding: 0px;
+} */
 
 .carousel:hover .next {
   display: block;
@@ -55,14 +61,14 @@
 
 .next {
   display: none;
-  right: 3%;
+  right: 2%;
   top: 100%;
   z-index: 1;
 }
 
 .prev {
   display: none;
-  left: 3%;
+  left: 2%;
   top: 100%;
   z-index: 1;
 }
