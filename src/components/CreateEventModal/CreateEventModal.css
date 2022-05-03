@@ -1,9 +1,11 @@
+@import "react-datepicker/dist/react-datepicker.css";
+
 .create-event-modal-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 400px;
   height: 550px;
   background-color: #18181b;
   /* border: 1px solid #aaaaaa; */
@@ -19,13 +21,10 @@
 }
 
 .create-event-title {
-  /* width: 100%; */
   display: flex;
   justify-self: center;
-  /* margin-left: 25px; */
-  margin: 20px 10px 10px 10px;
+  margin: 10px 20px 10px 20px;
   flex-direction: column;
-  /* margin-top: 30px; */
 }
 
 .create-event-header {
@@ -39,32 +38,62 @@
   margin-right: 15px;
 }
 
-.MuiFormLabel-root.Mui-focused {
-  /* color: red !important; */
-}
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #101012 !important;
-  border-radius: 0px;
-  /* color: red; */
-}
-
 .date-time-input-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: space-evenly;
 }
 
-.event-date-input {
-  width: 50%;
-  margin: 10px;
+.event-date-input:focus {
+  /* width: 150px; */
+  /* margin: 10px; */
+  border: 2px solid purple !important;
 }
 
 .event-start-time-input {
-  width: 25%;
-  margin: 10px;
+  /* width: 150px; */
+  /* margin: 10px; */
 }
 
 .event-end-time-input {
-  width: 25%;
-  margin: 10px;
+  /* width: 150px; */
+  /* margin: 10px; */
+}
+
+.select-event-date {
+  width: 150px;
+  margin: 5px;
+  height: 40px;
+  text-align: center;
+  color: #aaaaaa;
+  background-color: #101012;
+  border: none;
+  border-radius: 5px;
+}
+
+.select-event-start-time {
+  width: 75px;
+  height: 40px;
+  text-align: center;
+  margin: 5px;
+  color: #aaaaaa;
+  background-color: #101012;
+  border: none;
+  border-radius: 5px;
+}
+
+.select-event-end-time {
+  width: 75px;
+  height: 40px;
+  text-align: center;
+  margin: 5px;
+  color: #aaaaaa;
+  background-color: #101012;
+  border: none;
+  border-radius: 5px;
+}
+
+.create-event-description {
+  margin: 10px 20px 10px 20px;
 }

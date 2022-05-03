@@ -199,79 +199,9 @@ export default function TopNav() {
               </MenuItem>
             </Menu>
             <div>
-              <Modal open={open} onClose={handleModalClose}>
+              <Modal open={open}>
                 <div className="create-event-modal-wrapper">
-                  <CreateEventModal />
-                  {/* <div className="create-event-header-wrapper">
-                    <div className="create-event-header">
-                      <Typography color="#aaaaaa" variant="h5">
-                        Create an Event
-                      </Typography>
-                    </div>
-                    <div className="create-event-close-button">
-                      <IconButton>
-                        <CloseRoundedIcon
-                          sx={{
-                            width: "20px",
-                            height: "20px",
-                            color: "#aaaaaa",
-                            minHeight: 0,
-                            minWidth: 0,
-                            padding: 0,
-                          }}
-                        ></CloseRoundedIcon>
-                      </IconButton>
-                    </div>
-                  </div>
-                  <div className="create-event-title">
-                    <TextField
-                      autoComplete="off"
-                      sx={{
-                        "& label.Mui-focused": {
-                          color: "red",
-                        },
-                        "& .MuiInput-underline:before": {
-                          borderBottomColor: "#aaaaaa",
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "red",
-                        },
-                        "& .MuiOutlinedInput-root": {
-                          "&.Mui-focused fieldset": {
-                            borderColor: "white",
-                          },
-                        },
-
-                        input: { color: "#c2c2c2", fontSize: "small" },
-                        label: { color: "#aaaaaa" },
-                      }}
-                      hiddenLabel
-                      variant="standard"
-                    />
-                    <FormHelperTexts>
-                      <Typography color="#aaaaaa" variant="caption">
-                        Event Title
-                      </Typography>
-                    </FormHelperTexts>
-                    <div className="create-event-description">
-                      <TextareaAutosize
-                        aria-label="minimum height"
-                        minRows={3}
-                        // placeholder="Description"
-                        style={{
-                          width: 450,
-                          background: "transparent",
-                          color: "#c2c2c2",
-                          marginTop: "20px",
-                        }}
-                      />
-                      <FormHelperTexts>
-                        <Typography color="#aaaaaa" variant="caption">
-                          Description
-                        </Typography>
-                      </FormHelperTexts>
-                    </div>
-                  </div> */}
+                  <CreateEventModal onClose={handleModalClose} />
                 </div>
               </Modal>
             </div>
