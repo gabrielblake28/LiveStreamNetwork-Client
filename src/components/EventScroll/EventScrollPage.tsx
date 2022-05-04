@@ -16,20 +16,11 @@ import asmon from "../../assets/asmon.jpg";
 import transmog from "../../assets/transmog.jpg";
 import EventCarousel from "../EventCarousel/EventCarousel";
 
-// const queryString = window.location.search;
-
-// const urlParams = new URLSearchParams(queryString);
-
-// const code = urlParams.get("code");
-// console.log(code);
-
-// scopes:    channel:edit:commercial
-console.log(document.location.hash);
 export default function EventScrollPage() {
   return (
     <div>
       <div className="carousel-section">
-        <Typography
+        {/* <Typography
           variant="h5"
           sx={{
             marginLeft: "25px",
@@ -39,26 +30,11 @@ export default function EventScrollPage() {
           }}
         >
           Featured
-        </Typography>
-        <CustomCarousel slides={EventCards} />
+        </Typography> */}
+        <CustomCarousel slideTitle={"Featured"} slides={EventCards} />
       </div>
-      <div className="carousel-section">
-        <Typography
-          variant="h5"
-          sx={{
-            marginLeft: "25px",
-            color: "white",
-            fontFamily: "Source Sans Pro",
-          }}
-        >
-          Rising
-        </Typography>
-        <CustomCarousel slides={EventCards} />
-      </div>
-      {/* <EventCarousel sectionTitle={"Upcoming Events"}></EventCarousel>
 
-      <EventCarousel sectionTitle={"Sponsored"}></EventCarousel>
-      <EventCarousel sectionTitle={"All"}></EventCarousel> */}
+      <div></div>
     </div>
   );
 }

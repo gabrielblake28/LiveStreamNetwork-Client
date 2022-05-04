@@ -19,6 +19,7 @@
 
 .card-hover-translate:hover {
   transform: translateX(3px) translateY(-3px);
+  border-radius: 1rem;
 }
 
 .event-card-details {
@@ -28,7 +29,6 @@
 }
 
 .event-card {
-  width: 325px;
   height: 185px;
 }
 
@@ -63,8 +63,6 @@
   font-family: "Rubik", sans-serif;
 }
 
-/* @media screen and (min-width: 1450px) {
-  .event-card {
-    margin: 20px;
-  }
-} */
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  background-color: #101010 !important;
+}
