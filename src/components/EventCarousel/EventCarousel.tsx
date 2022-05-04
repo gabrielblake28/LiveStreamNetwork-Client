@@ -150,6 +150,7 @@ export default function EventCarousel(props) {
   const settings = {
     swipe: false,
     dots: false,
+    className: "slider variable-width",
     infinite: false,
     speed: 300,
     slidesToShow: 7,
@@ -157,14 +158,25 @@ export default function EventCarousel(props) {
     initialSlide: 0,
     arrows: true,
     accessability: true,
+
     nextArrow: <NextArrow onClick={onclick} />,
     prevArrow: <PrevArrow onClick={onclick} />,
     responsive: [
+      {
+        breakpoint: 2900,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 4,
+
+          // infinite: true,
+        },
+      },
       {
         breakpoint: 2500,
         settings: {
           slidesToShow: 7,
           slidesToScroll: 4,
+
           // infinite: true,
         },
       },
@@ -212,7 +224,7 @@ export default function EventCarousel(props) {
           {props.sectionTitle}
         </Typography>
       </div>
-      <div className="slider-margin">
+      <div className="slider-position">
         <Slider
           // beforeChange={(current, next) => setImageIndex(next)}
           {...settings}

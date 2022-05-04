@@ -1,21 +1,11 @@
 .carousel {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
 }
 
 .slick-slide > div {
   margin: 0 13px;
 }
-
-/* .slick-slide > div {
-  display: grid;
-  place-items: center;
-  width: 95%;
-  margin-top: 50px;
-  margin: 0 10px;
-  height: 500px;
-  padding: 0px;
-} */
 
 .carousel:hover .next {
   display: block;
@@ -30,14 +20,9 @@
 }
 
 .section-title {
-  margin: 30px 0 5px 15px;
+  margin: 30px 0 10px 15px;
   color: #e5e5e5;
 }
-
-/* .section-title:hover {
-  color: #ffffff;
-  cursor: default;
-} */
 
 .arrow {
   position: absolute;
@@ -48,28 +33,28 @@
   /* transition: color 300ms; */
   color: #a265fd;
   background-size: 30px;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 .arrow svg:hover {
-  /* transition: 0.5s ease-out; */
+  transition: 0.2s ease-out;
   color: #a970ff;
-  width: 22px;
-  height: 22px;
+  width: 35px;
+  height: 35px;
 }
 
 .next {
   display: none;
-  right: 2%;
-  top: 100%;
+  right: 1%;
+  top: 97%;
   z-index: 1;
 }
 
 .prev {
   display: none;
-  left: 2%;
-  top: 100%;
+  left: 1%;
+  top: 97%;
   z-index: 1;
 }
 
@@ -77,6 +62,6 @@
   background-color: #464648;
 }
 
-.slider-margin {
+.slider-position {
   margin-bottom: 30px;
 }

@@ -49,8 +49,6 @@ export default function EventCard({
               sx={{
                 width: "40px",
                 height: "40px",
-                // backgroundColor: "#00C8AF",
-                // color: "black",
               }}
             />
           </IconButton>

@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import FormHelperTexts from "@mui/material/FormHelperText";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import CreateEventModal from "../CreateEventModal/CreateEventModal";
+import CgMediaLive from "react-icons";
 // import { makeStyles } from "@material-ui/core/styles";
 import "./TopNav.css";
 import {
@@ -95,7 +96,9 @@ export default function TopNav() {
             sx={{ width: "35px", height: "35px", color: "#A970FF" }}
           />
         </div>
-        <Typography variant="h5">Name</Typography>
+        <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
+          WhatsLive
+        </Typography>
         <div className="top-nav-followers-link"></div>
       </div>
       <div className="top-nav-center-layout">
