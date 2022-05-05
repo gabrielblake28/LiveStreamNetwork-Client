@@ -1,24 +1,71 @@
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import "./CustomCarousel.css";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { EventCards } from "./CarouselData";
 import EventCard from "../EventCard/EventCard";
 import { Typography } from "@mui/material";
+import { sliderUnstyledClasses } from "@mui/base";
 
-// let transformValue = 0;
+window.addEventListener("resize", (e) => {
+  // Recalculate progress bar
+});
+
+const useWindowSize = () => {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    const updateSize = () => {
+      setSize([window.innerWidth, window.innerHeight]);
+    };
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+};
 
 export default function CustomCarousel({ slides, slideTitle }) {
   const [slideTransform, setSlideTransform] = useState(0);
   const [leftSliderOpacity, setLeftSliderOpacity] = useState(0);
-  const [rightSliderOpacity, setRightSliderOpacity] = useState(1);
   const [leftSliderCursor, setLeftSliderCursor] = useState("default");
+  const [rightSliderOpacity, setRightSliderOpacity] = useState(1);
   const [rightSliderCursor, setRightSliderCursor] = useState("pointer");
   const [index, setIndex] = useState(0);
+  const [screenSize, setScreenSize] = useWindowSize();
+  const [eventsToDisplay, setEventsToDisplay] = useState(7);
+  const [progressBar, setProgressBar] = useState(6);
+  const [activeRow, setActiveRow] = useState(0);
+
+  useEffect(() => {
+    console.log(screenSize);
+    // console.log(slideTransform);
+    if (screenSize > 2200) {
+      setEventsToDisplay(7);
+      setProgressBar(4);
+    } else if (screenSize > 1950) {
+      setEventsToDisplay(6);
+      setProgressBar(4);
+    } else if (screenSize > 1600) {
+      setEventsToDisplay(5);
+      setProgressBar(5);
+    } else if (screenSize >= 1250) {
+      setEventsToDisplay(4);
+      setProgressBar(6);
+    } else if (screenSize >= 900) {
+      setEventsToDisplay(8);
+      setProgressBar(24 / 3);
+    } else if (screenSize >= 550) {
+      setEventsToDisplay(2);
+      setProgressBar(12);
+    } else {
+      setEventsToDisplay(1);
+      setProgressBar(0);
+    }
+  });
 
   useEffect(() => {
     if (slideTransform === 0) {
-      setIndex(0);
+      // setIndex(0);
       setLeftSliderOpacity(0);
       setLeftSliderCursor("default");
     } else if (slideTransform !== 0) {
@@ -26,7 +73,7 @@ export default function CustomCarousel({ slides, slideTitle }) {
       setLeftSliderCursor("pointer");
     }
 
-    if (index >= slides.length - 4) {
+    if (index >= slides.length - eventsToDisplay) {
       setRightSliderOpacity(0);
       setRightSliderCursor("default");
     } else if (index < slides.length) {
@@ -36,20 +83,56 @@ export default function CustomCarousel({ slides, slideTitle }) {
   });
 
   function HandleLeftClick() {
-    if (slideTransform !== 0) {
+    if (slideTransform % 100 !== 0) {
+      setActiveRow(activeRow - 1);
+      setIndex(index - eventsToDisplay);
+      setSlideTransform(slideTransform - (slideTransform % 100));
+    } else if (slideTransform !== 0) {
+      setActiveRow(activeRow - 1);
+      setIndex(index - eventsToDisplay);
       setSlideTransform(slideTransform + 100);
-      setIndex(index - 4);
     }
   }
 
   function HandleRightClick() {
-    if (index < slides.length - 4) {
-      setIndex(index + 4);
-      setSlideTransform(slideTransform - 100);
+    if (slideTransform % 100 === 0) {
+      setActiveRow(activeRow + 1);
+      setIndex(index + eventsToDisplay);
+      if (index + eventsToDisplay + eventsToDisplay > slides.length) {
+        console.log(index);
+        const newTransform =
+          (100 / eventsToDisplay) * (slides.length - (index + eventsToDisplay));
+        console.log(index);
+        console.log(slideTransform);
+        console.log(newTransform);
+        setSlideTransform(slideTransform - newTransform);
+        console.log(slideTransform);
+        setRightSliderOpacity(0);
+        setRightSliderCursor("default");
+      } else if (index < slides.length - eventsToDisplay) {
+        setSlideTransform(slideTransform - 100);
+        console.log(setSlideTransform(slideTransform - 100));
+      }
     }
   }
+
+  const renderProgress = (): React.ReactNode[] => {
+    const progress: React.ReactNode[] = [];
+
+    for (let i = 0; i < progressBar; i++) {
+      progress.push(
+        <div
+          className={activeRow === i ? "progress-item active" : "progress-item"}
+        ></div>
+      );
+    }
+
+    return progress;
+  };
   console.log(slides.length);
   console.log(index);
+  // console.log(eventsToDisplay);
+  // console.log(progressBar);
   return (
     <div>
       <div className="row">
@@ -63,8 +146,8 @@ export default function CustomCarousel({ slides, slideTitle }) {
           >
             {slideTitle}
           </Typography>
-          <div className="progress-bar"> </div>
         </div>
+        <div className="progress-bar">{renderProgress()}</div>
       </div>
 
       <div className="slider-container">
@@ -84,7 +167,8 @@ export default function CustomCarousel({ slides, slideTitle }) {
             transform: `translateX(${slideTransform}%)`,
           }}
         >
-          {slides.map((slide) => {
+          {slides.map((slide, index) => {
+            // console.log(index);
             return (
               <div className="slider-class">
                 <EventCard

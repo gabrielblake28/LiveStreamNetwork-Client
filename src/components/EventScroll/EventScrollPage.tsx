@@ -32,6 +32,8 @@ export default function EventScrollPage() {
           Featured
         </Typography> */}
         <CustomCarousel slideTitle={"Featured"} slides={EventCards} />
+        <CustomCarousel slideTitle={"Popular"} slides={EventCards} />
+        <CustomCarousel slideTitle={"Upcoming"} slides={EventCards} />
       </div>
 
       <div></div>
