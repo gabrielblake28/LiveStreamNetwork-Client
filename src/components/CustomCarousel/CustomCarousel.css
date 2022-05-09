@@ -98,13 +98,8 @@
   gap: 2px;
   padding-top: 75px;
   margin: 0 60px;
-  /* opacity: 0; */
   transition: transform 50ms ease-in-out;
 }
-
-/* .slider-container:hover .progress-bar {
-  opacity: 1;
-} */
 
 .progress-item {
   flex: 0 0 0.75rem;
@@ -115,7 +110,6 @@
 
 .active {
   background-color: rgba(255, 255, 255, 0.9);
-  /* height: 3px; */
 }
 
 @media (max-width: 2200px) {

@@ -1,11 +1,7 @@
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import "./CustomCarousel.css";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { EventCards } from "./CarouselData";
 import EventCard from "../EventCard/EventCard";
 import { Typography } from "@mui/material";
-import { sliderUnstyledClasses } from "@mui/base";
 
 window.addEventListener("resize", (e) => {
   // Recalculate progress bar
@@ -38,7 +34,7 @@ export default function CustomCarousel({ slides, slideTitle }) {
 
   useEffect(() => {
     console.log(screenSize);
-    // console.log(slideTransform);
+
     if (screenSize > 2200) {
       setEventsToDisplay(7);
       setProgressBar(4);
@@ -73,10 +69,10 @@ export default function CustomCarousel({ slides, slideTitle }) {
       setLeftSliderCursor("pointer");
     }
 
-    if (index >= slides.length - eventsToDisplay) {
+    if (slideTransform % 100 !== 0) {
       setRightSliderOpacity(0);
       setRightSliderCursor("default");
-    } else if (index < slides.length) {
+    } else {
       setRightSliderOpacity(1);
       setRightSliderCursor("pointer");
     }
@@ -131,8 +127,6 @@ export default function CustomCarousel({ slides, slideTitle }) {
   };
   console.log(slides.length);
   console.log(index);
-  // console.log(eventsToDisplay);
-  // console.log(progressBar);
   return (
     <div>
       <div className="row">
@@ -168,7 +162,6 @@ export default function CustomCarousel({ slides, slideTitle }) {
           }}
         >
           {slides.map((slide, index) => {
-            // console.log(index);
             return (
               <div className="slider-class">
                 <EventCard

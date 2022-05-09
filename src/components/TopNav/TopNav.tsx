@@ -1,16 +1,14 @@
 // import Avatar from "@mui/material/Avatar";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import EventNoteIcon from "@mui/icons-material/EventNote";
+import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { styled } from "@mui/material/styles";
-import FormHelperTexts from "@mui/material/FormHelperText";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import CreateEventModal from "../CreateEventModal/CreateEventModal";
-import CgMediaLive from "react-icons";
-// import { makeStyles } from "@material-ui/core/styles";
 import "./TopNav.css";
 import {
   IconButton,
@@ -25,17 +23,11 @@ import {
   ListItemIcon,
   createTheme,
   ThemeProvider,
-  makeStyles,
-  Theme,
   Modal,
-  Button,
-  Box,
   TextField,
-  FormHelperText,
-  TextareaAutosize,
 } from "@mui/material";
 import { useState } from "react";
-import { ClassNames } from "@emotion/react";
+import { func } from "prop-types";
 
 const theme = createTheme({
   components: {
@@ -49,12 +41,17 @@ const theme = createTheme({
   },
 });
 
-export default function TopNav() {
+type TopNavProps = {
+  // open: boolean;
+  setOpen: Function;
+};
+
+export default function TopNav({ setOpen }: TopNavProps) {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [open, setOpen] = useState(false);
-  const handleModalOpen = () => setOpen(true);
-  const handleModalClose = () => setOpen(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAuth(event.target.checked);
@@ -89,7 +86,7 @@ export default function TopNav() {
   });
 
   return (
-    <div className="top-nav-wrapper">
+    <div className="top-nav-container">
       <div className="top-nav-left-layout">
         <div className="top-nav-logo">
           <EventNoteIcon
@@ -99,7 +96,6 @@ export default function TopNav() {
         <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
           WhatsLive
         </Typography>
-        <div className="top-nav-followers-link"></div>
       </div>
       <div className="top-nav-center-layout">
         <div className="top-nav-search-bar">
@@ -130,13 +126,33 @@ export default function TopNav() {
       </div>
       <div className="top-nav-right-layout">
         <div className="top-nav-notifications">
+          <Tooltip title="Home">
+            <IconButton
+              href="/"
+              style={{ color: "#EFEFF1" }}
+              aria-label="Create-Event"
+            >
+              <HomeOutlinedIcon sx={{ width: "25px", height: "25px" }} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Subscriptions">
+            <IconButton
+              style={{ color: "#EFEFF1" }}
+              aria-label="Create-Event"
+              // onClick={}
+            >
+              <SubscriptionsOutlinedIcon
+                sx={{ width: "23px", height: "23px" }}
+              />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Create Event">
             <IconButton
-              style={{ color: "#ffffff" }}
+              style={{ color: "#EFEFF1" }}
               aria-label="Create-Event"
               onClick={handleModalOpen}
             >
-              <AddBoxOutlinedIcon sx={{ width: "22px", height: "22px" }} />
+              <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
             </IconButton>
           </Tooltip>
         </div>
@@ -202,7 +218,7 @@ export default function TopNav() {
               </MenuItem>
             </Menu>
             <div>
-              <Modal open={open}>
+              <Modal open={modalOpen}>
                 <div className="create-event-modal-wrapper">
                   <CreateEventModal onClose={handleModalClose} />
                 </div>
