@@ -150,7 +150,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               style={{ color: "#EFEFF1" }}
               aria-label="Create-Event"
               onClick={(e) => {
-                setHomeIconFill(NavButtonStatus.HOME);
+                setHomeIconFill(NavButtonStatus.ACTIVE);
               }}
             >
               {homeIconFill === NavButtonStatus.ACTIVE ? (
@@ -158,7 +158,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
               ) : (
                 <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
               )}
-              {/* <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} /> */}
             </IconButton>
           </Tooltip>
           <Tooltip title="Subscriptions">
@@ -182,10 +181,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
               aria-label="Create-Event"
               onClick={() => {
                 handleModalOpen();
-                setCreateIconFill(NavButtonStatus.CREATE);
+                setCreateIconFill(NavButtonStatus.ACTIVE);
               }}
             >
-              {createIconFill === NavButtonStatus.CREATE ? (
+              {createIconFill === NavButtonStatus.ACTIVE ? (
                 <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
               ) : (
                 <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
