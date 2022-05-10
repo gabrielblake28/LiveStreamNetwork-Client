@@ -13,7 +13,14 @@ import "./CreateEventModal.css";
 import { ClassNames } from "@emotion/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
+import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
+
+type CreateEventModalProps = {
+  setHomeIconFill: Function;
+  setCreateIconFill: Function;
+  handleModalClose: Function;
+};
 
 const WhiteBorderTextField = styled(TextField)`
   & label.Mui-focused {
@@ -26,19 +33,23 @@ const WhiteBorderTextField = styled(TextField)`
   }
 `;
 
-export default function CreateEventModal(props) {
+export default function CreateEventModal({
+  setHomeIconFill,
+  setCreateIconFill,
+  handleModalClose,
+}: CreateEventModalProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
-  const handleChange = (e) => {
-    setIsOpen(!isOpen);
-    setStartDate(e);
-  };
-  const handleClick = (e) => {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  };
+  // const handleChange = (e) => {
+  //   setIsOpen(!isOpen);
+  //   setStartDate(e);
+  // };
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   setIsOpen(!isOpen);
+  // };
 
   return (
     <div className="create-event-modal-wrapper">
@@ -52,7 +63,8 @@ export default function CreateEventModal(props) {
           <IconButton>
             <CloseRoundedIcon
               onClick={() => {
-                props.onClose();
+                handleModalClose();
+                setCreateIconFill(NavButtonStatus.INACTIVE);
               }}
               sx={{
                 width: "20px",

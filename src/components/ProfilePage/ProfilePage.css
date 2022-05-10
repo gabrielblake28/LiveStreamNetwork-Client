@@ -9,8 +9,9 @@
 /* Header Content */
 
 .profile-page-header-container {
-  /* background-color: #18181b; */
-  margin-top: 30px;
+  background-color: #18181b;
+  margin-top: 20px;
+  margin-bottom: 20px;
   width: 50vw;
   display: flex;
   flex-direction: column;
@@ -21,6 +22,7 @@
 }
 
 .profile-page-profile-pic {
+  margin-top: 15px;
   justify-self: center;
   align-self: center;
 }
@@ -110,5 +112,5 @@
 .profile-page-content-container {
   background-color: #18181b;
   height: 100%;
-  width: 100%;
+  width: 95%;
 }

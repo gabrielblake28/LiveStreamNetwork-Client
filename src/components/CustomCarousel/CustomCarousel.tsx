@@ -57,7 +57,7 @@ export default function CustomCarousel({ slides, slideTitle }) {
       setEventsToDisplay(1);
       setProgressBar(0);
     }
-  });
+  }, [screenSize]);
 
   useEffect(() => {
     if (slideTransform === 0) {
@@ -76,7 +76,7 @@ export default function CustomCarousel({ slides, slideTitle }) {
       setRightSliderOpacity(1);
       setRightSliderCursor("pointer");
     }
-  });
+  }, [slideTransform]);
 
   function HandleLeftClick() {
     if (slideTransform % 100 !== 0) {
@@ -125,8 +125,6 @@ export default function CustomCarousel({ slides, slideTitle }) {
 
     return progress;
   };
-  console.log(slides.length);
-  console.log(index);
   return (
     <div>
       <div className="row">

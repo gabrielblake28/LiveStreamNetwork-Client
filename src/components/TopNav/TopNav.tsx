@@ -1,15 +1,20 @@
-// import Avatar from "@mui/material/Avatar";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
+import CottageIcon from "@mui/icons-material/Cottage";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import SearchIcon from "@mui/icons-material/Search";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { styled } from "@mui/material/styles";
 import CreateEventModal from "../CreateEventModal/CreateEventModal";
+import { useRecoilState } from "recoil";
+import { homeIconState } from "../Atoms/Atoms";
 import "./TopNav.css";
+
 import {
   IconButton,
   Avatar,
@@ -28,6 +33,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { func } from "prop-types";
+import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
+import { Link } from "react-router-dom";
 
 const theme = createTheme({
   components: {
@@ -50,6 +57,15 @@ export default function TopNav({ setOpen }: TopNavProps) {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [homeIconFill, setHomeIconFill] = useState<NavButtonStatus>(
+    NavButtonStatus.ACTIVE
+  );
+  const [subIconFill, setSubIconFill] = useState<NavButtonStatus>(
+    NavButtonStatus.INACTIVE
+  );
+  const [createIconFill, setCreateIconFill] = useState<NavButtonStatus>(
+    NavButtonStatus.INACTIVE
+  );
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
@@ -93,9 +109,11 @@ export default function TopNav({ setOpen }: TopNavProps) {
             sx={{ width: "35px", height: "35px", color: "#A970FF" }}
           />
         </div>
-        <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
-          WhatsLive
-        </Typography>
+        <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
+          <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
+            WhatsLive
+          </Typography>
+        </Link>
       </div>
       <div className="top-nav-center-layout">
         <div className="top-nav-search-bar">
@@ -131,8 +149,16 @@ export default function TopNav({ setOpen }: TopNavProps) {
               href="/"
               style={{ color: "#EFEFF1" }}
               aria-label="Create-Event"
+              onClick={(e) => {
+                setHomeIconFill(NavButtonStatus.HOME);
+              }}
             >
-              <HomeOutlinedIcon sx={{ width: "25px", height: "25px" }} />
+              {homeIconFill === NavButtonStatus.ACTIVE ? (
+                <CottageIcon sx={{ width: "25px", height: "25px" }} />
+              ) : (
+                <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
+              )}
+              {/* <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} /> */}
             </IconButton>
           </Tooltip>
           <Tooltip title="Subscriptions">
@@ -141,18 +167,29 @@ export default function TopNav({ setOpen }: TopNavProps) {
               aria-label="Create-Event"
               // onClick={}
             >
-              <SubscriptionsOutlinedIcon
-                sx={{ width: "23px", height: "23px" }}
-              />
+              {subIconFill === NavButtonStatus.ACTIVE ? (
+                <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
+              ) : (
+                <SubscriptionsOutlinedIcon
+                  sx={{ width: "23px", height: "23px" }}
+                />
+              )}
             </IconButton>
           </Tooltip>
           <Tooltip title="Create Event">
             <IconButton
               style={{ color: "#EFEFF1" }}
               aria-label="Create-Event"
-              onClick={handleModalOpen}
+              onClick={() => {
+                handleModalOpen();
+                setCreateIconFill(NavButtonStatus.CREATE);
+              }}
             >
-              <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
+              {createIconFill === NavButtonStatus.CREATE ? (
+                <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
+              ) : (
+                <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
+              )}
             </IconButton>
           </Tooltip>
         </div>
@@ -185,16 +222,23 @@ export default function TopNav({ setOpen }: TopNavProps) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <PermIdentityOutlinedIcon
-                    sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-                  />
-                </ListItemIcon>
-                <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-                  Profile
-                </Typography>
-              </MenuItem>
+              <Link to="/profile" style={{ textDecoration: "none" }}>
+                <MenuItem
+                  onClick={() => {
+                    setHomeIconFill(NavButtonStatus.INACTIVE);
+                    handleClose();
+                  }}
+                >
+                  <ListItemIcon>
+                    <PermIdentityOutlinedIcon
+                      sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
+                    />
+                  </ListItemIcon>
+                  <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
+                    Profile
+                  </Typography>
+                </MenuItem>
+              </Link>
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <StarBorderOutlinedIcon
@@ -220,7 +264,11 @@ export default function TopNav({ setOpen }: TopNavProps) {
             <div>
               <Modal open={modalOpen}>
                 <div className="create-event-modal-wrapper">
-                  <CreateEventModal onClose={handleModalClose} />
+                  <CreateEventModal
+                    setHomeIconFill={setHomeIconFill}
+                    setCreateIconFill={setCreateIconFill}
+                    handleModalClose={handleModalClose}
+                  />
                 </div>
               </Modal>
             </div>
