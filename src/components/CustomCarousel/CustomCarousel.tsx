@@ -1,6 +1,7 @@
 import "./CustomCarousel.css";
 import { useEffect, useLayoutEffect, useState } from "react";
 import EventCard from "../EventCard/EventCard";
+import schooled from "../../assets/schooled.jpg";
 import { Typography } from "@mui/material";
 
 window.addEventListener("resize", (e) => {
@@ -163,11 +164,11 @@ export default function CustomCarousel({ slides, slideTitle }) {
             return (
               <div className="slider-class">
                 <EventCard
-                  eventTitle={slide.eventTitle}
-                  creatorName={slide.creatorName}
-                  eventTime={slide.eventTime}
-                  eventImg={slide.eventImg}
-                  profilePic={slide.profilePic}
+                  eventTitle={slide.title}
+                  creatorName={slide.name || ""}
+                  eventTime={slide.start_timestamp}
+                  eventImg={slide.image  || schooled}
+                  profilePic={slide.profilePic || ""}
                 />
               </div>
             );

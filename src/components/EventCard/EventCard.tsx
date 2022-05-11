@@ -17,6 +17,8 @@ import mock1 from "../../assets/mockTN1.jpg";
 import mock2 from "../../assets/mockTN2.jpg";
 import mock3 from "../../assets/mockTN3.jpg";
 
+// const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
 type EventCardProps = {
   eventTitle: string;
   creatorName: string;
@@ -56,7 +58,7 @@ export default function EventCard({
         <div className="title-creator-timestamp">
           <div className="event-title">{eventTitle}</div>
           <div className="event-creator-name">{creatorName}</div>
-          <div className="event-timestamp">{eventTime}</div>
+          <div className="event-timestamp">{`${new Date(eventTime).toLocaleDateString("en-US", { weekday: 'short', month: 'long', day: 'numeric' })}, ${new Date(eventTime).toLocaleTimeString("en-US", {hour: "numeric", minute: "2-digit"})}`}</div>
         </div>
       </div>
     </div>
