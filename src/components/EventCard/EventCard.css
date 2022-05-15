@@ -1,0 +1,68 @@
+.card-row-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-column-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.card-column-wrapper:hover .event-title {
+  color: #ffffff;
+}
+
+.card-hover-translate {
+  transition: transform 0.3s ease-out;
+}
+
+.card-hover-translate:hover {
+  transform: translateX(3px) translateY(-3px);
+  border-radius: 1rem;
+}
+
+.event-card-details {
+  display: flex;
+  flex-direction: row;
+  color: white;
+}
+
+.event-card {
+  height: 185px;
+}
+
+.title-creator-timestamp {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-avatar {
+  margin: 2px;
+}
+
+.event-title {
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: medium;
+  color: #e5e5e5;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.event-creator-name {
+  font-size: small;
+  margin: 3px 0 3px 5px;
+  color: #aaaaaa;
+  font-family: "Rubik", sans-serif;
+}
+
+.event-timestamp {
+  font-size: small;
+  margin-left: 5px;
+  color: #aaaaaa;
+  font-family: "Rubik", sans-serif;
+}
+
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  background-color: #101010 !important;
+}

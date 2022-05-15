@@ -1,0 +1,119 @@
+.profile-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  background-image: url(C:\Users\Gabriel\Workspace\MainProjects\TWEFrontend\src\assets\twitch_banner.jpg);
+  /* background-repeat: no-repeat, repeat; */
+  background-color: #cccccc;
+}
+
+/* Header Content */
+
+.profile-page-header-container {
+  background-color: #18181b;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.profile-page-profile-pic {
+  margin-top: 15px;
+  justify-self: center;
+  align-self: center;
+}
+
+.profile-page-user-data-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.profile-page-username {
+  justify-self: center;
+  align-self: center;
+  margin: 10px 0 20px 0;
+}
+
+.profile-page-user-data {
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+  align-items: center;
+}
+
+.profile-page-active-events {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.profile-page-all-events {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.profile-page-active-subscriptions {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.active-events-num {
+  justify-self: center;
+  align-self: center;
+}
+
+.active-subs-num {
+  justify-self: center;
+  align-self: center;
+}
+
+.total-events-num {
+  justify-self: center;
+  align-self: center;
+}
+.active-events-num:hover {
+  cursor: pointer;
+}
+
+.active-events-num:hover .underline-on-hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.active-subs-num:hover {
+  cursor: pointer;
+}
+
+.active-subs-num:hover .underline-on-hover {
+  opacity: 1;
+}
+
+.total-events-num:hover {
+  cursor: pointer;
+}
+
+.total-events-num:hover .underline-on-hover {
+  opacity: 1;
+}
+
+.underline-on-hover {
+  opacity: 0;
+}
+
+/* Profile Page Content */
+
+.profile-page-content-container {
+  background-color: #18181b;
+  height: 100%;
+  width: 95%;
+}

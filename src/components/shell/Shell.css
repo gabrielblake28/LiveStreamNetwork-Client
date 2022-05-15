@@ -1,16 +1,48 @@
-.mfl-shell-content-body {
-    background: #F1F1F3;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto;
-  }
-  
-  .mfl-shell-container {
-    font-family: "Inter", sans-serif;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    width: calc(100vw);
-    height: calc(100vh - 1px);
-  }
-  
+.twe-shell-content-body {
+  background: #101010;
+  width: 100vw;
+  height: auto;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.twe-shell-header {
+  background: #18181b;
+  width: 100vw;
+  height: 55px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+.twe-shell-container {
+  background: #101010;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0;
+  width: calc(100vw);
+  height: calc(100vh - 55px);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #101010;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
