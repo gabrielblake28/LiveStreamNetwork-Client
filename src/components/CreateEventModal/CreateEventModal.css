@@ -6,7 +6,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 550px;
+  height: 570px;
   background-color: #18181b;
   /* border: 1px solid #aaaaaa; */
   border-radius: 10px;
@@ -22,8 +22,10 @@
 
 .create-event-title {
   display: flex;
+  /* width: 321px; */
   justify-self: center;
-  margin: 10px 20px 10px 20px;
+  justify-content: center;
+  margin: 10px 35px 10px 35px;
   flex-direction: column;
 }
 
@@ -42,7 +44,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .event-date-input:focus {
@@ -51,49 +53,73 @@
   border: 2px solid purple !important;
 }
 
-.event-start-time-input {
-  /* width: 150px; */
-  /* margin: 10px; */
-}
-
-.event-end-time-input {
-  /* width: 150px; */
-  /* margin: 10px; */
-}
-
-.select-event-date {
-  width: 150px;
-  margin: 5px;
-  height: 40px;
-  text-align: center;
-  color: #aaaaaa;
-  background-color: #101012;
-  border: none;
-  border-radius: 5px;
-}
-
 .select-event-start-time {
-  width: 75px;
+  width: 155px;
   height: 40px;
   text-align: center;
-  margin: 5px;
+  margin: 5px 5px 5px 5px;
   color: #aaaaaa;
   background-color: #101012;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .select-event-end-time {
-  width: 75px;
+  width: 155px;
   height: 40px;
   text-align: center;
-  margin: 5px;
+  margin: 5px 5px 5px 5px;
   color: #aaaaaa;
   background-color: #101012;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .create-event-description {
-  margin: 10px 20px 10px 20px;
+  margin: 10px 35px 10px 35px;
 }
+
+.create-event-image-preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-event-image-preview {
+  height: 185px;
+  width: 322px;
+  margin-top: 6px;
+  background-color: #101012;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-upload-button {
+  width: 100px;
+  height: 40px;
+  color: #101012;
+  background-color: #aaaaaa;
+}
+
+.image-upload-button:hover {
+  background-color: none;
+}
+
+#file-explore-icon-button {
+  display: none;
+}
+
+#file-explore-button {
+  display: none;
+}
+
+/* .create-event-title {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  margin: 10px 35px 10px 35px;
+  flex-direction: column;
+} */

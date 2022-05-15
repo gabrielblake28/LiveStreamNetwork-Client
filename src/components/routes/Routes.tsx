@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router";
-import EventScrollPage from "../EventScroll/EventScrollPage";
+import EventScrollPage from "../EventScrollPage/EventScrollPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 export default function Router() {
   return (

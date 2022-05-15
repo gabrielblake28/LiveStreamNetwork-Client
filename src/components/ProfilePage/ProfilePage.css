@@ -4,6 +4,9 @@
   justify-content: start;
   align-items: center;
   height: 100%;
+  background-image: url(C:\Users\Gabriel\Workspace\MainProjects\TWEFrontend\src\assets\twitch_banner.jpg);
+  /* background-repeat: no-repeat, repeat; */
+  background-color: #cccccc;
 }
 
 /* Header Content */

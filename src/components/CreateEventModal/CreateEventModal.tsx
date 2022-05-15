@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   IconButton,
   TextareaAutosize,
@@ -7,6 +8,7 @@ import {
 } from "@mui/material";
 
 import { styled } from "@mui/material";
+import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import FormHelperTexts from "@mui/material/FormHelperText";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./CreateEventModal.css";
@@ -15,6 +17,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { forwardRef, useEffect, useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
+import { Label } from "@mui/icons-material";
 
 type CreateEventModalProps = {
   setHomeIconFill: Function;
@@ -38,18 +41,13 @@ export default function CreateEventModal({
   setCreateIconFill,
   handleModalClose,
 }: CreateEventModalProps) {
-  const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
-  // const handleChange = (e) => {
-  //   setIsOpen(!isOpen);
-  //   setStartDate(e);
-  // };
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   setIsOpen(!isOpen);
-  // };
+  const [isImage, setIsImage] = useState(false);
+  const Input = styled("input")({
+    display: "none",
+  });
 
   return (
     <div className="create-event-modal-wrapper">
@@ -70,9 +68,6 @@ export default function CreateEventModal({
                 width: "20px",
                 height: "20px",
                 color: "#E3E3E3",
-                minHeight: 0,
-                minWidth: 0,
-                padding: 0,
               }}
             ></CloseRoundedIcon>
           </IconButton>
@@ -127,24 +122,6 @@ export default function CreateEventModal({
         />
       </div>
       <div className="date-time-input-wrapper">
-        <div className="event-date-input">
-          <FormHelperTexts>
-            <Typography
-              style={{ marginLeft: "10px" }}
-              color="#ACACAC"
-              variant="caption"
-            >
-              Date
-            </Typography>
-          </FormHelperTexts>
-          <DatePicker
-            placeholderText="Click to select a date"
-            todayButton="Today"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            className="select-event-date"
-          />
-        </div>
         <div className="event-start-time-input">
           <FormHelperTexts>
             <Typography
@@ -159,10 +136,9 @@ export default function CreateEventModal({
             selected={startTime}
             onChange={(startTime) => setStartTime(startTime)}
             showTimeSelect
-            showTimeSelectOnly
             timeIntervals={15}
             timeCaption="Time"
-            dateFormat="h:mm aa"
+            dateFormat="MMMM d, yyyy h:mm aa"
             className="select-event-start-time"
           />
         </div>
@@ -180,10 +156,9 @@ export default function CreateEventModal({
             selected={endTime}
             onChange={(date) => setEndTime(date)}
             showTimeSelect
-            showTimeSelectOnly
             timeIntervals={15}
             timeCaption="Time"
-            dateFormat="h:mm aa"
+            dateFormat="MMMM d, yyyy h:mm aa"
             className="select-event-end-time"
           />
         </div>
@@ -233,26 +208,41 @@ export default function CreateEventModal({
           variant="outlined"
           fullWidth
           multiline
-          maxRows={3}
-          minRows={3}
+          maxRows={2}
+          minRows={2}
           // value={name}
           // onChange={(e) => {
           //   setName(e.target.value);
           // }}
         />
-        {/* <TextareaAutosize
-          aria-label="minimum height"
-          minRows={4}
-          maxRows={4}
-          
-          style={{
-            marginTop: "5px",
-            width: "360px",
-            background: "#101012",
-            color: "#aaaaaa",
-            border: "1px solid #101012",
-          }}
-        /> */}
+      </div>
+      <div className="create-event-image-preview-container">
+        <input
+          id="file-explore-icon-button"
+          accept="image/jpeg, image/png"
+          type="file"
+        />
+        <label htmlFor="file-explore-icon-button">
+          <IconButton disableRipple component="span">
+            <CloudUploadOutlinedIcon sx={{ height: "150px", width: "150px" }} />
+          </IconButton>
+        </label>
+
+        <label htmlFor="contained-button-file">
+          <Input
+            accept="image/*"
+            id="contained-button-file"
+            multiple
+            type="file"
+          />
+          <Button
+            style={{ color: "#aaaaaa", backgroundColor: "transparent" }}
+            variant="contained"
+            component="span"
+          >
+            Upload an Image
+          </Button>
+        </label>
       </div>
     </div>
   );

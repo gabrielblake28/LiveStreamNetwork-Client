@@ -12,3 +12,7 @@ export const FeaturedEvents = atom({
   default: [] as IEvent[],
 });
 
+export const UpcomingEvents = atom({
+  key: 'UpcomingEvents',
+  default: [] as IEvent[],
+});
