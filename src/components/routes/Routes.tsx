@@ -6,6 +6,7 @@ export default function Router() {
     <Routes>
       <Route path="/" element={<EventScrollPage />} />
       <Route path="profile" element={<ProfilePage />} />
+      {/* <Route path="event" element={<EventDetailsPage />} /> */}
     </Routes>
   );
 }

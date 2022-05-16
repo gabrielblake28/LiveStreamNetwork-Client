@@ -2,22 +2,18 @@ import {
   Button,
   Divider,
   IconButton,
-  TextareaAutosize,
   TextField,
   Typography,
 } from "@mui/material";
-
 import { styled } from "@mui/material";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import FormHelperTexts from "@mui/material/FormHelperText";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./CreateEventModal.css";
-import { ClassNames } from "@emotion/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { forwardRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
-import { Label } from "@mui/icons-material";
 
 type CreateEventModalProps = {
   setHomeIconFill: Function;
@@ -44,10 +40,25 @@ export default function CreateEventModal({
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
-  const [isImage, setIsImage] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | undefined>(
+    undefined
+  );
   const Input = styled("input")({
     display: "none",
   });
+
+  useEffect(() => {
+    if (image !== null) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setImagePreview(undefined);
+    }
+  }, [image]);
 
   return (
     <div className="create-event-modal-wrapper">
@@ -106,7 +117,7 @@ export default function CreateEventModal({
               },
               "&:hover": {
                 ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                  border: "2px solid #101012",
+                  border: "2px solid #A970FF",
                 },
               },
             },
@@ -138,7 +149,7 @@ export default function CreateEventModal({
             showTimeSelect
             timeIntervals={15}
             timeCaption="Time"
-            dateFormat="MMMM d, yyyy h:mm aa"
+            dateFormat="MMMM d, h:mm aa"
             className="select-event-start-time"
           />
         </div>
@@ -158,7 +169,7 @@ export default function CreateEventModal({
             showTimeSelect
             timeIntervals={15}
             timeCaption="Time"
-            dateFormat="MMMM d, yyyy h:mm aa"
+            dateFormat="MMMM d, h:mm aa"
             className="select-event-end-time"
           />
         </div>
@@ -198,7 +209,7 @@ export default function CreateEventModal({
               },
               "&:hover": {
                 ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                  border: "2px solid #101012",
+                  border: "2px solid #A970FF",
                 },
               },
             },
@@ -216,34 +227,66 @@ export default function CreateEventModal({
           // }}
         />
       </div>
+      <Typography
+        style={{ marginLeft: "40px" }}
+        color="#aaaaaa"
+        variant="caption"
+      >
+        Thumbnail
+      </Typography>
       <div className="create-event-image-preview-container">
         <input
           id="file-explore-icon-button"
           accept="image/jpeg, image/png"
           type="file"
-        />
-        <label htmlFor="file-explore-icon-button">
-          <IconButton disableRipple component="span">
-            <CloudUploadOutlinedIcon sx={{ height: "150px", width: "150px" }} />
-          </IconButton>
-        </label>
+          onChange={(e) => {
+            const files = e?.target?.files;
 
-        <label htmlFor="contained-button-file">
-          <Input
-            accept="image/*"
-            id="contained-button-file"
-            multiple
-            type="file"
+            if (files) {
+              setImage(files[0]);
+            } else {
+              setImage(null);
+            }
+          }}
+        />
+
+        {imagePreview === undefined ? (
+          <label htmlFor="file-explore-icon-button">
+            <div className="create-event-image-preview">
+              <CloudUploadOutlinedIcon
+                sx={{ height: "150px", width: "150px" }}
+              />
+            </div>
+          </label>
+        ) : (
+          <img
+            style={{
+              height: "185px",
+              width: "322px",
+              objectFit: "cover",
+              borderRadius: "4px",
+            }}
+            src={imagePreview}
+            onClick={() => {
+              setImage(null);
+            }}
           />
-          <Button
-            style={{ color: "#aaaaaa", backgroundColor: "transparent" }}
-            variant="contained"
-            component="span"
-          >
-            Upload an Image
-          </Button>
-        </label>
+        )}
       </div>
+      <div className="confirm-create-event-button">
+        <Button
+          style={{
+            color: "#101012",
+            height: "35px",
+            width: "150px",
+            backgroundColor: "#A970FF",
+          }}
+          variant="contained"
+        >
+          Create Event
+        </Button>
+      </div>
+      <script src="https://unpkg.com/react-image-crop/dist/ReactCrop.min.js"></script>
     </div>
   );
 }
