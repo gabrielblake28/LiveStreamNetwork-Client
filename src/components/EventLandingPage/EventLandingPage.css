@@ -1,0 +1,22 @@
+.carousel-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-section-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-section-title {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0 20px 0;
+}

@@ -6,9 +6,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 570px;
+  height: 650px;
   background-color: #18181b;
-  /* border: 1px solid #aaaaaa; */
+  border: 2px solid #101012;
   border-radius: 10px;
   box-shadow: 24px;
   padding: 4px;
@@ -75,6 +75,14 @@
   border-radius: 4px;
 }
 
+.select-event-start-time:hover {
+  border: 2px solid #a970ff;
+}
+
+.select-event-end-time:hover {
+  border: 2px solid #a970ff;
+}
+
 .create-event-description {
   margin: 10px 35px 10px 35px;
 }
@@ -86,6 +94,10 @@
   align-items: center;
 }
 
+.create-event-image-preview:hover {
+  border: 2px solid #a970ff;
+}
+
 .create-event-image-preview {
   height: 185px;
   width: 322px;
@@ -95,6 +107,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .image-upload-button {
@@ -116,10 +129,9 @@
   display: none;
 }
 
-/* .create-event-title {
+.confirm-create-event-button {
+  margin-top: 30px;
   display: flex;
-  justify-self: center;
   justify-content: center;
-  margin: 10px 35px 10px 35px;
-  flex-direction: column;
-} */
+  align-items: center;
+}

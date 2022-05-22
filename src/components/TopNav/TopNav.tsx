@@ -12,7 +12,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { styled } from "@mui/material/styles";
 import CreateEventModal from "../CreateEventModal/CreateEventModal";
 import { useRecoilState } from "recoil";
-import { homeIconState } from "../Atoms/Atoms";
+import { homeIconState, IconState } from "../../Recoil/Events/Atoms";
 import "./TopNav.css";
 
 import {
@@ -57,15 +57,9 @@ export default function TopNav({ setOpen }: TopNavProps) {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [homeIconFill, setHomeIconFill] = useState<NavButtonStatus>(
-    NavButtonStatus.ACTIVE
-  );
-  const [subIconFill, setSubIconFill] = useState<NavButtonStatus>(
-    NavButtonStatus.INACTIVE
-  );
-  const [createIconFill, setCreateIconFill] = useState<NavButtonStatus>(
-    NavButtonStatus.INACTIVE
-  );
+  const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
+  const [subIconFill, setSubIconFill] = useRecoilState(IconState);
+  const [createIconFill, setCreateIconFill] = useRecoilState(IconState);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
@@ -109,7 +103,13 @@ export default function TopNav({ setOpen }: TopNavProps) {
             sx={{ width: "35px", height: "35px", color: "#A970FF" }}
           />
         </div>
-        <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
+        <Link
+          onClick={() => {
+            setHomeIconFill(NavButtonStatus.HOME);
+          }}
+          to="/"
+          style={{ textDecoration: "none", color: "#e5e5e5" }}
+        >
           <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
             WhatsLive
           </Typography>
@@ -145,28 +145,29 @@ export default function TopNav({ setOpen }: TopNavProps) {
       <div className="top-nav-right-layout">
         <div className="top-nav-notifications">
           <Tooltip title="Home">
-            <IconButton
-              href="/"
-              style={{ color: "#EFEFF1" }}
-              aria-label="Create-Event"
-              onClick={(e) => {
-                setHomeIconFill(NavButtonStatus.ACTIVE);
-              }}
-            >
-              {homeIconFill === NavButtonStatus.ACTIVE ? (
-                <CottageIcon sx={{ width: "25px", height: "25px" }} />
-              ) : (
-                <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
-              )}
-            </IconButton>
+            <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
+              <IconButton
+                style={{ color: "#EFEFF1" }}
+                aria-label="Home"
+                onClick={(e) => {
+                  setHomeIconFill(NavButtonStatus.HOME);
+                }}
+              >
+                {homeIconFill === NavButtonStatus.HOME ? (
+                  <CottageIcon sx={{ width: "25px", height: "25px" }} />
+                ) : (
+                  <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
+                )}
+              </IconButton>
+            </Link>
           </Tooltip>
           <Tooltip title="Subscriptions">
             <IconButton
               style={{ color: "#EFEFF1" }}
-              aria-label="Create-Event"
+              aria-label="Subs"
               // onClick={}
             >
-              {subIconFill === NavButtonStatus.ACTIVE ? (
+              {subIconFill === NavButtonStatus.SUBS ? (
                 <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
               ) : (
                 <SubscriptionsOutlinedIcon
@@ -181,10 +182,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
               aria-label="Create-Event"
               onClick={() => {
                 handleModalOpen();
-                setCreateIconFill(NavButtonStatus.ACTIVE);
+                setCreateIconFill(NavButtonStatus.CREATE);
               }}
             >
-              {createIconFill === NavButtonStatus.ACTIVE ? (
+              {createIconFill === NavButtonStatus.CREATE ? (
                 <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
               ) : (
                 <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
@@ -203,6 +204,13 @@ export default function TopNav({ setOpen }: TopNavProps) {
               }}
             />
           </IconButton>
+
+          {/* Twith Auth Code */}
+
+          {/* <a href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3000&scope=user:read:email">
+            Login with twitch
+          </a> */}
+
           <ThemeProvider theme={theme}>
             <Menu
               sx={{
@@ -224,7 +232,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               <Link to="/profile" style={{ textDecoration: "none" }}>
                 <MenuItem
                   onClick={() => {
-                    setHomeIconFill(NavButtonStatus.INACTIVE);
+                    setHomeIconFill(NavButtonStatus.PROFILE);
                     handleClose();
                   }}
                 >

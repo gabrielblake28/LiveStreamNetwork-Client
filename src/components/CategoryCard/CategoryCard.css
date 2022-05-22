@@ -1,0 +1,18 @@
+.category-card {
+  width: 167px;
+  border-radius: 4px;
+  margin: 5px 5px 5px 5px;
+}
+
+.category-card-container {
+  display: flex;
+  flex-direction: column !important;
+  margin: 0 10px 0 10px;
+}
+
+.category-card-details {
+  margin-left: 10px;
+  margin-bottom: 50px;
+}
+
+

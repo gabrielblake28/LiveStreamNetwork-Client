@@ -1,23 +1,12 @@
 import {
   Avatar,
-  Box,
-  Button,
   Card,
   CardActionArea,
-  CardActions,
-  CardContent,
   CardMedia,
   IconButton,
-  Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import "./EventCard.css";
-import image2 from "../../assets/img2.jpg";
-// import mizkif from "../../assets/mizkif.jpg";
-import mock1 from "../../assets/mockTN1.jpg";
-import mock2 from "../../assets/mockTN2.jpg";
-import mock3 from "../../assets/mockTN3.jpg";
-
-// const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
 type EventCardProps = {
   eventTitle: string;
@@ -38,8 +27,17 @@ export default function EventCard({
     <div className="card-column-wrapper">
       <div className="card-hover-translate">
         <Card className="event-card">
-          <CardActionArea>
-            <CardMedia component="img" height="185" image={eventImg} />
+          <CardActionArea onClick={() => {}}>
+            <Link to="event" style={{ textDecoration: "none" }}>
+              <CardMedia
+                component="img"
+                height="185"
+                image={eventImg}
+                onClick={() => {
+                  // send data to the event details page
+                }}
+              />
+            </Link>
           </CardActionArea>
         </Card>
       </div>

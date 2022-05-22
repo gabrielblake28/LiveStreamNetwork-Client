@@ -1,0 +1,45 @@
+.event-details-page-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-details-page-content {
+  height: 98%;
+  width: 50%;
+  background-color: #18181b;
+  margin: 10px 0 10px 0;
+  padding: 20px 30px 20px 30px;
+}
+
+.event-details-page-header {
+  display: flex;
+  flex-direction: row;
+  /* margin: 20px 0 0 30px; */
+}
+
+.event-details-page-notification-button {
+  margin-left: auto;
+}
+
+.bounce {
+  animation: bounce 0.1s;
+}
+
+@keyframes bounce {
+  0%,
+  25%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+}

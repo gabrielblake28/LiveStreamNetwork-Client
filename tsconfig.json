@@ -1,20 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "useDefineForClassFields": true,
-    "skipLibCheck": false,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "es5",
     "module": "commonjs",
-    "moduleResolution": "Node",
+    "outDir": "./public",
+    "strict": true,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "noImplicitThis": false,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "noImplicitAny": false,
     "jsx": "react-jsx",
-    "noImplicitAny": false
+    "moduleResolution": "node",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["/src/**.*spec.*"],
+  "include": ["src"]
 }

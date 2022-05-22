@@ -1,9 +1,9 @@
 export enum NavButtonStatus {
-  INACTIVE,
-  ACTIVE,
+  // INACTIVE,
+  // ACTIVE,
   DISABLED,
-  // HOME,
-  // CREATE,
-  // SUBS,
-  // PROFILE,
+  HOME,
+  CREATE,
+  SUBS,
+  PROFILE,
 }
