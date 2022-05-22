@@ -98,16 +98,23 @@ export default function CustomCarousel({ slides, slideTitle }) {
           }}
           className="handle left-handle"
           onClick={() => {
-            const movement = carouselController.PrevSlide(
-              windowSize,
-              index,
-              NUM_OF_EVENTS
-            );
+            if (transition === false) {
+              transition = true;
+              const movement = carouselController.PrevSlide(
+                windowSize,
+                index,
+                NUM_OF_EVENTS
+              );
 
-            setSlideTransform(
-              (prevValue) => (prevValue += movement.translation)
-            );
-            setIndex((prevValue) => (prevValue -= movement.index));
+              setSlideTransform(
+                (prevValue) => (prevValue += movement.translation)
+              );
+              setIndex((prevValue) => (prevValue -= movement.index));
+
+              setTimeout(() => {
+                transition = false;
+              }, 750);
+            }
           }}
         >
           <div className="arrow-text"> &#8249;</div>
