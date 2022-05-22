@@ -23,7 +23,15 @@ export default function CategoryCard({
           </CardActionArea>
         </Card>
         <div className="category-card-details">
-          <Typography variant="caption" color="#aaaaaa">
+          <Typography
+            variant="caption"
+            color="#aaaaaa"
+            style={{
+              fontFamily: "Source Sans Pro",
+              fontSize: "medium",
+              color: "#e5e5e5",
+            }}
+          >
             {category}
           </Typography>
         </div>

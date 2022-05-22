@@ -14,12 +14,52 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
+import {
+  EventTitleState,
+  EventDescriptionState,
+  EventStartTimeState,
+  EventEndTimeState,
+} from "../../Recoil/Events/Atoms";
+import { EventAPI } from "../../API/Events/EventAPI";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { createSecureServer } from "http2";
+
+const eventAPI = new EventAPI();
 
 type CreateEventModalProps = {
   setHomeIconFill: Function;
   setCreateIconFill: Function;
   handleModalClose: Function;
 };
+
+// const months = {
+//   Jan: "01",
+//   Feb: "02",
+//   Mar: "03",
+//   Apr: "04",
+//   May: "05",
+//   Jun: "06",
+//   Jul: "07",
+//   Aug: "08",
+//   Sep: "09",
+//   Oct: "10",
+//   Nov: "11",
+//   Dec: "12",
+// };
+
+// function FormatTimeStamp(timeStamp) {
+//   let dayOfWeek = timeStamp.toString().substring(0, 3);
+//   let month = timeStamp.toString().substring(4, 7);
+//   let day = timeStamp.toString().substring(8, 10);
+//   let year = timeStamp.toString().substring(11, 15);
+//   let time = timeStamp.toString().substring(16, 24);
+
+//   if (month in months) month = months[month];
+
+//   let newTimeStamp = `${year}-${month}-${day} ${time}`;
+
+//   return newTimeStamp;
+// }
 
 const WhiteBorderTextField = styled(TextField)`
   & label.Mui-focused {
@@ -37,8 +77,12 @@ export default function CreateEventModal({
   setCreateIconFill,
   handleModalClose,
 }: CreateEventModalProps) {
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const [eventTitle, setEventTitle] = useRecoilState(EventTitleState);
+  const [startTime, setStartTime] = useRecoilState(EventStartTimeState);
+  const [endTime, setEndTime] = useRecoilState(EventEndTimeState);
+  const [eventDescription, setEventDescription] = useRecoilState(
+    EventDescriptionState
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
@@ -64,8 +108,12 @@ export default function CreateEventModal({
     <div className="create-event-modal-wrapper">
       <div className="create-event-header-wrapper">
         <div className="create-event-header">
-          <Typography color="#aaaaaa" variant="h5">
-            Create an Event
+          <Typography
+            style={{ fontFamily: "Source Sans Pro" }}
+            color="#aaaaaa"
+            variant="h5"
+          >
+            Create Event
           </Typography>
         </div>
         <div className="create-event-close-button">
@@ -73,6 +121,10 @@ export default function CreateEventModal({
             <CloseRoundedIcon
               onClick={() => {
                 handleModalClose();
+                setEventTitle("");
+                setEventDescription("");
+                setStartTime(new Date());
+                setEndTime(new Date());
                 setCreateIconFill(NavButtonStatus.INACTIVE);
               }}
               sx={{
@@ -88,7 +140,7 @@ export default function CreateEventModal({
       <div className="create-event-title">
         <FormHelperTexts>
           <Typography
-            style={{ marginLeft: "5px" }}
+            style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
             color="#ACACAC"
             variant="caption"
           >
@@ -126,21 +178,21 @@ export default function CreateEventModal({
           size="medium"
           variant="outlined"
           fullWidth
-          // value={name}
-          // onChange={(e) => {
-          //   setName(e.target.value);
-          // }}
+          value={eventTitle}
+          onChange={(e) => {
+            setEventTitle(e.target.value);
+          }}
         />
       </div>
       <div className="date-time-input-wrapper">
         <div className="event-start-time-input">
           <FormHelperTexts>
             <Typography
-              style={{ marginLeft: "10px" }}
+              style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
               color="#ACACAC"
               variant="caption"
             >
-              Start time
+              Start Time
             </Typography>
           </FormHelperTexts>
           <DatePicker
@@ -156,7 +208,7 @@ export default function CreateEventModal({
         <div className="event-end-time-input">
           <FormHelperTexts>
             <Typography
-              style={{ marginLeft: "10px" }}
+              style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
               color="#ACACAC"
               variant="caption"
             >
@@ -178,7 +230,7 @@ export default function CreateEventModal({
       <div className="create-event-description">
         <FormHelperTexts>
           <Typography
-            style={{ marginLeft: "5px" }}
+            style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
             color="#aaaaaa"
             variant="caption"
           >
@@ -221,14 +273,14 @@ export default function CreateEventModal({
           multiline
           maxRows={2}
           minRows={2}
-          // value={name}
-          // onChange={(e) => {
-          //   setName(e.target.value);
-          // }}
+          value={eventDescription}
+          onChange={(e) => {
+            setEventDescription(e.target.value);
+          }}
         />
       </div>
       <Typography
-        style={{ marginLeft: "40px" }}
+        style={{ marginLeft: "38px", fontFamily: "Source Sans Pro" }}
         color="#aaaaaa"
         variant="caption"
       >
@@ -282,8 +334,27 @@ export default function CreateEventModal({
             backgroundColor: "#A970FF",
           }}
           variant="contained"
+          onClick={() => {
+            eventAPI.CreateEvent({
+              title: eventTitle,
+              start_timestamp: startTime,
+              end_timestamp: endTime,
+              description: eventDescription,
+              user_id: "1",
+            });
+            handleModalClose();
+            setEventTitle("");
+            setEventDescription("");
+            setStartTime(new Date());
+            setEndTime(new Date());
+          }}
         >
-          Create Event
+          <Typography
+            style={{ fontFamily: "Source Sans Pro" }}
+            variant="button"
+          >
+            Create Event
+          </Typography>
         </Button>
       </div>
       <script src="https://unpkg.com/react-image-crop/dist/ReactCrop.min.js"></script>

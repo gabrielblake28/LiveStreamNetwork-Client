@@ -1,22 +1,15 @@
-import "./EventScrollPage.css";
+import "./EventLandingPage.css";
 import CustomCarousel from "../CustomCarousel/CustomCarousel";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect } from "react";
-import { FeaturedEvents, UpcomingEvents } from "../Atoms/Atoms";
+import { FeaturedEvents, UpcomingEvents } from "../../Recoil/Events/Atoms";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
 import CategoryCard from "../CategoryCard/CategoryCards";
-import Fortnite from "../../assets/Categories/Fortnite.jpg";
-import ApexLegends from "../../assets/Categories/Apex.jpg";
-import JustChatting from "../../assets/Categories/JustChatting.jpg";
-import PoE from "../../assets/Categories/PoE.jpg";
-import Valorant from "../../assets/Categories/Valorant.jpg";
-import Wow from "../../assets/Categories/Wow.jpg";
-import AmongUs from "../../assets/Categories/AmongUs.jpg";
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { CategoryCardData } from "../CategoryCard/CategoryCardData";
 
-export default function EventScrollPage() {
+export default function EventLandingPage() {
   const featuredEvents = useRecoilValue(FeaturedEvents);
   const setFeaturedEvents = useSetRecoilState(FeaturedEvents);
   const upcomingEvents = useRecoilValue(UpcomingEvents);
@@ -37,18 +30,37 @@ export default function EventScrollPage() {
         <CustomCarousel slideTitle={"Sponsored"} slides={upcomingEvents} />
         <CustomCarousel slideTitle={"Upcoming"} slides={featuredEvents} />
       </div>
-      <div className="category-section">
-        {CategoryCardData.map((card, index) => {
-          return (
-            <div>
+      <Divider
+        variant="middle"
+        style={{
+          margin: "60px 150px 0 150px",
+          backgroundColor: "#aaaaaa",
+        }}
+      />
+      <div className="category-section-container">
+        <div className="category-section-title">
+          <Typography
+            variant="h5"
+            style={{
+              color: "white",
+              fontFamily: "Source Sans Pro",
+            }}
+          >
+            Categories
+          </Typography>
+        </div>
+        <div className="category-section">
+          {CategoryCardData.map((card, index) => {
+            return (
               <CategoryCard
                 category={card.category}
                 categoryImage={card.categoryImage}
               />
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
+      <div className="all-events-section"></div>
 
       <div className="infinite-scroll-section"></div>
     </div>

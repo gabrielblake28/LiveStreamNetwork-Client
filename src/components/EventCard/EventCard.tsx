@@ -5,6 +5,7 @@ import {
   CardMedia,
   IconButton,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import "./EventCard.css";
 
 type EventCardProps = {
@@ -26,10 +27,17 @@ export default function EventCard({
     <div className="card-column-wrapper">
       <div className="card-hover-translate">
         <Card className="event-card">
-          <CardActionArea onClick={() => {
-
-          }}>
-            <CardMedia component="img" height="185" image={eventImg} />
+          <CardActionArea onClick={() => {}}>
+            <Link to="event" style={{ textDecoration: "none" }}>
+              <CardMedia
+                component="img"
+                height="185"
+                image={eventImg}
+                onClick={() => {
+                  // send data to the event details page
+                }}
+              />
+            </Link>
           </CardActionArea>
         </Card>
       </div>
