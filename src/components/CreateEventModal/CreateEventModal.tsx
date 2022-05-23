@@ -19,7 +19,7 @@ import {
   EventDescriptionState,
   EventStartTimeState,
   EventEndTimeState,
-} from "../../Recoil/Events/Atoms";
+} from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { createSecureServer } from "http2";

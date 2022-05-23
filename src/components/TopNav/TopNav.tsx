@@ -9,11 +9,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import LoggedInMenu from "../LoggedInMenu/LoggedInMenu";
+import { Authorized } from "../../Recoil/Auth/AuthAtoms";
 import { styled } from "@mui/material/styles";
 import CreateEventModal from "../CreateEventModal/CreateEventModal";
 import { useRecoilState } from "recoil";
-import { homeIconState, IconState } from "../../Recoil/Events/Atoms";
+import { IconState } from "../../Recoil/Events/EventAtoms";
 import "./TopNav.css";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 import {
   IconButton,
@@ -31,7 +36,7 @@ import {
   Modal,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { func } from "prop-types";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import { Link } from "react-router-dom";
@@ -49,23 +54,34 @@ const theme = createTheme({
 });
 
 type TopNavProps = {
-  // open: boolean;
   setOpen: Function;
 };
 
+function useAuth(): boolean {
+  const LocalAccess = localStorage.getItem("evently_access_token");
+
+  if (LocalAccess) {
+    return true;
+  } else {
+    const CookieAccess = cookies.get("evently_access_token");
+    if (CookieAccess) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
 export default function TopNav({ setOpen }: TopNavProps) {
-  const [auth, setAuth] = useState(true);
+  // const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
   const [subIconFill, setSubIconFill] = useRecoilState(IconState);
   const [createIconFill, setCreateIconFill] = useRecoilState(IconState);
+  const [isAuth, setIsAuth] = useState<boolean>(useAuth());
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -74,26 +90,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const CssTextField = styled(TextField)({
-    "& label.Mui-focused": {
-      color: "#aaaaaa",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "green",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "red",
-      },
-      "&:hover fieldset": {
-        borderColor: "#aaaaaa",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "black",
-      },
-    },
-  });
 
   return (
     <div className="top-nav-container">
@@ -194,80 +190,25 @@ export default function TopNav({ setOpen }: TopNavProps) {
           </Tooltip>
         </div>
         <div className="top-nav-user-avatar">
-          <IconButton style={{ color: "#00C8AF" }} onClick={handleMenu}>
-            <Avatar
-              sx={{
-                width: "30px",
-                height: "30px",
-                backgroundColor: "#00C8AF",
-                color: "black",
-              }}
-            />
-          </IconButton>
-
-          {/* Twith Auth Code */}
-
-          {/* <a href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3000&scope=user:read:email">
-            Login with twitch
-          </a> */}
+          {isAuth === false ? (
+            <a href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3500/auth/twitch/callback&scope=user:read:email">
+              Login with twitch
+            </a>
+          ) : (
+            <IconButton style={{ color: "#00C8AF" }} onClick={handleMenu}>
+              <Avatar
+                sx={{
+                  width: "30px",
+                  height: "30px",
+                  backgroundColor: "#00C8AF",
+                  color: "black",
+                }}
+              />
+            </IconButton>
+          )}
 
           <ThemeProvider theme={theme}>
-            <Menu
-              sx={{
-                mt: "45px",
-              }}
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <Link to="/profile" style={{ textDecoration: "none" }}>
-                <MenuItem
-                  onClick={() => {
-                    setHomeIconFill(NavButtonStatus.PROFILE);
-                    handleClose();
-                  }}
-                >
-                  <ListItemIcon>
-                    <PermIdentityOutlinedIcon
-                      sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-                    />
-                  </ListItemIcon>
-                  <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-                    Profile
-                  </Typography>
-                </MenuItem>
-              </Link>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <StarBorderOutlinedIcon
-                    sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-                  />
-                </ListItemIcon>
-                <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-                  Subscriptions
-                </Typography>
-              </MenuItem>
-              <Divider variant="middle" color="white" />
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <LogoutOutlinedIcon
-                    sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-                  />
-                </ListItemIcon>
-                <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-                  Logout
-                </Typography>
-              </MenuItem>
-            </Menu>
+            <LoggedInMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
             <div>
               <Modal open={modalOpen}>
                 <div className="create-event-modal-wrapper">
