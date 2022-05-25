@@ -6,19 +6,15 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import SearchIcon from "@mui/icons-material/Search";
-import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import LoggedInMenu from "../LoggedInMenu/LoggedInMenu";
-import { Authorized } from "../../Recoil/Auth/AuthAtoms";
-import { styled } from "@mui/material/styles";
 import CreateEventModal from "../CreateEventModal/CreateEventModal";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { CurrentUserData, Authorized } from "../../Recoil/Users/UserAtoms";
+import { getUserData } from "../../GetUserData/GetUserData";
+import cors from "cors";
 import { IconState } from "../../Recoil/Events/EventAtoms";
 import "./TopNav.css";
 import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
 
 import {
   IconButton,
@@ -28,18 +24,17 @@ import {
   Paper,
   Divider,
   Tooltip,
-  MenuItem,
-  Menu,
-  ListItemIcon,
   createTheme,
   ThemeProvider,
   Modal,
-  TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { func } from "prop-types";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import { Link } from "react-router-dom";
+import { IUser } from "../../API/Users/IUser";
+import { access } from "fs";
+
+const cookies = new Cookies();
 
 const theme = createTheme({
   components: {
@@ -58,28 +53,55 @@ type TopNavProps = {
 };
 
 function useAuth(): boolean {
-  const LocalAccess = localStorage.getItem("evently_access_token");
+  const isLoggedIn = useRecoilValue(Authorized);
+  const setIsLoggedIn = useSetRecoilState(Authorized);
+  const setUserData = useSetRecoilState(CurrentUserData);
+  let accessKey = "";
 
-  if (LocalAccess) {
-    return true;
-  } else {
-    const CookieAccess = cookies.get("evently_access_token");
-    if (CookieAccess) {
-      return true;
+  useEffect(() => {
+    if (localStorage.getItem("evently_access_token")) {
+      accessKey = localStorage.getItem("evently_access_token") || "";
+      setIsLoggedIn(true);
+    } else if (cookies.get("evently_access_token")) {
+      accessKey = cookies.get("evently_access_token");
+      localStorage.setItem("evently_access_token", accessKey);
+      setIsLoggedIn(true);
     } else {
-      return false;
+      setIsLoggedIn(false);
     }
-  }
+
+    if (isLoggedIn) {
+      const userData = getUserData(accessKey).then((response) => {
+        setUserData(response.data.data[0] as IUser);
+      });
+    }
+  }, [isLoggedIn]);
+
+  return isLoggedIn;
+}
+
+function ClearDataOnLogout() {
+  // const setIsLoggedIn = useSetRecoilState(Authorized);
+  cookies.remove("evently_access_token");
+  cookies.remove("evently_refresh_token");
+  localStorage.removeItem("evently_access_token");
+  localStorage.removeItem("evently_refresh_token");
+  window.location.reload();
 }
 
 export default function TopNav({ setOpen }: TopNavProps) {
-  // const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
   const [subIconFill, setSubIconFill] = useRecoilState(IconState);
   const [createIconFill, setCreateIconFill] = useRecoilState(IconState);
-  const [isAuth, setIsAuth] = useState<boolean>(useAuth());
+  const isLoggedIn = useAuth();
+  const userInfo = useRecoilValue(CurrentUserData);
+
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
+
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
@@ -143,6 +165,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
           <Tooltip title="Home">
             <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
               <IconButton
+                disableRipple
                 style={{ color: "#EFEFF1" }}
                 aria-label="Home"
                 onClick={(e) => {
@@ -158,57 +181,104 @@ export default function TopNav({ setOpen }: TopNavProps) {
             </Link>
           </Tooltip>
           <Tooltip title="Subscriptions">
-            <IconButton
-              style={{ color: "#EFEFF1" }}
-              aria-label="Subs"
-              // onClick={}
-            >
-              {subIconFill === NavButtonStatus.SUBS ? (
-                <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
-              ) : (
-                <SubscriptionsOutlinedIcon
-                  sx={{ width: "23px", height: "23px" }}
-                />
-              )}
-            </IconButton>
+            {isLoggedIn === true ? (
+              <IconButton
+                disableRipple
+                style={{ color: "#EFEFF1" }}
+                aria-label="Subs"
+                // onClick={}
+              >
+                {subIconFill === NavButtonStatus.SUBS ? (
+                  <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
+                ) : (
+                  <SubscriptionsOutlinedIcon
+                    sx={{ width: "23px", height: "23px" }}
+                  />
+                )}
+              </IconButton>
+            ) : (
+              <IconButton
+                disabled
+                disableRipple
+                style={{ color: "#4a4a4a" }}
+                aria-label="Subs"
+                // onClick={}
+              >
+                {subIconFill === NavButtonStatus.SUBS ? (
+                  <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
+                ) : (
+                  <SubscriptionsOutlinedIcon
+                    sx={{ width: "23px", height: "23px" }}
+                  />
+                )}
+              </IconButton>
+            )}
           </Tooltip>
           <Tooltip title="Create Event">
-            <IconButton
-              style={{ color: "#EFEFF1" }}
-              aria-label="Create-Event"
-              onClick={() => {
-                handleModalOpen();
-                setCreateIconFill(NavButtonStatus.CREATE);
-              }}
-            >
-              {createIconFill === NavButtonStatus.CREATE ? (
-                <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
-              ) : (
-                <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
-              )}
-            </IconButton>
+            {isLoggedIn === true ? (
+              <IconButton
+                disableRipple
+                style={{ color: "#EFEFF1" }}
+                aria-label="Create-Event"
+                onClick={() => {
+                  handleModalOpen();
+                  setCreateIconFill(NavButtonStatus.CREATE);
+                }}
+              >
+                {createIconFill === NavButtonStatus.CREATE ? (
+                  <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
+                ) : (
+                  <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
+                )}
+              </IconButton>
+            ) : (
+              <IconButton
+                disabled
+                disableRipple
+                style={{ color: "#4a4a4a" }}
+                aria-label="Create-Event"
+                onClick={() => {
+                  handleModalOpen();
+                  setCreateIconFill(NavButtonStatus.CREATE);
+                }}
+              >
+                {createIconFill === NavButtonStatus.CREATE ? (
+                  <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
+                ) : (
+                  <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
+                )}
+              </IconButton>
+            )}
           </Tooltip>
         </div>
         <div className="top-nav-user-avatar">
-          {isAuth === false ? (
+          {isLoggedIn === false ? (
             <a href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3500/auth/twitch/callback&scope=user:read:email">
               Login with twitch
             </a>
           ) : (
-            <IconButton style={{ color: "#00C8AF" }} onClick={handleMenu}>
+            <IconButton
+              // style={{ backgroundColor: "transparent" }}
+              onClick={handleMenu}
+            >
               <Avatar
                 sx={{
                   width: "30px",
                   height: "30px",
-                  backgroundColor: "#00C8AF",
+                  backgroundColor: "#transparent",
                   color: "black",
                 }}
+                src={userInfo.profile_image_url}
               />
             </IconButton>
           )}
 
           <ThemeProvider theme={theme}>
-            <LoggedInMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+            <LoggedInMenu
+              anchorEl={anchorEl}
+              setAnchorEl={setAnchorEl}
+              logout={ClearDataOnLogout}
+            />
             <div>
               <Modal open={modalOpen}>
                 <div className="create-event-modal-wrapper">

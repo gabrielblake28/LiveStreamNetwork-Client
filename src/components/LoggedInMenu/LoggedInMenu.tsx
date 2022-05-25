@@ -17,11 +17,13 @@ import { IconState } from "../../Recoil/Events/EventAtoms";
 type LoggedInMenuProps = {
   anchorEl: null | HTMLElement;
   setAnchorEl: Function;
+  logout: Function;
 };
 
 export default function LoggedInMenu({
   anchorEl,
   setAnchorEl,
+  logout,
 }: LoggedInMenuProps) {
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
 
@@ -75,7 +77,11 @@ export default function LoggedInMenu({
         </Typography>
       </MenuItem>
       <Divider variant="middle" color="white" />
-      <MenuItem onClick={handleClose}>
+      <MenuItem
+        onClick={() => {
+          handleClose(), logout();
+        }}
+      >
         <ListItemIcon>
           <LogoutOutlinedIcon
             sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}

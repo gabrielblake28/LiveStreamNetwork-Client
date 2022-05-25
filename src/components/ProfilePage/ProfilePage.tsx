@@ -1,19 +1,36 @@
 import { Avatar, Divider, Typography } from "@mui/material";
+import { useRecoilValue } from "recoil";
+import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import "./ProfilePage.css";
+import bi from "../../assets/lud_event.jpg";
+import defaultBackground from "../../assets/twitch_banner.jpg";
+import { useState } from "react";
 
 export default function ProfilePage() {
+  const profilePageUserData = useRecoilValue(CurrentUserData);
+  const [backgroundImage, setBackgroundImage] = useState<string>(
+    "C:UsersGabrielWorkspaceMainProjectsTWEFrontendsrcassets\twitch_banner.jpg"
+  );
+  const UserData = useRecoilValue(CurrentUserData);
+
   return (
-    <div className="profile-page-container">
+    <div
+      className="profile-page-container"
+      style={{
+        backgroundImage: `url(${UserData.profile_image_url})`,
+      }}
+    >
       <div className="profile-page-header-container">
         <div className="profile-page-profile-pic">
-          <Avatar
+          {/* <Avatar
             sx={{
               height: "150px",
               width: "150px",
               backgroundColor: "#00C8AF",
               color: "black",
             }}
-          ></Avatar>
+            src={UserData.profile_image_url}
+          ></Avatar> */}
         </div>
         <div className="profile-page-user-data-container">
           <div className="profile-page-username">
@@ -24,7 +41,7 @@ export default function ProfilePage() {
                 fontFamily: "Source Sans Pro",
               }}
             >
-              Daunttx
+              {UserData.display_name}
             </Typography>
           </div>
           <div className="profile-page-user-data">
