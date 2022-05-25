@@ -2,7 +2,7 @@ import "./EventLandingPage.css";
 import CustomCarousel from "../CustomCarousel/CustomCarousel";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect } from "react";
-import { FeaturedEvents, UpcomingEvents } from "../../Recoil/Events/Atoms";
+import { FeaturedEvents, UpcomingEvents } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
 import CategoryCard from "../CategoryCard/CategoryCards";
