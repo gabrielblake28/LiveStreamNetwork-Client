@@ -1,7 +1,7 @@
 import "./CustomCarousel.css";
 import { useEffect, useLayoutEffect, useState } from "react";
 import EventCard from "../EventCard/EventCard";
-import schooled from "../../assets/schooled.jpg";
+import schooled from "../../assets/Thumbnails/schooled.jpg";
 import { Typography } from "@mui/material";
 import { CarouselController } from "../../Service/CarouselService/impl/CarouselController";
 import { Link } from "react-router-dom";

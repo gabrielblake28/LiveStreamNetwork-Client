@@ -19,6 +19,18 @@
   flex-direction: row;
   /* margin: 20px 0 0 30px; */
 }
+.event-details-page-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-details-page-image {
+  background-color: white;
+  width: 75%;
+  height: 100px;
+}
 
 .event-details-page-notification-button {
   margin-left: auto;

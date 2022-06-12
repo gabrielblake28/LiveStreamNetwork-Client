@@ -7,14 +7,14 @@ import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import SearchIcon from "@mui/icons-material/Search";
 import LoggedInMenu from "../LoggedInMenu/LoggedInMenu";
-import CreateEventModal from "../CreateEventModal/CreateEventModal";
+import CreateEventModal from "../CreateEventWorkflow/CreateEventWorkflow";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CurrentUserData, Authorized } from "../../Recoil/Users/UserAtoms";
-import { getUserData } from "../../GetUserData/GetUserData";
 import cors from "cors";
 import { IconState } from "../../Recoil/Events/EventAtoms";
 import "./TopNav.css";
 import Cookies from "universal-cookie";
+import { UserAPI } from "../../API/Users/UserAPI";
 
 import {
   IconButton,
@@ -34,6 +34,7 @@ import { Link } from "react-router-dom";
 import { IUser } from "../../API/Users/IUser";
 import { access } from "fs";
 
+const userAPI = new UserAPI();
 const cookies = new Cookies();
 
 const theme = createTheme({
@@ -71,8 +72,8 @@ function useAuth(): boolean {
     }
 
     if (isLoggedIn) {
-      const userData = getUserData(accessKey).then((response) => {
-        setUserData(response.data.data[0] as IUser);
+      const userData = userAPI.GetOrCreateUser(accessKey).then((response) => {
+        setUserData(response as IUser);
       });
     }
   }, [isLoggedIn]);
@@ -81,12 +82,11 @@ function useAuth(): boolean {
 }
 
 function ClearDataOnLogout() {
-  // const setIsLoggedIn = useSetRecoilState(Authorized);
   cookies.remove("evently_access_token");
   cookies.remove("evently_refresh_token");
   localStorage.removeItem("evently_access_token");
   localStorage.removeItem("evently_refresh_token");
-  window.location.reload();
+  window.location.replace("http://localhost:3000");
 }
 
 export default function TopNav({ setOpen }: TopNavProps) {
@@ -98,19 +98,11 @@ export default function TopNav({ setOpen }: TopNavProps) {
   const isLoggedIn = useAuth();
   const userInfo = useRecoilValue(CurrentUserData);
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
-
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   return (
@@ -126,12 +118,35 @@ export default function TopNav({ setOpen }: TopNavProps) {
             setHomeIconFill(NavButtonStatus.HOME);
           }}
           to="/"
-          style={{ textDecoration: "none", color: "#e5e5e5" }}
+          style={{
+            textDecoration: "none",
+            color: "#e5e5e5",
+            marginRight: "30px",
+          }}
         >
           <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
-            WhatsLive
+            Evently
           </Typography>
         </Link>
+        <Divider
+          orientation="vertical"
+          variant="middle"
+          flexItem
+          style={{ backgroundColor: "#545454" }}
+        />
+        <div className="top-nav-browse">
+          {/* <Link
+            onClick={() => {
+              setHomeIconFill(NavButtonStatus.HOME);
+            }}
+            to="/browse"
+            style={{ textDecoration: "none", color: "#e5e5e5" }}
+          > */}
+          <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
+            Browse
+          </Typography>
+          {/* </Link> */}
+        </div>
       </div>
       <div className="top-nav-center-layout">
         <div className="top-nav-search-bar">
@@ -162,8 +177,8 @@ export default function TopNav({ setOpen }: TopNavProps) {
       </div>
       <div className="top-nav-right-layout">
         <div className="top-nav-notifications">
-          <Tooltip title="Home">
-            <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
+            <Tooltip title="Home">
               <IconButton
                 disableRipple
                 style={{ color: "#EFEFF1" }}
@@ -178,8 +193,8 @@ export default function TopNav({ setOpen }: TopNavProps) {
                   <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
                 )}
               </IconButton>
-            </Link>
-          </Tooltip>
+            </Tooltip>
+          </Link>
           <Tooltip title="Subscriptions">
             {isLoggedIn === true ? (
               <IconButton

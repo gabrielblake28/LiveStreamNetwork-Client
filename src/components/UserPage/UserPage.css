@@ -1,4 +1,4 @@
-.profile-page-container {
+.user-page-container {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -11,7 +11,7 @@
 
 /* Header Content */
 
-.profile-page-header-container {
+.user-page-header-container {
   background-color: #18181b;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -24,44 +24,44 @@
   align-items: center;
 }
 
-.profile-page-profile-pic {
+.user-page-profile-pic {
   margin-top: 15px;
   justify-self: center;
   align-self: center;
 }
 
-.profile-page-user-data-container {
+.user-page-user-data-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
-.profile-page-username {
+.user-page-username {
   justify-self: center;
   align-self: center;
   margin: 10px 0 20px 0;
 }
 
-.profile-page-user-data {
+.user-page-user-data {
   display: flex;
   flex-direction: row;
   justify-self: center;
   align-items: center;
 }
 
-.profile-page-active-events {
+.user-page-active-events {
   display: flex;
   flex-direction: column;
   margin: 15px;
 }
 
-.profile-page-all-events {
+.user-page-all-events {
   display: flex;
   flex-direction: column;
   margin: 15px;
 }
 
-.profile-page-active-subscriptions {
+.user-page-active-subscriptions {
   display: flex;
   flex-direction: column;
   margin: 15px;
@@ -112,7 +112,7 @@
 
 /* Profile Page Content */
 
-.profile-page-content-container {
+.user-page-content-container {
   background-color: #18181b;
   height: 100%;
   width: 95%;
@@ -122,6 +122,6 @@
   align-items: end;
 }
 
-.profile-page-carousel-section {
+.user-page-carousel-section {
   width: 100%;
 }

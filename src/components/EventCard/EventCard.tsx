@@ -43,37 +43,42 @@ export default function EventCard({
         </Card>
       </div>
       <div className="event-card-details">
-        <div className="event-footer__panel-container">
-          <div className="event-footer__panel-left">
-            <div className="event-avatar">
-              <IconButton style={{ color: "#A970FF" }}>
-                <Avatar
-                  src={profilePic}
-                  sx={{
-                    width: "40px",
-                    height: "40px",
-                  }}
-                />
-              </IconButton>
+        <div className="event-avatar">
+          <Link to="/user">
+            <IconButton style={{ color: "#A970FF" }}>
+              <Avatar
+                src={profilePic}
+                sx={{
+                  width: "40px",
+                  height: "40px",
+                }}
+              />
+            </IconButton>
+          </Link>
+        </div>
+        <div className="title-creator-timestamp">
+          <Link to="event" style={{ textDecoration: "none" }}>
+            <div className="event-title">
+              {/* {eventTitle} */}
+              OTK Schooled Season Finale
             </div>
-            <div className="title-creator-timestamp">
-              <div className="event-title">{eventTitle}</div>
-              <div className="event-creator-name">{creatorName}</div>
-              <div className="event-timestamp">{`${new Date(
-                eventTime
-              ).toLocaleDateString("en-US", {
-                weekday: "short",
-                month: "long",
-                day: "numeric",
-              })}, ${new Date(eventTime).toLocaleTimeString("en-US", {
-                hour: "numeric",
-                minute: "2-digit",
-              })}`}</div>
+          </Link>
+          <Link to="/user" style={{ textDecoration: "none" }}>
+            <div className="event-creator-name">
+              {creatorName}
+              Mizkif
             </div>
-          </div>
-          <div className="event-footer__panel-right">
-            <SubscriptionComponent />
-          </div>
+          </Link>
+          <div className="event-timestamp">{`${new Date(
+            eventTime
+          ).toLocaleDateString("en-US", {
+            weekday: "short",
+            month: "long",
+            day: "numeric",
+          })}, ${new Date(eventTime).toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+          })}`}</div>
         </div>
       </div>
     </div>

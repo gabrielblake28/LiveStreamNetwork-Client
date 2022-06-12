@@ -9,7 +9,7 @@ type SubscriptionComponentProps = {
 };
 export function SubscriptionComponent({ EventId }: SubscriptionComponentProps) {
   const [isSubscribed, setIsSubscribed] = useState(false);
-
+  const isAuth = useAuth;
   useEffect(() => {
     GetSubscriptions().then((result) => {
       setIsSubscribed(!!result);
