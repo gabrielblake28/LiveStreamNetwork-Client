@@ -11,10 +11,10 @@ export default function EventDetailsPage() {
       <div className="event-details-page-content">
         <div className="event-details-page-header">
           <Typography
-            variant="h4"
+            variant="h5"
             style={{ fontFamily: "Source Sans Pro", color: "white" }}
           >
-            Event Title Here
+            OTK Schooled Season Finale
           </Typography>
           <div className="event-details-page-notification-button">
             <IconButton
@@ -39,6 +39,16 @@ export default function EventDetailsPage() {
                 />
               )}
             </IconButton>
+          </div>
+        </div>
+        <div className="event-details-page-details">
+          <div className="event-details-page-image">
+            {/* when an event is clicked, use the event id to grab the THUMBNAIL from that
+            specific event and display it here */}
+          </div>
+          <div className="event-details-page-description">
+            {/* when an event is clicked, use the event id to grab the DESCRIPTION from that
+            specific event and display it here */}
           </div>
         </div>
       </div>

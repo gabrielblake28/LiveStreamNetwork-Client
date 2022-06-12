@@ -43,19 +43,31 @@ export default function EventCard({
       </div>
       <div className="event-card-details">
         <div className="event-avatar">
-          <IconButton style={{ color: "#A970FF" }}>
-            <Avatar
-              src={profilePic}
-              sx={{
-                width: "40px",
-                height: "40px",
-              }}
-            />
-          </IconButton>
+          <Link to="/user">
+            <IconButton style={{ color: "#A970FF" }}>
+              <Avatar
+                src={profilePic}
+                sx={{
+                  width: "40px",
+                  height: "40px",
+                }}
+              />
+            </IconButton>
+          </Link>
         </div>
         <div className="title-creator-timestamp">
-          <div className="event-title">{eventTitle}</div>
-          <div className="event-creator-name">{creatorName}</div>
+          <Link to="event" style={{ textDecoration: "none" }}>
+            <div className="event-title">
+              {/* {eventTitle} */}
+              OTK Schooled Season Finale
+            </div>
+          </Link>
+          <Link to="/user" style={{ textDecoration: "none" }}>
+            <div className="event-creator-name">
+              {creatorName}
+              Mizkif
+            </div>
+          </Link>
           <div className="event-timestamp">{`${new Date(
             eventTime
           ).toLocaleDateString("en-US", {

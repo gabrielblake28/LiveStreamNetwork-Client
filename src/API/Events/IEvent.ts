@@ -1,9 +1,9 @@
 export interface IEvent {
-  start_timestamp: Date;
-  end_timestamp: Date;
   title: string;
   description?: string;
-  image?: string;
+  start_timestamp: Date;
+  end_timestamp: Date;
+  image?: File;
   featured?: boolean;
   user_id: string;
   category_id?: string;

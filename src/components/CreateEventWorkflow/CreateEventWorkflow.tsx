@@ -1,7 +1,10 @@
 import {
+  Breadcrumbs,
   Button,
   Divider,
   IconButton,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -9,7 +12,7 @@ import { styled } from "@mui/material";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import FormHelperTexts from "@mui/material/FormHelperText";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import "./CreateEventModal.css";
+import "./CreateEventWorkflow.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
@@ -19,102 +22,153 @@ import {
   EventDescriptionState,
   EventStartTimeState,
   EventEndTimeState,
+  EventCategoryState,
 } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { createSecureServer } from "http2";
+import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
+import CreateEventDetailsComponent from "./CreateEventDetailsComponent";
+import CreateEventDescriptionComponent from "./CreateEventDescriptionComponent";
+import CreateEventThumbnailComponent from "./CreateEventThumbnailComponent";
 
 const eventAPI = new EventAPI();
 
-type CreateEventModalProps = {
+type CreateEventWorkflowProps = {
   setHomeIconFill: Function;
   setCreateIconFill: Function;
   handleModalClose: Function;
 };
 
-// const months = {
-//   Jan: "01",
-//   Feb: "02",
-//   Mar: "03",
-//   Apr: "04",
-//   May: "05",
-//   Jun: "06",
-//   Jul: "07",
-//   Aug: "08",
-//   Sep: "09",
-//   Oct: "10",
-//   Nov: "11",
-//   Dec: "12",
-// };
-
-// function FormatTimeStamp(timeStamp) {
-//   let dayOfWeek = timeStamp.toString().substring(0, 3);
-//   let month = timeStamp.toString().substring(4, 7);
-//   let day = timeStamp.toString().substring(8, 10);
-//   let year = timeStamp.toString().substring(11, 15);
-//   let time = timeStamp.toString().substring(16, 24);
-
-//   if (month in months) month = months[month];
-
-//   let newTimeStamp = `${year}-${month}-${day} ${time}`;
-
-//   return newTimeStamp;
-// }
-
-const WhiteBorderTextField = styled(TextField)`
-  & label.Mui-focused {
-    color: #101012;
-  }
-  & .MuiOutlinedInput-root {
-    &.Mui-focused fieldset {
-      border-color: #101012;
-    }
-  }
-`;
-
-export default function CreateEventModal({
+export default function CreateEventWorkflow({
   setHomeIconFill,
   setCreateIconFill,
   handleModalClose,
-}: CreateEventModalProps) {
+}: CreateEventWorkflowProps) {
+  const [activePage, setActivePage] = useState("details");
+  const [eventCategory, setEventCategory] = useRecoilState(EventCategoryState);
   const [eventTitle, setEventTitle] = useRecoilState(EventTitleState);
   const [startTime, setStartTime] = useRecoilState(EventStartTimeState);
   const [endTime, setEndTime] = useRecoilState(EventEndTimeState);
   const [eventDescription, setEventDescription] = useRecoilState(
     EventDescriptionState
   );
-  const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
   );
-  const Input = styled("input")({
-    display: "none",
-  });
+  const [imageURL, setImageURL] = useState<string>("");
+  const userInfo = useRecoilValue(CurrentUserData);
 
-  useEffect(() => {
-    if (image !== null) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(image);
-    } else {
-      setImagePreview(undefined);
+  const CompleteWorkflow = () => {
+    eventAPI.CreateEvent({
+      user_id: userInfo.user_id as string,
+      title: eventTitle,
+      description: eventDescription,
+      start_timestamp: startTime,
+      end_timestamp: endTime,
+      image: image as File,
+      category_id: eventCategory,
+    });
+    handleModalClose();
+    setEventCategory("");
+    setEventTitle("");
+    setEventDescription("");
+    setStartTime(new Date());
+    setEndTime(new Date());
+    setCreateIconFill(NavButtonStatus.DISABLED);
+  };
+
+  const ActiveComponent = (value) => {
+    if (value === "details") {
+      return (
+        <CreateEventDetailsComponent
+          eventCategory={eventCategory}
+          setEventCategory={setEventCategory}
+          eventTitle={eventTitle}
+          setEventTitle={setEventTitle}
+          startTime={startTime}
+          setStartTime={setStartTime}
+          endTime={endTime}
+          setEndTime={setEndTime}
+          setActivePage={setActivePage}
+          onNext={() => {
+            setActivePage("description");
+          }}
+          onCancel={() => {
+            setCreateIconFill(NavButtonStatus.DISABLED);
+            handleModalClose();
+            setEventTitle("");
+            setEventCategory("");
+          }}
+        />
+      );
+    } else if (value === "description") {
+      return (
+        <CreateEventDescriptionComponent
+          eventDescription={eventDescription}
+          setEventDescription={setEventDescription}
+          setActivePage={setActivePage}
+          onNext={() => {
+            setActivePage("thumbnail");
+          }}
+          onBack={() => {
+            setActivePage("details");
+          }}
+        />
+      );
+    } else if (value === "thumbnail") {
+      return (
+        <CreateEventThumbnailComponent
+          image={image}
+          setImage={setImage}
+          setImageURL={setImageURL}
+          imagePreview={imagePreview}
+          setImagePreview={setImagePreview}
+          onCreate={() => {
+            CompleteWorkflow();
+          }}
+          onBack={() => {
+            setActivePage("description");
+          }}
+        />
+      );
     }
-  }, [image]);
+  };
 
   return (
     <div className="create-event-modal-wrapper">
       <div className="create-event-header-wrapper">
         <div className="create-event-header">
-          <Typography
-            style={{ fontFamily: "Source Sans Pro" }}
-            color="#aaaaaa"
-            variant="h5"
-          >
-            Create Event
-          </Typography>
+          <Breadcrumbs style={{ color: "#aaaaaa" }} aria-label="breadcrumb">
+            <Typography
+              style={
+                activePage === "details"
+                  ? { color: "#fff" }
+                  : { color: "#aaaaaa" }
+              }
+            >
+              Details
+            </Typography>
+            <Typography
+              style={
+                activePage === "description"
+                  ? { color: "#fff" }
+                  : { color: "#aaaaaa" }
+              }
+            >
+              Description
+            </Typography>
+            <Typography
+              style={
+                activePage === "thumbnail"
+                  ? { color: "#fff" }
+                  : { color: "#aaaaaa" }
+              }
+            >
+              Thumbnail
+            </Typography>
+          </Breadcrumbs>
         </div>
         <div className="create-event-close-button">
           <IconButton>
@@ -125,7 +179,7 @@ export default function CreateEventModal({
                 setEventDescription("");
                 setStartTime(new Date());
                 setEndTime(new Date());
-                setCreateIconFill(NavButtonStatus.INACTIVE);
+                setCreateIconFill(NavButtonStatus.DISABLED);
               }}
               sx={{
                 width: "20px",
@@ -137,6 +191,60 @@ export default function CreateEventModal({
         </div>
       </div>
       <Divider variant="fullWidth" style={{ backgroundColor: "#545454" }} />
+      <div className="create-event-active-component">
+        {ActiveComponent(activePage)}
+      </div>
+      {/* <div className="create-event-categories">
+        <FormHelperTexts>
+          <Typography
+            style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
+            color="#ACACAC"
+            variant="caption"
+          >
+            Categories
+          </Typography>
+        </FormHelperTexts>
+        <WhiteBorderSelect
+          autoFocus={false}
+          autoComplete="off"
+          sx={{
+            marginTop: "5px",
+            marginRight: 15,
+            backgroundColor: "#101012",
+            border: "2px solid #101012",
+            color: "#aaaaaa",
+            "&:hover": {
+              border: "2px solid #A970FF",
+            },
+            "& .MuiSvgIcon-root": {
+              color: "#aaaaaa",
+            },
+            "&:focus": {
+              border: "2px solid #101012",
+            },
+          }}
+          size="small"
+          variant="outlined"
+          fullWidth
+          value={eventTitle}
+          onChange={(e) => {
+            setEventTitle(e.target.value as string);
+          }}
+        >
+          <MenuItem disabled value="">
+            Categories
+          </MenuItem>
+          <MenuItem value="1">Test 1</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+          <MenuItem value="2">Test 2</MenuItem>
+        </WhiteBorderSelect>
+      </div>
       <div className="create-event-title">
         <FormHelperTexts>
           <Typography
@@ -226,8 +334,49 @@ export default function CreateEventModal({
           />
         </div>
       </div>
+      <div className="create-event-button-wrapper">
+        <div className="create-event-left-button">
+          {" "}
+          <Button
+            style={{
+              color: "#101012",
+              height: "35px",
+              width: "150px",
+              backgroundColor: "#27272c",
+            }}
+            variant="contained"
+            onClick={() => {}}
+          >
+            <Typography
+              style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
+              variant="button"
+            >
+              Cancel
+            </Typography>
+          </Button>
+        </div>
+        <div className="create-event-right-button">
+          <Button
+            style={{
+              color: "#101012",
+              height: "35px",
+              width: "150px",
+              backgroundColor: "#A970FF",
+            }}
+            variant="contained"
+            onClick={() => {}}
+          >
+            <Typography
+              style={{ fontFamily: "Source Sans Pro" }}
+              variant="button"
+            >
+              Next
+            </Typography>
+          </Button>
+        </div>
+      </div> */}
 
-      <div className="create-event-description">
+      {/* <div className="create-event-description">
         <FormHelperTexts>
           <Typography
             style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
@@ -278,8 +427,8 @@ export default function CreateEventModal({
             setEventDescription(e.target.value);
           }}
         />
-      </div>
-      <Typography
+      </div> */}
+      {/* <Typography
         style={{ marginLeft: "38px", fontFamily: "Source Sans Pro" }}
         color="#aaaaaa"
         variant="caption"
@@ -287,20 +436,23 @@ export default function CreateEventModal({
         Thumbnail
       </Typography>
       <div className="create-event-image-preview-container">
-        <input
-          id="file-explore-icon-button"
-          accept="image/jpeg, image/png"
-          type="file"
-          onChange={(e) => {
-            const files = e?.target?.files;
+        <form action="/profile" method="post" encType="multipart/form-data">
+          <input
+            id="file-explore-icon-button"
+            accept="image/jpeg, image/png"
+            type="file"
+            onChange={(e) => {
+              const files = e?.target?.files;
 
-            if (files) {
-              setImage(files[0]);
-            } else {
-              setImage(null);
-            }
-          }}
-        />
+              if (files) {
+                console.log(files[0]);
+                setImage(files[0]);
+              } else {
+                setImage(null);
+              }
+            }}
+          />
+        </form>
 
         {imagePreview === undefined ? (
           <label htmlFor="file-explore-icon-button">
@@ -336,17 +488,21 @@ export default function CreateEventModal({
           variant="contained"
           onClick={() => {
             eventAPI.CreateEvent({
+              user_id: userInfo.user_id as string,
               title: eventTitle,
+              description: eventDescription,
               start_timestamp: startTime,
               end_timestamp: endTime,
-              description: eventDescription,
-              user_id: "1",
+              image: image as File,
+              // category_id: category_id;
             });
+            console.log(image);
             handleModalClose();
             setEventTitle("");
             setEventDescription("");
             setStartTime(new Date());
             setEndTime(new Date());
+            setCreateIconFill(NavButtonStatus.DISABLED);
           }}
         >
           <Typography
@@ -356,7 +512,7 @@ export default function CreateEventModal({
             Create Event
           </Typography>
         </Button>
-      </div>
+      </div> */}
       <script src="https://unpkg.com/react-image-crop/dist/ReactCrop.min.js"></script>
     </div>
   );

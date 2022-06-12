@@ -66,16 +66,6 @@ export default function LoggedInMenu({
           </Typography>
         </MenuItem>
       </Link>
-      <MenuItem onClick={handleClose}>
-        <ListItemIcon>
-          <StarBorderOutlinedIcon
-            sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
-          />
-        </ListItemIcon>
-        <Typography variant="subtitle2" sx={{ color: "#EFEFF1" }}>
-          Subscriptions
-        </Typography>
-      </MenuItem>
       <Divider variant="middle" color="white" />
       <MenuItem
         onClick={() => {
