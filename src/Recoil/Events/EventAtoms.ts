@@ -27,6 +27,11 @@ export const UpcomingEvents = atom({
 
 // Events Atoms
 
+export const EventCategoryState = atom({
+  key: "EventCategory",
+  default: "" as string,
+});
+
 export const EventTitleState = atom({
   key: "EventTitle",
   default: "" as string,
@@ -44,4 +49,9 @@ export const EventEndTimeState = atom({
 export const EventDescriptionState = atom({
   key: "EventDescription",
   default: "" as string,
+});
+
+export const EventWorkflowPageState = atom({
+  key: "EventWorkflowPageState",
+  default: "details" as string,
 });

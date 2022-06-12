@@ -1,17 +1,15 @@
 import { Avatar, Divider, Typography } from "@mui/material";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
-import "./ProfilePage.css";
-import bi from "../../assets/lud_event.jpg";
-import defaultBackground from "../../assets/twitch_banner.jpg";
+import "./UserPage.css";
 import { useEffect, useState } from "react";
 import CustomCarousel from "../CustomCarousel/CustomCarousel";
 import { FeaturedEvents } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
 
-export default function ProfilePage() {
-  const profilePageUserData = useRecoilValue(CurrentUserData);
+export default function UserPage() {
+  const userPageUserData = useRecoilValue(CurrentUserData);
   const [backgroundImage, setBackgroundImage] = useState<string>(
     "C:UsersGabrielWorkspaceMainProjectsTWEFrontendsrcassets\twitch_banner.jpg"
   );
@@ -29,14 +27,14 @@ export default function ProfilePage() {
 
   return (
     <div
-      className="profile-page-container"
+      className="user-page-container"
       style={{
         backgroundImage: `url(${UserData.profile_image_url})`,
       }}
     >
-      <div className="profile-page-header-container">
-        <div className="profile-page-user-data-container">
-          <div className="profile-page-username">
+      <div className="user-page-header-container">
+        <div className="user-page-user-data-container">
+          <div className="user-page-username">
             <Typography
               variant="h4"
               sx={{
@@ -47,8 +45,8 @@ export default function ProfilePage() {
               {UserData.display_name}
             </Typography>
           </div>
-          <div className="profile-page-user-data">
-            <div className="profile-page-active-events">
+          <div className="user-page-user-data">
+            <div className="user-page-active-events">
               <Typography
                 variant="caption"
                 sx={{
@@ -76,35 +74,8 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
-            <div className="profile-page-active-subscriptions">
-              <Typography
-                variant="caption"
-                sx={{
-                  color: "white",
-                  fontFamily: "Source Sans Pro",
-                }}
-              >
-                Active Subscriptions
-              </Typography>
-              <div className="active-subs-num">
-                <Typography
-                  variant="h4"
-                  sx={{
-                    color: "white",
-                    fontFamily: "Source Sans Pro",
-                  }}
-                >
-                  14
-                </Typography>
-                <div className="underline-on-hover">
-                  <Divider
-                    variant="fullWidth"
-                    sx={{ backgroundColor: "white" }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="profile-page-all-events">
+
+            <div className="user-page-all-events">
               <Typography
                 variant="caption"
                 sx={{
@@ -136,8 +107,8 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      <div className="profile-page-content-container">
-        <div className="profile-page-carousel-section">
+      <div className="user-page-content-container">
+        <div className="user-page-carousel-section">
           <CustomCarousel
             slideTitle={"Active Subscriptions"}
             slides={featuredEvents}

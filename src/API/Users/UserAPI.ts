@@ -9,22 +9,12 @@ export class UserAPI implements IUserAPI {
       baseURL:
         process.env.NODE_ENV == "production"
           ? ""
-          : "http://localhost:3500/event",
+          : "http://localhost:3500/user",
     });
   }
-
-  async CreateUser(resource: IUser): Promise<string> {
-    const result = await this.query.post("/", resource);
-    return result.data;
-  }
-
-  async GetUser(accessToken: string): Promise<IUser> {
-    const result = await this.query.get(`/${accessToken}`);
-    return result.data;
-  }
-
-  async DeleteUser(id: string): Promise<void> {
-    const result = await this.query.delete(`/${id}`);
-    return result.data;
+  async GetOrCreateUser(accessToken: string): Promise<IUser> {
+    return await (
+      await this.query.post("/", { accessToken })
+    ).data;
   }
 }

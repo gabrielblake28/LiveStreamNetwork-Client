@@ -9,7 +9,7 @@
   margin: 5px;
 }
 
-.card-column-wrapper:hover .event-title {
+.card-column-wrapper:hover {
   color: #ffffff;
 }
 
@@ -35,6 +35,7 @@
 .title-creator-timestamp {
   display: flex;
   flex-direction: column;
+  user-select: none;
 }
 
 .event-avatar {
@@ -49,11 +50,19 @@
   font-family: "Source Sans Pro", sans-serif;
 }
 
+.event-title:hover {
+  color: #a970ff;
+}
+
 .event-creator-name {
   font-size: small;
   margin: 3px 0 3px 5px;
   color: #aaaaaa;
   font-family: "Rubik", sans-serif;
+}
+
+.event-creator-name:hover {
+  color: #a970ff;
 }
 
 .event-timestamp {

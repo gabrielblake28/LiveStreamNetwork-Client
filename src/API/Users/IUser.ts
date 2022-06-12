@@ -1,13 +1,15 @@
 export interface IUser {
-  broadcaster_type: string;
-  created_at: Date;
-  description?: string;
+  user_id?: string;
+  twitch_id: string;
   display_name: string;
-  email?: string;
-  id: string;
-  login: string;
-  profile_image_url?: string;
-  offline_image_url?: string;
-  type: string;
+  description: string;
+  profile_image_url: string;
   view_count: number;
+  email: string;
+  created_at: string;
+  broadcaster_type: string;
+  login: string;
+  offline_image_url: string;
+  type: string;
+  phone?: string;
 }
