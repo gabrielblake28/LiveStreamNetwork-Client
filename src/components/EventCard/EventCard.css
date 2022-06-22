@@ -22,12 +22,6 @@
   border-radius: 1rem;
 }
 
-.event-card-details {
-  display: flex;
-  flex-direction: row;
-  color: white;
-}
-
 .event-card {
   height: 185px;
 }
@@ -74,4 +68,30 @@
 
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
   background-color: #101010 !important;
+}
+
+.event-card-details {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.event-footer__panel-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-footer__panel-right {
+}
+
+.event-footer__panel-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.event-footer__bell-icon {
+  cursor: pointer;
 }

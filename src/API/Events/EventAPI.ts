@@ -33,9 +33,13 @@ export class EventAPI implements IEventAPI {
     const result = await this.query.get("/live", { params: { limit, page } });
     return result.data;
   }
-  async GetFeaturedEvents(limit: number, page: number): Promise<IEvent[]> {
+  async GetFeaturedEvents(
+    limit: number,
+    page: number,
+    user_id: string
+  ): Promise<IEvent[]> {
     const result = await this.query.get("/featured", {
-      params: { limit, page },
+      params: { limit, page, user_id },
     });
     return result.data;
   }
