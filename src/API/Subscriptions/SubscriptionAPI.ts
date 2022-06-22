@@ -14,7 +14,15 @@ export class SubscriptionAPI implements ISubscriptionAPI {
           : "http://localhost:3500/subscription",
     });
   }
-  async addSubscription(resource: Subscription): Promise<string> {
+  async GetSubscriptionByEventId(
+    event_id: string,
+    user_id: string
+  ): Promise<Subscription> {
+    const result = await this.query.get("/", { params: { event_id, user_id } });
+
+    return result.data;
+  }
+  async addSubscription(resource: Partial<Subscription>): Promise<string> {
     const result = await this.query.post("/", resource);
 
     return result.data;
@@ -28,6 +36,8 @@ export class SubscriptionAPI implements ISubscriptionAPI {
 
     return result.data;
   }
+
+  async;
 
   async BatchGetSubscriptions(eventIds: string[]): Promise<Subscription[]> {
     const result = await this.query.get(`/`, { params: { eventIds } });

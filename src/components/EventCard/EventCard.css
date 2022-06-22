@@ -22,12 +22,6 @@
   border-radius: 1rem;
 }
 
-.event-card-details {
-  display: flex;
-  flex-direction: row;
-  color: white;
-}
-
 .event-card {
   height: 185px;
 }
@@ -74,6 +68,12 @@
 
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
   background-color: #101010 !important;
+}
+
+.event-card-details {
+  display: flex;
+  flex-direction: column;
+  color: white;
 }
 
 .event-footer__panel-left {
