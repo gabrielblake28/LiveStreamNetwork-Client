@@ -43,7 +43,9 @@ export default function CreateEventThumbnailComponent({
         setImagePreview(reader.result as string);
       };
       // reader.readAsText(image);
-      reader.readAsDataURL(image);
+      const test = reader.readAsDataURL(image);
+      // reader.readAsDataURL(image);
+      console.log(test);
     } else {
       setImagePreview(undefined);
     }
@@ -93,7 +95,6 @@ export default function CreateEventThumbnailComponent({
             <img
               style={{
                 marginTop: "10px",
-                //   marginBottom: "30px",
                 height: "185px",
                 width: "322px",
                 objectFit: "cover",

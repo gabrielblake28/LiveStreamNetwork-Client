@@ -2,10 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Shell from "./components/shell/Shell";
-import Router from "./components/routes/Routes";
+import Shell from "./components/Shell/Shell";
+import Router from "./components/Routes/Routes";
 
 function App() {
   const [count, setCount] = useState(0);
