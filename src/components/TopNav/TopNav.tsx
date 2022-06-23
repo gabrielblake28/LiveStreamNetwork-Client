@@ -7,7 +7,7 @@ import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import SearchIcon from "@mui/icons-material/Search";
 import LoggedInMenu from "../LoggedInMenu/LoggedInMenu";
-import CreateEventModal from "../CreateEventWorkflow/CreateEventWorkflow";
+import CreateEventWorkflow from "../CreateEventWorkflow/CreateEventWorkflow";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CurrentUserData, Authorized } from "../../Recoil/Users/UserAtoms";
 import cors from "cors";
@@ -28,11 +28,12 @@ import {
   ThemeProvider,
   Modal,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import { Link } from "react-router-dom";
 import { IUser } from "../../API/Users/IUser";
 import { access } from "fs";
+import SubscriptionsMenu from "../SubscriptionsMenu/SubscriptionsMenu";
 
 const userAPI = new UserAPI();
 const cookies = new Cookies();
@@ -91,18 +92,24 @@ function ClearDataOnLogout() {
 
 export default function TopNav({ setOpen }: TopNavProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [subsAnchorEl, setSubsAnchorEl] = useState<null | HTMLElement>(null);
+  const [creatEventModalOpen, setCreateEventModalOpen] = useState(false);
+  const [subsModalOpen, setSubsModalOpen] = useState(false);
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
   const [subIconFill, setSubIconFill] = useRecoilState(IconState);
   const [createIconFill, setCreateIconFill] = useRecoilState(IconState);
   const isLoggedIn = useAuth();
   const userInfo = useRecoilValue(CurrentUserData);
 
-  const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
+  const handleCreateEventModalOpen = () => setCreateEventModalOpen(true);
+  const handleCreateEventModalClose = () => setCreateEventModalOpen(false);
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleProfileMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleSubsMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setSubsAnchorEl(event.currentTarget);
   };
 
   return (
@@ -110,7 +117,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
       <div className="top-nav-left-layout">
         <div className="top-nav-logo">
           <EventNoteIcon
-            sx={{ width: "35px", height: "35px", color: "#A970FF" }}
+            sx={{ width: "35px", height: "35px", color: "#9552fa" }}
           />
         </div>
         <Link
@@ -135,17 +142,9 @@ export default function TopNav({ setOpen }: TopNavProps) {
           style={{ backgroundColor: "#545454" }}
         />
         <div className="top-nav-browse">
-          {/* <Link
-            onClick={() => {
-              setHomeIconFill(NavButtonStatus.HOME);
-            }}
-            to="/browse"
-            style={{ textDecoration: "none", color: "#e5e5e5" }}
-          > */}
           <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
             Browse
           </Typography>
-          {/* </Link> */}
         </div>
       </div>
       <div className="top-nav-center-layout">
@@ -201,7 +200,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 disableRipple
                 style={{ color: "#EFEFF1" }}
                 aria-label="Subs"
-                // onClick={}
+                onClick={handleSubsMenu}
               >
                 {subIconFill === NavButtonStatus.SUBS ? (
                   <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
@@ -217,7 +216,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 disableRipple
                 style={{ color: "#4a4a4a" }}
                 aria-label="Subs"
-                // onClick={}
+                // onClick={handleSubsMenu}
               >
                 {subIconFill === NavButtonStatus.SUBS ? (
                   <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
@@ -236,7 +235,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 style={{ color: "#EFEFF1" }}
                 aria-label="Create-Event"
                 onClick={() => {
-                  handleModalOpen();
+                  handleCreateEventModalOpen();
                   setCreateIconFill(NavButtonStatus.CREATE);
                 }}
               >
@@ -253,7 +252,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 style={{ color: "#4a4a4a" }}
                 aria-label="Create-Event"
                 onClick={() => {
-                  handleModalOpen();
+                  handleCreateEventModalOpen();
                   setCreateIconFill(NavButtonStatus.CREATE);
                 }}
               >
@@ -265,6 +264,13 @@ export default function TopNav({ setOpen }: TopNavProps) {
               </IconButton>
             )}
           </Tooltip>
+          <Modal open={creatEventModalOpen}>
+            <CreateEventWorkflow
+              setHomeIconFill={setHomeIconFill}
+              setCreateIconFill={setCreateIconFill}
+              handleCreateEventModalClose={handleCreateEventModalClose}
+            />
+          </Modal>
         </div>
         <div className="top-nav-user-avatar">
           {isLoggedIn === false ? (
@@ -272,10 +278,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               Login with twitch
             </a>
           ) : (
-            <IconButton
-              // style={{ backgroundColor: "transparent" }}
-              onClick={handleMenu}
-            >
+            <IconButton onClick={handleProfileMenu}>
               <Avatar
                 sx={{
                   width: "30px",
@@ -294,17 +297,14 @@ export default function TopNav({ setOpen }: TopNavProps) {
               setAnchorEl={setAnchorEl}
               logout={ClearDataOnLogout}
             />
-            <div>
-              <Modal open={modalOpen}>
-                <div className="create-event-modal-wrapper">
-                  <CreateEventModal
-                    setHomeIconFill={setHomeIconFill}
-                    setCreateIconFill={setCreateIconFill}
-                    handleModalClose={handleModalClose}
-                  />
-                </div>
-              </Modal>
-            </div>
+            <div></div>
+          </ThemeProvider>
+
+          <ThemeProvider theme={theme}>
+            <SubscriptionsMenu
+              subsAnchorEl={subsAnchorEl}
+              setSubsAnchorEl={setSubsAnchorEl}
+            ></SubscriptionsMenu>
           </ThemeProvider>
         </div>
       </div>
