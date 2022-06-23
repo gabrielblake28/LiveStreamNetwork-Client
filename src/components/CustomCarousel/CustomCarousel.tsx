@@ -5,6 +5,12 @@ import schooled from "../../assets/Thumbnails/schooled.jpg";
 import { Typography } from "@mui/material";
 import { CarouselController } from "../../Service/CarouselService/impl/CarouselController";
 import { Link } from "react-router-dom";
+import { IEvent } from "../../API/Events/IEvent";
+
+type CustomCarouselProps = {
+  slides: IEvent[];
+  slideTitle: string;
+};
 
 const carouselController = new CarouselController();
 
@@ -23,7 +29,10 @@ const useWindowSize = () => {
   return size;
 };
 
-export default function CustomCarousel({ slides, slideTitle }) {
+export default function CustomCarousel({
+  slides,
+  slideTitle,
+}: CustomCarouselProps) {
   const NUM_OF_EVENTS = 24;
   const [carouselPosition, setCarouselPosition] = useState(0);
   const [progressBar, setProgressBar] = useState(0);
@@ -129,11 +138,13 @@ export default function CustomCarousel({ slides, slideTitle }) {
             return (
               <div className="slider-class">
                 <EventCard
-                  eventTitle={slide.title}
-                  creatorName={slide.name || ""}
-                  eventTime={slide.start_timestamp}
-                  eventImg={slide.image || schooled}
-                  profilePic={slide.profilePic || ""}
+                  EventTitle={slide.title}
+                  CreatorName={slide.title || ""}
+                  EventTime={slide.start_timestamp}
+                  EventImg={slide.image || schooled}
+                  ProfilePic={slide.profile_pic}
+                  SubscriptionId={slide.subscription_id}
+                  EventId={slide.event_id}
                 />
               </div>
             );

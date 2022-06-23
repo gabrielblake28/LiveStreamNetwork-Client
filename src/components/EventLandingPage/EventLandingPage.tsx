@@ -18,7 +18,7 @@ export default function EventLandingPage() {
   useEffect(() => {
     const api = new EventAPI();
 
-    api.GetFeaturedEvents(24, 1).then((result: IEvent[]) => {
+    api.GetFeaturedEvents(24, 1, "1").then((result: IEvent[]) => {
       setFeaturedEvents(() => result);
     });
   }, []);
