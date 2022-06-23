@@ -5,7 +5,7 @@ export default function twitchStreamEmbed() {
     <div className="twitch-stream-embed">
       <CardMedia
         component="iframe"
-        src="https://player.twitch.tv/?channel=mizkif&parent=localhost&autoplay=false"
+        src="https://player.twitch.tv/?channel=mizkif&parent=localhost&autoplay=true&muted=true"
         height="400"
         title="User's Stream"
         // controls
