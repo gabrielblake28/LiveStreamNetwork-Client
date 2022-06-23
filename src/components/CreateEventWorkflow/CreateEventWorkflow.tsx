@@ -31,19 +31,21 @@ import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import CreateEventDetailsComponent from "./CreateEventDetailsComponent";
 import CreateEventDescriptionComponent from "./CreateEventDescriptionComponent";
 import CreateEventThumbnailComponent from "./CreateEventThumbnailComponent";
+import { FileAPI } from "../../API/File/FileAPI";
 
+const fileAPI = new FileAPI();
 const eventAPI = new EventAPI();
 
 type CreateEventWorkflowProps = {
   setHomeIconFill: Function;
   setCreateIconFill: Function;
-  handleModalClose: Function;
+  handleCreateEventModalClose: Function;
 };
 
 export default function CreateEventWorkflow({
   setHomeIconFill,
   setCreateIconFill,
-  handleModalClose,
+  handleCreateEventModalClose,
 }: CreateEventWorkflowProps) {
   const [activePage, setActivePage] = useState("details");
   const [eventCategory, setEventCategory] = useRecoilState(EventCategoryState);
@@ -61,22 +63,25 @@ export default function CreateEventWorkflow({
   const userInfo = useRecoilValue(CurrentUserData);
 
   const CompleteWorkflow = () => {
-    eventAPI.CreateEvent({
-      user_id: userInfo.user_id as string,
-      title: eventTitle,
-      description: eventDescription,
-      start_timestamp: startTime,
-      end_timestamp: endTime,
-      image: image as File,
-      category_id: eventCategory,
-    });
-    handleModalClose();
-    setEventCategory("");
-    setEventTitle("");
-    setEventDescription("");
-    setStartTime(new Date());
-    setEndTime(new Date());
-    setCreateIconFill(NavButtonStatus.DISABLED);
+    if (image !== null) {
+      fileAPI.UploadFile({ fileName: image.name, file: image });
+      eventAPI.CreateEvent({
+        user_id: userInfo.user_id as string,
+        title: eventTitle,
+        description: eventDescription,
+        start_timestamp: startTime,
+        end_timestamp: endTime,
+        image: image as File,
+        category_id: eventCategory,
+      });
+      handleCreateEventModalClose();
+      setEventCategory("");
+      setEventTitle("");
+      setEventDescription("");
+      setStartTime(new Date());
+      setEndTime(new Date());
+      setCreateIconFill(NavButtonStatus.DISABLED);
+    }
   };
 
   const ActiveComponent = (value) => {
@@ -97,7 +102,7 @@ export default function CreateEventWorkflow({
           }}
           onCancel={() => {
             setCreateIconFill(NavButtonStatus.DISABLED);
-            handleModalClose();
+            handleCreateEventModalClose();
             setEventTitle("");
             setEventCategory("");
           }}
@@ -144,7 +149,7 @@ export default function CreateEventWorkflow({
             <Typography
               style={
                 activePage === "details"
-                  ? { color: "#fff" }
+                  ? { color: "#A970FF" }
                   : { color: "#aaaaaa" }
               }
             >
@@ -153,7 +158,7 @@ export default function CreateEventWorkflow({
             <Typography
               style={
                 activePage === "description"
-                  ? { color: "#fff" }
+                  ? { color: "#A970FF" }
                   : { color: "#aaaaaa" }
               }
             >
@@ -162,7 +167,7 @@ export default function CreateEventWorkflow({
             <Typography
               style={
                 activePage === "thumbnail"
-                  ? { color: "#fff" }
+                  ? { color: "#A970FF" }
                   : { color: "#aaaaaa" }
               }
             >
@@ -171,16 +176,17 @@ export default function CreateEventWorkflow({
           </Breadcrumbs>
         </div>
         <div className="create-event-close-button">
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              handleCreateEventModalClose();
+              setEventTitle("");
+              setEventDescription("");
+              setStartTime(new Date());
+              setEndTime(new Date());
+              setCreateIconFill(NavButtonStatus.DISABLED);
+            }}
+          >
             <CloseRoundedIcon
-              onClick={() => {
-                handleModalClose();
-                setEventTitle("");
-                setEventDescription("");
-                setStartTime(new Date());
-                setEndTime(new Date());
-                setCreateIconFill(NavButtonStatus.DISABLED);
-              }}
               sx={{
                 width: "20px",
                 height: "20px",
@@ -194,325 +200,6 @@ export default function CreateEventWorkflow({
       <div className="create-event-active-component">
         {ActiveComponent(activePage)}
       </div>
-      {/* <div className="create-event-categories">
-        <FormHelperTexts>
-          <Typography
-            style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
-            color="#ACACAC"
-            variant="caption"
-          >
-            Categories
-          </Typography>
-        </FormHelperTexts>
-        <WhiteBorderSelect
-          autoFocus={false}
-          autoComplete="off"
-          sx={{
-            marginTop: "5px",
-            marginRight: 15,
-            backgroundColor: "#101012",
-            border: "2px solid #101012",
-            color: "#aaaaaa",
-            "&:hover": {
-              border: "2px solid #A970FF",
-            },
-            "& .MuiSvgIcon-root": {
-              color: "#aaaaaa",
-            },
-            "&:focus": {
-              border: "2px solid #101012",
-            },
-          }}
-          size="small"
-          variant="outlined"
-          fullWidth
-          value={eventTitle}
-          onChange={(e) => {
-            setEventTitle(e.target.value as string);
-          }}
-        >
-          <MenuItem disabled value="">
-            Categories
-          </MenuItem>
-          <MenuItem value="1">Test 1</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-          <MenuItem value="2">Test 2</MenuItem>
-        </WhiteBorderSelect>
-      </div>
-      <div className="create-event-title">
-        <FormHelperTexts>
-          <Typography
-            style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
-            color="#ACACAC"
-            variant="caption"
-          >
-            Title
-          </Typography>
-        </FormHelperTexts>
-        <WhiteBorderTextField
-          autoFocus
-          autoComplete="off"
-          InputLabelProps={{
-            style: { color: "#aaaaaa" },
-          }}
-          sx={{
-            marginTop: "5px",
-            ".css-x2l1vy-MuiInputBase-root-MuiOutlinedInput-root": {
-              color: "white",
-            },
-          }}
-          InputProps={{
-            sx: {
-              height: "40px",
-              backgroundColor: "#101012",
-              color: "#aaaaaa",
-              ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                border: "2px solid #101012",
-              },
-              "&:hover": {
-                ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                  border: "2px solid #A970FF",
-                },
-              },
-            },
-          }}
-          hiddenLabel={true}
-          size="medium"
-          variant="outlined"
-          fullWidth
-          value={eventTitle}
-          onChange={(e) => {
-            setEventTitle(e.target.value);
-          }}
-        />
-      </div>
-      <div className="date-time-input-wrapper">
-        <div className="event-start-time-input">
-          <FormHelperTexts>
-            <Typography
-              style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
-              color="#ACACAC"
-              variant="caption"
-            >
-              Start Time
-            </Typography>
-          </FormHelperTexts>
-          <DatePicker
-            selected={startTime}
-            onChange={(startTime) => setStartTime(startTime)}
-            showTimeSelect
-            timeIntervals={15}
-            timeCaption="Time"
-            dateFormat="MMMM d, h:mm aa"
-            className="select-event-start-time"
-          />
-        </div>
-        <div className="event-end-time-input">
-          <FormHelperTexts>
-            <Typography
-              style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
-              color="#ACACAC"
-              variant="caption"
-            >
-              End Time
-            </Typography>
-          </FormHelperTexts>
-          <DatePicker
-            selected={endTime}
-            onChange={(date) => setEndTime(date)}
-            showTimeSelect
-            timeIntervals={15}
-            timeCaption="Time"
-            dateFormat="MMMM d, h:mm aa"
-            className="select-event-end-time"
-          />
-        </div>
-      </div>
-      <div className="create-event-button-wrapper">
-        <div className="create-event-left-button">
-          {" "}
-          <Button
-            style={{
-              color: "#101012",
-              height: "35px",
-              width: "150px",
-              backgroundColor: "#27272c",
-            }}
-            variant="contained"
-            onClick={() => {}}
-          >
-            <Typography
-              style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
-              variant="button"
-            >
-              Cancel
-            </Typography>
-          </Button>
-        </div>
-        <div className="create-event-right-button">
-          <Button
-            style={{
-              color: "#101012",
-              height: "35px",
-              width: "150px",
-              backgroundColor: "#A970FF",
-            }}
-            variant="contained"
-            onClick={() => {}}
-          >
-            <Typography
-              style={{ fontFamily: "Source Sans Pro" }}
-              variant="button"
-            >
-              Next
-            </Typography>
-          </Button>
-        </div>
-      </div> */}
-
-      {/* <div className="create-event-description">
-        <FormHelperTexts>
-          <Typography
-            style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
-            color="#aaaaaa"
-            variant="caption"
-          >
-            Description
-          </Typography>
-        </FormHelperTexts>
-        <WhiteBorderTextField
-          inputProps={{
-            maxLength: 160,
-          }}
-          autoFocus
-          autoComplete="off"
-          InputLabelProps={{
-            style: { color: "#aaaaaa" },
-          }}
-          sx={{
-            marginTop: "5px",
-            ".css-x2l1vy-MuiInputBase-root-MuiOutlinedInput-root": {
-              color: "white",
-            },
-          }}
-          InputProps={{
-            sx: {
-              backgroundColor: "#101012",
-              color: "#aaaaaa",
-              ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                border: "2px solid #101012",
-              },
-              "&:hover": {
-                ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                  border: "2px solid #A970FF",
-                },
-              },
-            },
-          }}
-          hiddenLabel={true}
-          size="medium"
-          variant="outlined"
-          fullWidth
-          multiline
-          maxRows={2}
-          minRows={2}
-          value={eventDescription}
-          onChange={(e) => {
-            setEventDescription(e.target.value);
-          }}
-        />
-      </div> */}
-      {/* <Typography
-        style={{ marginLeft: "38px", fontFamily: "Source Sans Pro" }}
-        color="#aaaaaa"
-        variant="caption"
-      >
-        Thumbnail
-      </Typography>
-      <div className="create-event-image-preview-container">
-        <form action="/profile" method="post" encType="multipart/form-data">
-          <input
-            id="file-explore-icon-button"
-            accept="image/jpeg, image/png"
-            type="file"
-            onChange={(e) => {
-              const files = e?.target?.files;
-
-              if (files) {
-                console.log(files[0]);
-                setImage(files[0]);
-              } else {
-                setImage(null);
-              }
-            }}
-          />
-        </form>
-
-        {imagePreview === undefined ? (
-          <label htmlFor="file-explore-icon-button">
-            <div className="create-event-image-preview">
-              <CloudUploadOutlinedIcon
-                sx={{ height: "150px", width: "150px" }}
-              />
-            </div>
-          </label>
-        ) : (
-          <img
-            style={{
-              height: "185px",
-              width: "322px",
-              objectFit: "cover",
-              borderRadius: "4px",
-            }}
-            src={imagePreview}
-            onClick={() => {
-              setImage(null);
-            }}
-          />
-        )}
-      </div>
-      <div className="confirm-create-event-button">
-        <Button
-          style={{
-            color: "#101012",
-            height: "35px",
-            width: "150px",
-            backgroundColor: "#A970FF",
-          }}
-          variant="contained"
-          onClick={() => {
-            eventAPI.CreateEvent({
-              user_id: userInfo.user_id as string,
-              title: eventTitle,
-              description: eventDescription,
-              start_timestamp: startTime,
-              end_timestamp: endTime,
-              image: image as File,
-              // category_id: category_id;
-            });
-            console.log(image);
-            handleModalClose();
-            setEventTitle("");
-            setEventDescription("");
-            setStartTime(new Date());
-            setEndTime(new Date());
-            setCreateIconFill(NavButtonStatus.DISABLED);
-          }}
-        >
-          <Typography
-            style={{ fontFamily: "Source Sans Pro" }}
-            variant="button"
-          >
-            Create Event
-          </Typography>
-        </Button>
-      </div> */}
       <script src="https://unpkg.com/react-image-crop/dist/ReactCrop.min.js"></script>
     </div>
   );

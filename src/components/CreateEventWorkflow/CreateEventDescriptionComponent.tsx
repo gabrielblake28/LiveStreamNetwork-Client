@@ -1,8 +1,6 @@
 import { Button, styled, TextField, Typography } from "@mui/material";
 import FormHelperTexts from "@mui/material/FormHelperText";
 import "./CreateEventWorkflow.css";
-import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
-import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
 
 const WhiteBorderTextField = styled(TextField)`
   & label.Mui-focused {

@@ -4,8 +4,6 @@ import Shell from "./components/Shell/Shell";
 import Router from "./components/Routes/Routes";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const [count, setCount] = useState(0);
