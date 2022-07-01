@@ -14,10 +14,10 @@ type EventCardProps = {
   EventTitle: string;
   CreatorName: string;
   EventTime: Date;
-  EventImg: string;
-  ProfilePic: string;
+  EventImg?: string;
+  ProfilePic?: string;
   EventId: string;
-  SubscriptionId: string;
+  SubscriptionId?: string;
 };
 
 export default function EventCard({

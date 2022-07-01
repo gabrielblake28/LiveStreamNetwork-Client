@@ -42,10 +42,8 @@ export default function CreateEventThumbnailComponent({
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
       };
-      // reader.readAsText(image);
-      const test = reader.readAsDataURL(image);
-      // reader.readAsDataURL(image);
-      console.log(test);
+
+      reader.readAsDataURL(image);
     } else {
       setImagePreview(undefined);
     }
