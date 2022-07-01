@@ -66,16 +66,14 @@ export default function CreateEventWorkflow({
     if (image !== null) {
       fileAPI.UploadFile({ fileName: image.name, file: image });
       eventAPI.CreateEvent({
-        event: {
-          featured: false,
-          name: "asdf",
-          user_id: userInfo.user_id as string,
-          title: eventTitle,
-          description: eventDescription,
-          start_timestamp: startTime,
-          end_timestamp: endTime,
-          category_id: eventCategory,
-        },
+        featured: false,
+        name: "asdf",
+        user_id: userInfo.user_id as string,
+        title: eventTitle,
+        description: eventDescription,
+        start_timestamp: startTime,
+        end_timestamp: endTime,
+        category_id: eventCategory,
         image: imageURL,
       });
       handleCreateEventModalClose();
