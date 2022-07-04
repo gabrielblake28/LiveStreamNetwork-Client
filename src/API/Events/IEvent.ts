@@ -12,3 +12,16 @@ export interface IEvent {
   name: string;
   subscription_id?: string;
 }
+
+export function toFormData(formData: FormData, event: IEvent): FormData {
+  for (var key in event) {
+    if (key == "start_timestamp" || key == "end_timestamp") {
+      formData.append(key, event[key].toUTCString());
+    } else if (key == "featured" || key == "imageTest") {
+    } else {
+      formData.append(key, event[key]);
+    }
+  }
+
+  return formData;
+}

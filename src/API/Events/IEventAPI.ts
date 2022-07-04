@@ -1,7 +1,8 @@
 import { IEvent } from "./IEvent";
+import { IEventPayload } from "./IEventPayload";
 
 export default interface IEventAPI {
-  CreateEvent(resource: IEvent): Promise<string>;
+  CreateEvent(resource: IEventPayload): Promise<string>;
   GetEvent(id: string): Promise<IEvent>;
   UpdateEvent(id: string, resource: IEvent): Promise<IEvent>;
   DeleteEvent(id: string): Promise<void>;

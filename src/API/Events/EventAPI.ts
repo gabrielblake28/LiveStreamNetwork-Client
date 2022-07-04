@@ -1,6 +1,7 @@
 import axios, { Axios, AxiosInstance, AxiosStatic } from "axios";
-import { IEvent } from "./IEvent";
+import { IEvent, toFormData } from "./IEvent";
 import IEventAPI from "./IEventAPI";
+import { IEventPayload } from "./IEventPayload";
 
 export class EventAPI implements IEventAPI {
   private readonly query: AxiosInstance;
@@ -13,8 +14,15 @@ export class EventAPI implements IEventAPI {
     });
   }
 
-  async CreateEvent(resource: IEvent): Promise<string> {
-    const result = await this.query.post("/", resource);
+  async CreateEvent(resource: IEventPayload): Promise<string> {
+    const formData = new FormData();
+
+    toFormData(formData, resource.event);
+    formData.append("file", resource.image);
+
+    const result = await this.query.post("/", formData, {
+      headers: { ContentType: "multipart/form-data" },
+    });
     return result.data;
   }
   async GetEvent(id: string): Promise<IEvent> {

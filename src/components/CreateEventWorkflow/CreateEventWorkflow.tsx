@@ -64,17 +64,18 @@ export default function CreateEventWorkflow({
 
   const CompleteWorkflow = () => {
     if (image !== null) {
-      fileAPI.UploadFile({ fileName: image.name, file: image });
       eventAPI.CreateEvent({
-        featured: false,
-        name: "asdf",
-        user_id: userInfo.user_id as string,
-        title: eventTitle,
-        description: eventDescription,
-        start_timestamp: startTime,
-        end_timestamp: endTime,
-        category_id: eventCategory,
-        image: imageURL,
+        event: {
+          featured: false,
+          name: "asdf",
+          user_id: userInfo.user_id as string,
+          title: eventTitle,
+          description: eventDescription,
+          start_timestamp: startTime,
+          end_timestamp: endTime,
+          category_id: eventCategory,
+        },
+        image: image,
       });
       handleCreateEventModalClose();
       setEventCategory("");
@@ -132,7 +133,7 @@ export default function CreateEventWorkflow({
           setImageURL={setImageURL}
           imagePreview={imagePreview}
           setImagePreview={setImagePreview}
-          onCreate={() => {
+          onCreate={async () => {
             CompleteWorkflow();
           }}
           onBack={() => {
