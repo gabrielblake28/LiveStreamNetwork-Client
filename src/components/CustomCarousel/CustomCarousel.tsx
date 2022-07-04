@@ -144,7 +144,7 @@ export default function CustomCarousel({
                   EventImg={slide.image || schooled}
                   ProfilePic={slide.profile_pic}
                   SubscriptionId={slide.subscription_id}
-                  EventId={slide.event_id}
+                  EventId={slide.event_id!}
                 />
               </div>
             );
