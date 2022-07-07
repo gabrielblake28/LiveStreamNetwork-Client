@@ -4,9 +4,17 @@ import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useState } from "react";
 import thumb12 from "../../assets/Thumbnails/thumb12.jpg";
+import { SubscriptionComponent } from "../SubscriptionComponent/SubscriptionComponent";
+import { useLocation } from "react-router-dom";
+import { IUser } from "../../API/Users/IUser";
+import { IEvent } from "../../API/Events/IEvent";
 
 export default function EventDetailsPage() {
   const [icon, setIcon] = useState(false);
+  const location = useLocation();
+  const eventDetails = location.state as IEvent;
+  console.log(eventDetails);
+
   return (
     <div className="event-details-page-container">
       <div className="event-details-page-content">
@@ -17,50 +25,46 @@ export default function EventDetailsPage() {
                 variant="h5"
                 style={{ fontFamily: "Source Sans Pro", color: "white" }}
               >
-                OTK Schooled Season Finale
+                {eventDetails.title}
+                {/* OTK Schooled Season Finale */}
               </Typography>
               <Typography
                 variant="body2"
                 style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
               >
-                Mizkif    | Just Chatting
+                {eventDetails.name}
+                {/* Mizkif | Just Chatting */}
               </Typography>
               <Typography
                 variant="caption"
                 style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
               >
-                Start Time: 5:00 pm
+                {`${new Date(eventDetails.start_timestamp).toLocaleDateString(
+                  "en-US",
+                  {
+                    weekday: "short",
+                    month: "long",
+                    day: "numeric",
+                  }
+                )}, ${new Date(eventDetails.start_timestamp).toLocaleTimeString(
+                  "en-US",
+                  {
+                    hour: "numeric",
+                    minute: "2-digit",
+                  }
+                )}`}
+                {/* Start Time: 5:00 pm */}
               </Typography>
               <Typography
                 variant="caption"
                 style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
-              >
-                
-              </Typography>
+              ></Typography>
             </div>
             <div className="event-details-page-notification-button">
-              <IconButton
-                onClick={() => {
-                  if (icon === true) {
-                    // show confirm unsubscribe modal
-                  } else {
-                    //set as subscribed
-                    setIcon(!icon);
-                  }
-                  setIcon(!icon);
-                }}
-              >
-                {icon === false ? (
-                  <NotificationsNoneOutlinedIcon
-                    sx={{ width: "35px", height: "35px", color: "#aaaaaa" }}
-                  />
-                ) : (
-                  <NotificationsActiveIcon
-                    className="bounce"
-                    sx={{ width: "35px", height: "35px", color: "#9552fa" }}
-                  />
-                )}
-              </IconButton>
+              <SubscriptionComponent
+                EventId={eventDetails.event_id}
+                SubscriptionId={eventDetails.subscription_id}
+              />
             </div>
           </div>
         </div>

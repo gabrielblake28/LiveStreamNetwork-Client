@@ -65,7 +65,7 @@ export default function CreateEventDetailsComponent({
         <FormHelperTexts>
           <Typography
             style={{
-                marginLeft: "5px",
+              marginLeft: "5px",
               fontFamily: "Source Sans Pro",
             }}
             color="#ACACAC"

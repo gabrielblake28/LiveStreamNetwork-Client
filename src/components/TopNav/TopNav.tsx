@@ -32,8 +32,8 @@ import React, { useEffect, useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import { Link } from "react-router-dom";
 import { IUser } from "../../API/Users/IUser";
-import { access } from "fs";
 import SubscriptionsMenu from "../SubscriptionsMenu/SubscriptionsMenu";
+import SearchBar from "../SearchBar/SearchBar";
 
 const userAPI = new UserAPI();
 const cookies = new Cookies();
@@ -90,6 +90,8 @@ function ClearDataOnLogout() {
   window.location.replace("http://localhost:3000");
 }
 
+function Search(term) {}
+
 export default function TopNav({ setOpen }: TopNavProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subsAnchorEl, setSubsAnchorEl] = useState<null | HTMLElement>(null);
@@ -132,7 +134,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
           }}
         >
           <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
-            Evently
+            Eventium
           </Typography>
         </Link>
         <Divider
@@ -142,36 +144,22 @@ export default function TopNav({ setOpen }: TopNavProps) {
           style={{ backgroundColor: "#545454" }}
         />
         <div className="top-nav-browse">
-          <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
-            Browse
-          </Typography>
+          <Link
+            to={"/browse"}
+            style={{
+              textDecoration: "none",
+              color: "#e5e5e5",
+            }}
+          >
+            <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
+              Browse
+            </Typography>
+          </Link>
         </div>
       </div>
       <div className="top-nav-center-layout">
         <div className="top-nav-search-bar">
-          <Paper
-            component="form"
-            sx={{
-              p: "px 02px",
-              display: "flex",
-              alignItems: "center",
-              height: 36,
-              width: 380,
-              backgroundColor: "#464648",
-            }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1, color: "#EFEFF1" }}
-              placeholder="Search"
-            />
-            <Divider sx={{ height: "36" }} orientation="vertical" />
-            <IconButton
-              sx={{ p: "10px", color: "#EFEFF1" }}
-              aria-label="directions"
-            >
-              <SearchIcon />
-            </IconButton>
-          </Paper>
+          <SearchBar />
         </div>
       </div>
       <div className="top-nav-right-layout">
@@ -216,7 +204,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 disableRipple
                 style={{ color: "#4a4a4a" }}
                 aria-label="Subs"
-                // onClick={handleSubsMenu}
               >
                 {subIconFill === NavButtonStatus.SUBS ? (
                   <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />

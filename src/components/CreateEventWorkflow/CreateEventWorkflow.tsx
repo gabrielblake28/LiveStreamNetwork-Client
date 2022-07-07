@@ -1,21 +1,8 @@
-import {
-  Breadcrumbs,
-  Button,
-  Divider,
-  IconButton,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { styled } from "@mui/material";
-import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import FormHelperTexts from "@mui/material/FormHelperText";
+import { Breadcrumbs, Divider, IconButton, Typography } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./CreateEventWorkflow.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import {
   EventTitleState,
@@ -25,8 +12,7 @@ import {
   EventCategoryState,
 } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { createSecureServer } from "http2";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import CreateEventDetailsComponent from "./CreateEventDetailsComponent";
 import CreateEventDescriptionComponent from "./CreateEventDescriptionComponent";

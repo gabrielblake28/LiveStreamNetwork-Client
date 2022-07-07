@@ -1,0 +1,36 @@
+*,
+*::after,
+*::before {
+  z-index: 1;
+}
+
+.search-drop-down-container {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 380px;
+  background-color: #18181b;
+  position: absolute;
+  top: 47px;
+  border: 1px solid #464648;
+}
+
+.search-bar-component-container {
+  /* display: relative; */
+}
+
+.search-bar-container {
+  display: absolute;
+}
+
+.search-bar-z-index {
+  z-index: 1;
+}
+
+/* All Search */
+
+.search-data-container {
+  height: 352px;
+  width: auto;
+  overflow: auto;
+}
