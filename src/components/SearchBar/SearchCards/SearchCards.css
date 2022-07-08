@@ -5,13 +5,10 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  border-left: 2px solid #18181b;
-  padding: 16px 8px 16px 6;
 }
 
 .user-search-card-container:hover {
-  border-left: 2px solid #9552fa;
-  background-color: #2d2d33;
+  background-color: #27272c;
 }
 
 .user-search-avatar {
@@ -29,13 +26,10 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  border-left: 2px solid #18181b;
-  padding: 16px 8px 16px 6;
 }
 
 .event-search-card-container:hover {
-  border-left: 2px solid #9552fa;
-  background-color: #2d2d33;
+  background-color: #27272c;
 }
 
 .event-search-thumbnail {
@@ -45,4 +39,14 @@
 
 .event-search-title {
   margin-left: 10px;
+}
+
+/* Empty Search Bar */
+
+.empty-search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
 }

@@ -1,8 +1,9 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { IEvent } from "../../API/Events/IEvent";
 import { SearchResult } from "../../API/Search/SearchResult";
 import { IUser } from "../../API/Users/IUser";
 import { SearchData, SearchType } from "../../Recoil/Search/SearchAtoms";
+import EmptySearch from "./SearchCards/EmptySearch";
 import EventsSearchCard from "./SearchCards/EventsSearchCard";
 import UsersSearchCard from "./SearchCards/UsersSearchCard";
 
@@ -31,7 +32,7 @@ export default function SearchResults() {
     });
 
     if (elementsToRender.length == 0) {
-      elementsToRender.push(<div style={{ color: "white" }}>No Data</div>);
+      elementsToRender.push(<EmptySearch />);
     }
 
     return elementsToRender;

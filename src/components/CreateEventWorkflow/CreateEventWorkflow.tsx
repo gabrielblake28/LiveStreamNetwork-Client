@@ -23,13 +23,11 @@ const fileAPI = new FileAPI();
 const eventAPI = new EventAPI();
 
 type CreateEventWorkflowProps = {
-  setHomeIconFill: Function;
   setCreateIconFill: Function;
   handleCreateEventModalClose: Function;
 };
 
 export default function CreateEventWorkflow({
-  setHomeIconFill,
   setCreateIconFill,
   handleCreateEventModalClose,
 }: CreateEventWorkflowProps) {
@@ -66,7 +64,7 @@ export default function CreateEventWorkflow({
       setEventDescription("");
       setStartTime(new Date());
       setEndTime(new Date());
-      setCreateIconFill(NavButtonStatus.DISABLED);
+      setCreateIconFill(false);
     }
   };
 

@@ -41,13 +41,13 @@ export default function ProfilePage() {
   const setFeaturedEvents = useSetRecoilState(FeaturedEvents);
   const featuredEvents = useRecoilValue(FeaturedEvents);
 
-  useEffect(() => {
-    const api = new EventAPI();
+  // useEffect(() => {
+  //   const api = new EventAPI();
 
-    api.GetFeaturedEvents(24, 1).then((result: IEvent[]) => {
-      setFeaturedEvents(() => result);
-    });
-  }, []);
+  //   api.GetFeaturedEvents(24, 1).then((result: IEvent[]) => {
+  //     setFeaturedEvents(() => result);
+  //   });
+  // }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -100,9 +100,51 @@ export default function ProfilePage() {
                 variant="standard"
                 aria-label="action tabs example"
               >
-                <Tab disableRipple label="Profile" value="profile" />
-                <Tab disableRipple label="Settings" value="settings" />
-                <Tab disableRipple label="Events" value="events" />
+                <Tab
+                  disableRipple
+                  label={
+                    <Typography
+                      sx={{
+                        color: "#CCCCCC",
+                        fontFamily: "Source Sans Pro",
+                        fontSize: "15px",
+                      }}
+                    >
+                      Profile
+                    </Typography>
+                  }
+                  value="profile"
+                />
+                <Tab
+                  disableRipple
+                  label={
+                    <Typography
+                      sx={{
+                        color: "#CCCCCC",
+                        fontFamily: "Source Sans Pro",
+                        fontSize: "15px",
+                      }}
+                    >
+                      Settings
+                    </Typography>
+                  }
+                  value="settings"
+                />
+                <Tab
+                  disableRipple
+                  label={
+                    <Typography
+                      sx={{
+                        color: "#CCCCCC",
+                        fontFamily: "Source Sans Pro",
+                        fontSize: "15px",
+                      }}
+                    >
+                      Events
+                    </Typography>
+                  }
+                  value="events"
+                />
               </Tabs>
             </ThemeProvider>
           </div>

@@ -25,7 +25,7 @@ export default function EventCard({ Event }: EventCardProps) {
           <CardActionArea>
             <Link
               to="event"
-              state={Event as IEvent}
+              state={Event.event_id}
               style={{ textDecoration: "none" }}
             >
               <CardMedia

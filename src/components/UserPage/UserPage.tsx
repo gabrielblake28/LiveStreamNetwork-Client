@@ -12,9 +12,14 @@ import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import "./UserPage.css";
 import { useEffect, useState } from "react";
 import { FeaturedEvents } from "../../Recoil/Events/EventAtoms";
+import { useLocation } from "react-router-dom";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
 import UserPageProfile from "./UserPageProfile";
+import { IUser } from "../../API/Users/IUser";
+import { UserAPI } from "../../API/Users/UserAPI";
+
+const userAPI = new UserAPI();
 
 const tabsTheme = createTheme({
   palette: {
@@ -39,34 +44,45 @@ const tabsTheme = createTheme({
 export default function UserPage() {
   const userPageUserData = useRecoilValue(CurrentUserData);
   const [value, setValue] = useState("profile");
-  const [backgroundImage, setBackgroundImage] = useState<string>(
-    "C:UsersGabrielWorkspaceMainProjectsTWEFrontendsrcassets\twitch_banner.jpg"
-  );
-  const UserData = useRecoilValue(CurrentUserData);
+  const [userDetails, setUserDetails] = useState<IUser>();
+  // const UserData = useRecoilValue(CurrentUserData);
   const setFeaturedEvents = useSetRecoilState(FeaturedEvents);
   const featuredEvents = useRecoilValue(FeaturedEvents);
+  const location = useLocation();
+  const userId = location.state as string;
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    const api = new EventAPI();
+  // useEffect(() => {
+  //   const api = new EventAPI();
 
-    api.GetFeaturedEvents(24, 1).then((result: IEvent[]) => {
-      setFeaturedEvents(() => result);
+  //   api.GetFeaturedEvents(24, 1).then((result: IEvent[]) => {
+  //     setFeaturedEvents(() => result);
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    userAPI.GetUser(userId).then((response) => {
+      setUserDetails(response);
     });
-  }, []);
+  }, [userId]);
 
   const ActiveComponent = (value) => {
     if (value === "profile") {
-      return <UserPageProfile />;
+      return (
+        <UserPageProfile
+          descriptionHeader={userDetails?.display_name as string}
+          description={userDetails?.description as string}
+        />
+      );
     } else if (value === "events") {
       return <div></div>;
     }
   };
 
-  return (
+  return userDetails ? (
     <div className="user-page-container">
       <div className="user-page-header-container">
         <div className="user-page-user-data-container">
@@ -77,7 +93,7 @@ export default function UserPage() {
                 width: "130px",
                 marginBottom: "10px",
               }}
-              src={UserData.profile_image_url}
+              src={userDetails.profile_image_url}
             />
             <Typography
               variant="h4"
@@ -86,7 +102,7 @@ export default function UserPage() {
                 fontFamily: "Source Sans Pro",
               }}
             >
-              {UserData.display_name}
+              {userDetails.display_name}
             </Typography>
           </div>
           <div className="user-page-user-data">
@@ -103,8 +119,36 @@ export default function UserPage() {
                 variant="standard"
                 aria-label="action tabs example"
               >
-                <Tab disableRipple label="Profile" value="profile" />
-                <Tab disableRipple label="Events" value="events" />
+                <Tab
+                  disableRipple
+                  label={
+                    <Typography
+                      sx={{
+                        color: "#CCCCCC",
+                        fontFamily: "Source Sans Pro",
+                        fontSize: "15px",
+                      }}
+                    >
+                      Profile
+                    </Typography>
+                  }
+                  value="profile"
+                />
+                <Tab
+                  disableRipple
+                  label={
+                    <Typography
+                      sx={{
+                        color: "#CCCCCC",
+                        fontFamily: "Source Sans Pro",
+                        fontSize: "15px",
+                      }}
+                    >
+                      Events
+                    </Typography>
+                  }
+                  value="events"
+                />
               </Tabs>
             </ThemeProvider>
           </div>
@@ -115,5 +159,7 @@ export default function UserPage() {
         {ActiveComponent(value)}
       </div>
     </div>
+  ) : (
+    <div>not loaded</div>
   );
 }

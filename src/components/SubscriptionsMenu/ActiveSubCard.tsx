@@ -1,5 +1,6 @@
 import { Avatar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import hundred from "../../assets/ProfilePictures/maya.jpg";
 
 type ActiveSubProps = {
   handleClose: Function;
@@ -12,31 +13,37 @@ export default function ActiveSubCard({ handleClose }: ActiveSubProps) {
       onClick={() => {
         handleClose();
       }}
-      style={{ textDecoration: "none" }}
+      style={{ textDecoration: "none", color: "#aaaaaa" }}
     >
-      <div className="active-sub-card-wrapper" onClick={() => {}}>
+      <div className="active-sub-card-wrapper">
         <div className="active-sub-card-avatar">
           <Avatar
             sx={{
-              width: "40px",
-              height: "40px",
+              width: "35px",
+              height: "35px",
             }}
-            // src={userInfo.profile_image_url}
+            src={hundred}
           />
         </div>
         <div className="active-sub-card-content">
           <div className="active-sub-card-title">
             <Typography
-              variant="subtitle1"
-              sx={{ fontFamily: "Source Sans Pro", color: "#e5e5e5" }}
+              sx={{
+                fontFamily: "Source Sans Pro",
+                color: "#aaaaaaa",
+                fontSize: "12px",
+              }}
             >
               OTK Schooled Grand Finale
             </Typography>
           </div>
           <div className="active-sub-card-time">
             <Typography
-              variant="caption"
-              sx={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
+              sx={{
+                fontFamily: "Source Sans Pro",
+                color: "#aaaaaaa",
+                fontSize: "12px",
+              }}
             >
               Wed, May 10, 6:00 pm
             </Typography>

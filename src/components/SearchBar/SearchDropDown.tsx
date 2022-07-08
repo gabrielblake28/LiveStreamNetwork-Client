@@ -1,7 +1,5 @@
 import {
-  ClickAwayListener,
   createTheme,
-  Menu,
   styled,
   Tab,
   Tabs,
@@ -15,9 +13,6 @@ import {
   ShowSearchDropDown,
 } from "../../Recoil/Search/SearchAtoms";
 import "./SearchBar.css";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import EventNoteIcon from "@mui/icons-material/EventNote";
-import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
 import SearchResults from "./SearchResults";
 
 interface StyledTabsProps {

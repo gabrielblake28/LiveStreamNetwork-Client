@@ -5,6 +5,10 @@ import { ShowSearchDropDown } from "../../../Recoil/Search/SearchAtoms";
 import { Typography } from "@mui/material";
 import { SearchResult } from "../../../API/Search/SearchResult";
 import { IEvent } from "../../../API/Events/IEvent";
+import { EventAPI } from "../../../API/Events/EventAPI";
+import { useState } from "react";
+
+const eventApi = new EventAPI();
 
 type EventsSearchCardProps = {
   SearchResult: Partial<IEvent>;
@@ -14,12 +18,15 @@ export default function EventsSearchCard({
   SearchResult,
 }: EventsSearchCardProps) {
   const setShowSearchDropDown = useSetRecoilState(ShowSearchDropDown);
+  const [eventData, setEventData] = useState<IEvent | undefined>();
+
   return (
     <Link
       to="/event"
       onClick={() => {
         setShowSearchDropDown("none");
       }}
+      state={SearchResult.event_id}
       style={{
         textDecoration: "none",
         color: "#aaaaaa",

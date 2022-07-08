@@ -19,6 +19,7 @@ export default function UsersSearchCard({
         setShowSearchDropDown("none");
       }}
       to="/user"
+      state={SearchResult.user_id}
       style={{
         textDecoration: "none",
         color: "#aaaaaa",
