@@ -65,7 +65,7 @@ export default function EventCard({ Event }: EventCardProps) {
             </Link>
             <Link to="/user" style={{ textDecoration: "none" }}>
               <div className="event-creator-name">
-                {Event.name}
+                {/* {Event.name} */}
                 Mizkif
               </div>
             </Link>

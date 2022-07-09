@@ -24,4 +24,5 @@ export default interface IEventAPI {
     limit: number,
     page: number
   ): Promise<IEvent[]>;
+  GetSubscribedEvents(user_id: string): Promise<Partial<IEvent>[]>;
 }

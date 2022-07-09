@@ -33,8 +33,10 @@ import { Link } from "react-router-dom";
 import { IUser } from "../../API/Users/IUser";
 import SubscriptionsMenu from "../SubscriptionsMenu/SubscriptionsMenu";
 import SearchBar from "../SearchBar/SearchBar";
-import { IconState } from "../../Recoil/Events/EventAtoms";
+import { IconState, SubscribedToEvents } from "../../Recoil/Events/EventAtoms";
+import { EventAPI } from "../../API/Events/EventAPI";
 
+const eventAPI = new EventAPI();
 const userAPI = new UserAPI();
 const cookies = new Cookies();
 
@@ -90,18 +92,16 @@ function ClearDataOnLogout() {
   window.location.replace("http://localhost:3000");
 }
 
-function Search(term) {}
-
 export default function TopNav({ setOpen }: TopNavProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subsAnchorEl, setSubsAnchorEl] = useState<null | HTMLElement>(null);
   const [creatEventModalOpen, setCreateEventModalOpen] = useState(false);
-  const [subsModalOpen, setSubsModalOpen] = useState(false);
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
   const [subIconFill, setSubIconFill] = useState(false);
   const [createIconFill, setCreateIconFill] = useState(false);
   const isLoggedIn = useAuth();
   const userInfo = useRecoilValue(CurrentUserData);
+  const setSubscribedToEvents = useSetRecoilState(SubscribedToEvents);
 
   const handleCreateEventModalOpen = () => setCreateEventModalOpen(true);
   const handleCreateEventModalClose = () => setCreateEventModalOpen(false);
@@ -110,9 +110,17 @@ export default function TopNav({ setOpen }: TopNavProps) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleSubsMenu = (event: React.MouseEvent<HTMLElement>) => {
+  function handleSubsMenu(event: React.MouseEvent<HTMLElement>) {
     setSubsAnchorEl(event.currentTarget);
     setSubIconFill(true);
+  }
+  const checkUsersSubs = () => {
+    eventAPI
+      .GetSubscribedEvents(userInfo.user_id as string)
+      .then((response) => {
+        console.log(response);
+        setSubscribedToEvents(response);
+      });
   };
 
   return (
@@ -201,7 +209,9 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 }}
               >
                 {homeIconFill === NavButtonStatus.HOME ? (
-                  <CottageIcon sx={{ width: "25px", height: "25px" }} />
+                  <CottageIcon
+                    sx={{ width: "25px", height: "25px", color: "#9552fa" }}
+                  />
                 ) : (
                   <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
                 )}
@@ -227,10 +237,20 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 disableRipple
                 style={{ color: "#EFEFF1" }}
                 aria-label="Subs"
-                onClick={handleSubsMenu}
+                onClick={(e) => {
+                  handleSubsMenu(e);
+                  eventAPI
+                    .GetSubscribedEvents(userInfo.user_id as string)
+                    .then((response) => {
+                      console.log(response);
+                      setSubscribedToEvents(response);
+                    });
+                }}
               >
                 {subIconFill === true ? (
-                  <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
+                  <SubscriptionsIcon
+                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                  />
                 ) : (
                   <SubscriptionsOutlinedIcon
                     sx={{ width: "23px", height: "23px" }}
@@ -245,7 +265,9 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 aria-label="Subs"
               >
                 {subIconFill === true ? (
-                  <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
+                  <SubscriptionsIcon
+                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                  />
                 ) : (
                   <SubscriptionsOutlinedIcon
                     sx={{ width: "23px", height: "23px" }}
@@ -279,7 +301,9 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 }}
               >
                 {createIconFill === true ? (
-                  <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
+                  <AddBoxIcon
+                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                  />
                 ) : (
                   <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
                 )}

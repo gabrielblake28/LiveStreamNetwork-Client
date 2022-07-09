@@ -4,13 +4,13 @@ import "./CreateEventWorkflow.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
-import {
-  EventTitleState,
-  EventDescriptionState,
-  EventStartTimeState,
-  EventEndTimeState,
-  EventCategoryState,
-} from "../../Recoil/Events/EventAtoms";
+// import {
+//   EventTitleState,
+//   EventDescriptionState,
+//   EventStartTimeState,
+//   EventEndTimeState,
+//   EventCategoryState,
+// } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
@@ -32,13 +32,11 @@ export default function CreateEventWorkflow({
   handleCreateEventModalClose,
 }: CreateEventWorkflowProps) {
   const [activePage, setActivePage] = useState("details");
-  const [eventCategory, setEventCategory] = useRecoilState(EventCategoryState);
-  const [eventTitle, setEventTitle] = useRecoilState(EventTitleState);
-  const [startTime, setStartTime] = useRecoilState(EventStartTimeState);
-  const [endTime, setEndTime] = useRecoilState(EventEndTimeState);
-  const [eventDescription, setEventDescription] = useRecoilState(
-    EventDescriptionState
-  );
+  const [eventCategory, setEventCategory] = useState<string>("");
+  const [eventTitle, setEventTitle] = useState<string>("");
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
+  const [eventDescription, setEventDescription] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined

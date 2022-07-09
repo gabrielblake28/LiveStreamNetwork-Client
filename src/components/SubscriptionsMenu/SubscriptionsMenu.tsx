@@ -1,9 +1,15 @@
-import { Divider, Menu, Typography } from "@mui/material";
-import { useState } from "react";
-import EventsSearchCard from "../SearchBar/SearchCards/EventsSearchCard";
+import { Menu, Typography } from "@mui/material";
+
+import { useRecoilValue } from "recoil";
+import { IEvent } from "../../API/Events/IEvent";
+import { SubscribedToEvents } from "../../Recoil/Events/EventAtoms";
 import ActiveSubCard from "./ActiveSubCard";
 import NoCurrentSubs from "./NoCurrentSubs";
+import { UserAPI } from "../../API/Users/UserAPI";
 import "./SubscriptionsMenu.css";
+import { useState } from "react";
+
+const userAPI = new UserAPI();
 
 type SubscriptionsMenuProps = {
   setSubIconFill: Function;
@@ -16,11 +22,29 @@ export default function SubscriptionsMenu({
   subsAnchorEl,
   setSubsAnchorEl,
 }: SubscriptionsMenuProps) {
-  const [activeSubs, setActiveSubs] = useState<Boolean>(false);
+  const subcribedEventsData = useRecoilValue(SubscribedToEvents);
   const handleClose = () => {
     setSubsAnchorEl(null);
     setSubIconFill(false);
   };
+  const [subMenuProfPic, setSubMenuProfPic] = useState<string>("");
+
+  function Results(result: Partial<IEvent>[]): JSX.Element[] {
+    const elementsToRender: JSX.Element[] = [];
+
+    if (result.length < 1) {
+      elementsToRender.push(<NoCurrentSubs />);
+    } else {
+      result.forEach((data) => {
+        elementsToRender.push(
+          <ActiveSubCard handleClose={handleClose} data={data} />
+        );
+      });
+    }
+
+    return elementsToRender;
+  }
+
   return (
     <Menu
       sx={{
@@ -43,24 +67,16 @@ export default function SubscriptionsMenu({
         <div className="subs-menu-header">
           <Typography
             sx={{
-                fontFamily: "Source Sans Pro",
-                color: "#e5e5e5",
-                fontSize: "20px",
-              }}
+              fontFamily: "Source Sans Pro",
+              color: "#e5e5e5",
+              fontSize: "20px",
+            }}
           >
             Subscriptions
           </Typography>
         </div>
-        {/* <Divider variant="middle" color="#aaaaaa" /> */}
         <div className="subs-menu-content">
-          {/* <NoCurrentSubs /> */}
-          {/* <ActiveSubCard handleClose={handleClose}></ActiveSubCard>
-          <ActiveSubCard handleClose={handleClose}></ActiveSubCard>
-          <ActiveSubCard handleClose={handleClose}></ActiveSubCard>
-          <ActiveSubCard handleClose={handleClose}></ActiveSubCard>  */}
-          <ActiveSubCard handleClose={handleClose}></ActiveSubCard>
-          <ActiveSubCard handleClose={handleClose}></ActiveSubCard>
-          <ActiveSubCard handleClose={handleClose}></ActiveSubCard>
+          <div>{Results(subcribedEventsData)}</div>
         </div>
       </div>
     </Menu>

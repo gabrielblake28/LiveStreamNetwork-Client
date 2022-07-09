@@ -17,22 +17,27 @@ export class EventAPI implements IEventAPI {
     const result = await this.query.post("/", resource);
     return result.data;
   }
+
   async GetEvent(id: string): Promise<IEvent> {
     const result = await this.query.get(`/${id}`);
     return result.data;
   }
+
   async UpdateEvent(id: string, resource: IEvent): Promise<IEvent> {
     const result = await this.query.put(`/${id}`, resource);
     return result.data;
   }
+
   async DeleteEvent(id: string): Promise<void> {
     const result = await this.query.delete(`/${id}`);
     return result.data;
   }
+
   async GetLiveEvents(limit: number, page: number): Promise<IEvent[]> {
     const result = await this.query.get("/live", { params: { limit, page } });
     return result.data;
   }
+
   async GetFeaturedEvents(
     limit: number,
     page: number,
@@ -43,24 +48,28 @@ export class EventAPI implements IEventAPI {
     });
     return result.data;
   }
+
   async GetTrendingEvents(limit: number, page: number): Promise<IEvent[]> {
     const result = await this.query.get("/trending", {
       params: { limit, page },
     });
     return result.data;
   }
+
   async GetSponsoredEvents(limit: number, page: number): Promise<IEvent[]> {
     const result = await this.query.get("/sponsored", {
       params: { limit, page },
     });
     return result.data;
   }
+
   async GetUpcomingEvents(limit: number, page: number): Promise<IEvent[]> {
     const result = await this.query.get("/upcoming", {
       params: { limit, page },
     });
     return result.data;
   }
+
   async GetEventsWithMatchingUserIds(
     limit: number,
     page: number,
@@ -68,11 +77,17 @@ export class EventAPI implements IEventAPI {
   ): Promise<IEvent[]> {
     throw new Error("Method not implemented.");
   }
+
   async GetEventsByTwitchCategory(
     category_id: string,
     limit: number,
     page: number
   ): Promise<IEvent[]> {
     throw new Error("Method not implemented.");
+  }
+
+  async GetSubscribedEvents(user_id: string): Promise<Partial<IEvent>[]> {
+    const result = await this.query.get(`/subscribed/${user_id}`);
+    return result.data;
   }
 }
