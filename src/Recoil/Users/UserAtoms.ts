@@ -11,8 +11,3 @@ export const CurrentUserData = atom({
   key: "CurrentUserData",
   default: {} as IUser,
 });
-
-export const SubMenuProfPic = atom<string>({
-  key: "SubMenuProfPic",
-  default: "",
-});

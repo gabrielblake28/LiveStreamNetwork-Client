@@ -1,8 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useEffect } from "react";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 
 type CreateEventThumbnailComponentProps = {
   image: File | null;
@@ -42,10 +40,8 @@ export default function CreateEventThumbnailComponent({
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
       };
-      // reader.readAsText(image);
-      const test = reader.readAsDataURL(image);
-      // reader.readAsDataURL(image);
-      console.log(test);
+
+      reader.readAsDataURL(image);
     } else {
       setImagePreview(undefined);
     }

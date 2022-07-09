@@ -4,15 +4,8 @@ import "./CreateEventWorkflow.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
-// import {
-//   EventTitleState,
-//   EventDescriptionState,
-//   EventStartTimeState,
-//   EventEndTimeState,
-//   EventCategoryState,
-// } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
-import { useRecoilState, useRecoilValue } from "recoil";
+import {  useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import CreateEventDetailsComponent from "./CreateEventDetailsComponent";
 import CreateEventDescriptionComponent from "./CreateEventDescriptionComponent";

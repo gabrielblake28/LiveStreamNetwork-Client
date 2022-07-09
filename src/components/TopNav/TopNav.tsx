@@ -5,12 +5,10 @@ import CottageIcon from "@mui/icons-material/Cottage";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import SearchIcon from "@mui/icons-material/Search";
 import LoggedInMenu from "../LoggedInMenu/LoggedInMenu";
 import CreateEventWorkflow from "../CreateEventWorkflow/CreateEventWorkflow";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CurrentUserData, Authorized } from "../../Recoil/Users/UserAtoms";
-import cors from "cors";
 import "./TopNav.css";
 import Cookies from "universal-cookie";
 import { UserAPI } from "../../API/Users/UserAPI";
@@ -19,8 +17,6 @@ import {
   IconButton,
   Avatar,
   Typography,
-  InputBase,
-  Paper,
   Divider,
   Tooltip,
   createTheme,

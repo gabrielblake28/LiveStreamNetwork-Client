@@ -1,16 +1,12 @@
-import { AppBar, Avatar, Divider, Tab, Tabs, Typography } from "@mui/material";
+import { Avatar, Tab, Tabs, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import "./ProfilePage.css";
-import { useEffect, useState } from "react";
-import { FeaturedEvents } from "../../Recoil/Events/EventAtoms";
-import { EventAPI } from "../../API/Events/EventAPI";
-import { IEvent } from "../../API/Events/IEvent";
+import { useState } from "react";
+
 import ProfilePageSettings from "./ProfilePageSettings";
 import ProfilePageProfile from "./ProfilePageProfile";
-
-const theme = createTheme({});
 
 const tabsTheme = createTheme({
   palette: {
@@ -35,19 +31,6 @@ const tabsTheme = createTheme({
 export default function ProfilePage() {
   const userInfo = useRecoilValue(CurrentUserData);
   const [value, setValue] = useState<string>("profile");
-  const [backgroundImage, setBackgroundImage] = useState<string>(
-    "C:UsersGabrielWorkspaceMainProjectsTWEFrontendsrcassets\twitch_banner.jpg"
-  );
-  const setFeaturedEvents = useSetRecoilState(FeaturedEvents);
-  const featuredEvents = useRecoilValue(FeaturedEvents);
-
-  // useEffect(() => {
-  //   const api = new EventAPI();
-
-  //   api.GetFeaturedEvents(24, 1).then((result: IEvent[]) => {
-  //     setFeaturedEvents(() => result);
-  //   });
-  // }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);

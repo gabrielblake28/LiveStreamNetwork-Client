@@ -1,20 +1,17 @@
 import {
   Avatar,
   createTheme,
-  Divider,
   Tab,
   Tabs,
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
+
 import "./UserPage.css";
 import { useEffect, useState } from "react";
-import { FeaturedEvents } from "../../Recoil/Events/EventAtoms";
+
 import { useLocation } from "react-router-dom";
-import { EventAPI } from "../../API/Events/EventAPI";
-import { IEvent } from "../../API/Events/IEvent";
+
 import UserPageProfile from "./UserPageProfile";
 import { IUser } from "../../API/Users/IUser";
 import { UserAPI } from "../../API/Users/UserAPI";
@@ -42,26 +39,14 @@ const tabsTheme = createTheme({
 });
 
 export default function UserPage() {
-  const userPageUserData = useRecoilValue(CurrentUserData);
   const [value, setValue] = useState("profile");
   const [userDetails, setUserDetails] = useState<IUser>();
-  // const UserData = useRecoilValue(CurrentUserData);
-  const setFeaturedEvents = useSetRecoilState(FeaturedEvents);
-  const featuredEvents = useRecoilValue(FeaturedEvents);
   const location = useLocation();
   const userId = location.state as string;
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-
-  // useEffect(() => {
-  //   const api = new EventAPI();
-
-  //   api.GetFeaturedEvents(24, 1).then((result: IEvent[]) => {
-  //     setFeaturedEvents(() => result);
-  //   });
-  // }, []);
 
   useEffect(() => {
     userAPI.GetUser(userId).then((response) => {

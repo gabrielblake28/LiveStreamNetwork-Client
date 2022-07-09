@@ -17,10 +17,6 @@
   border-top: none;
 }
 
-.search-bar-component-container {
-  /* display: relative; */
-}
-
 .search-bar-container {
   display: absolute;
 }

@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import "./SearchCards.css";
-import { useSetRecoilState } from "recoil";
-import { ShowSearchDropDown } from "../../../Recoil/Search/SearchAtoms";
 import { Typography } from "@mui/material";
-import { SearchResult } from "../../../API/Search/SearchResult";
 import { IEvent } from "../../../API/Events/IEvent";
 import { EventAPI } from "../../../API/Events/EventAPI";
 import { useState } from "react";
@@ -12,12 +9,13 @@ const eventApi = new EventAPI();
 
 type EventsSearchCardProps = {
   SearchResult: Partial<IEvent>;
+  setShowSearchDropDown: Function;
 };
 
 export default function EventsSearchCard({
   SearchResult,
+  setShowSearchDropDown,
 }: EventsSearchCardProps) {
-  const setShowSearchDropDown = useSetRecoilState(ShowSearchDropDown);
   const [eventData, setEventData] = useState<IEvent | undefined>();
 
   return (

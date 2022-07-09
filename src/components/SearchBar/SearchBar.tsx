@@ -1,6 +1,5 @@
 import {
   ClickAwayListener,
-  createTheme,
   Divider,
   IconButton,
   InputBase,
@@ -9,47 +8,21 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { useEffect, useState } from "react";
 import SearchDropDown from "./SearchDropDown";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  SearchData,
-  SearchType,
-  ShowSearchDropDown,
-} from "../../Recoil/Search/SearchAtoms";
 import "./SearchBar.css";
 import { SearchAPI } from "../../API/Search/SearchAPI";
+import { SearchResult } from "../../API/Search/SearchResult";
 const searchApi = new SearchAPI();
-
-const tabsTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#9552fa",
-    },
-    secondary: {
-      main: "#aaaaaa",
-    },
-  },
-  components: {
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          color: "#aaaaaa",
-        },
-      },
-    },
-  },
-});
 
 let timeout: NodeJS.Timeout;
 export default function SearchBar() {
   const [term, setTerm] = useState<string>("");
   const [searchBarColor, setSearchBarColor] = useState<string>("#464648");
   const [showClear, setShowClear] = useState(false);
+  const [searchData, setSearchData] = useState<SearchResult[]>([]);
+  const [searchType, setSearchType] = useState<string>("all");
+  const [showSearchDropDown, setShowSearchDropDown] = useState<string>("none");
   const [searchBarBorderColor, setSearchBarBorderColor] =
     useState<string>("#464648");
-  useState<string>("#464648");
-  const setShowSearchDropDown = useSetRecoilState(ShowSearchDropDown);
-  const setSearchData = useSetRecoilState(SearchData);
-  const searchType = useRecoilValue(SearchType);
 
   const handleClickAway = () => {
     setSearchBarColor("#464648");
@@ -86,7 +59,7 @@ export default function SearchBar() {
   return (
     <div className="search-bar-z-index">
       <ClickAwayListener onClickAway={handleClickAway}>
-        <div className="search-bar-component-container">
+        <div>
           <Paper
             component="form"
             sx={{
@@ -127,7 +100,12 @@ export default function SearchBar() {
               <CloseIcon />
             </IconButton>
           </Paper>
-          <SearchDropDown />
+          <SearchDropDown
+            setSearchType={setSearchType}
+            searchData={searchData}
+            showSearchDropDown={showSearchDropDown}
+            setShowSearchDropDown={setShowSearchDropDown}
+          />
         </div>
       </ClickAwayListener>
     </div>

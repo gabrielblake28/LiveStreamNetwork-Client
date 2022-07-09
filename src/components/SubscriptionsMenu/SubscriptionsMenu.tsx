@@ -27,7 +27,6 @@ export default function SubscriptionsMenu({
     setSubsAnchorEl(null);
     setSubIconFill(false);
   };
-  const [subMenuProfPic, setSubMenuProfPic] = useState<string>("");
 
   function Results(result: Partial<IEvent>[]): JSX.Element[] {
     const elementsToRender: JSX.Element[] = [];

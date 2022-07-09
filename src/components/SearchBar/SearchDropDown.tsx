@@ -7,19 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  SearchType,
-  ShowSearchDropDown,
-} from "../../Recoil/Search/SearchAtoms";
+import { SearchResult } from "../../API/Search/SearchResult";
 import "./SearchBar.css";
-import SearchResults from "./SearchResults";
-
-interface StyledTabsProps {
-  children?: React.ReactNode;
-  value: number;
-  onChange: (event: React.SyntheticEvent, newValue: number) => void;
-}
+import SearchResults from "./SearchResultsContainer";
 
 const AntTabs = styled(Tabs)({
   "& .MuiTabs-indicator": {
@@ -51,7 +41,6 @@ const AntTab = styled((props: StyledTabProps) => (
   },
   fontWeight: theme.typography.fontWeightRegular,
   marginRight: theme.spacing(0),
-  // padding: "0 20px",
   color: "#aaaaaa",
   "&:hover": {
     color: "#9552fa",
@@ -86,10 +75,20 @@ const tabsTheme = createTheme({
   },
 });
 
-export default function SearchDropDown() {
+type SearchDropDownProps = {
+  setSearchType: Function;
+  searchData: SearchResult[];
+  showSearchDropDown: string;
+  setShowSearchDropDown: Function;
+};
+
+export default function SearchDropDown({
+  setSearchType,
+  searchData,
+  showSearchDropDown,
+  setShowSearchDropDown,
+}: SearchDropDownProps) {
   const [value, setValue] = useState<string>("all");
-  const showSearchDropDown = useRecoilValue(ShowSearchDropDown);
-  const setSearchType = useSetRecoilState(SearchType);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -156,7 +155,10 @@ export default function SearchDropDown() {
         </ThemeProvider>
       </div>
       <div className="search-data-container">
-        <SearchResults></SearchResults>
+        <SearchResults
+          searchData={searchData}
+          setShowSearchDropDown={setShowSearchDropDown}
+        ></SearchResults>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
-// import noSubs1 from "../../assets/illustrations/no-subs.svg";
-import noSubs from "../../assets/illustrations/no-subs.svg"; 
+import noSubs from "../../assets/illustrations/no-subs.svg";
 
 export default function NoCurrentSubs() {
   return (
@@ -11,11 +10,11 @@ export default function NoCurrentSubs() {
       <div className="no-current-subs-text">
         <div className="no-current-subs-top-text">
           <Typography
-           sx={{
-                fontFamily: "Source Sans Pro",
-                color: "#e5e5e5",
-                fontSize: "13px",
-              }}
+            sx={{
+              fontFamily: "Source Sans Pro",
+              color: "#e5e5e5",
+              fontSize: "13px",
+            }}
           >
             Click The Notification Bell To Subscribe To Events
           </Typography>

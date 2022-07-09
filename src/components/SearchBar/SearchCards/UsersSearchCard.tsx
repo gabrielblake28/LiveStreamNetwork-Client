@@ -2,17 +2,18 @@ import { Avatar, IconButton, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { IUser } from "../../../API/Users/IUser";
-import { ShowSearchDropDown } from "../../../Recoil/Search/SearchAtoms";
 import "./SearchCards.css";
 
 type UsersSearchCardProps = {
   SearchResult: Partial<IUser>;
+  setShowSearchDropDown: Function;
 };
 
 export default function UsersSearchCard({
   SearchResult,
+  setShowSearchDropDown
 }: UsersSearchCardProps) {
-  const setShowSearchDropDown = useSetRecoilState(ShowSearchDropDown);
+  // const setShowSearchDropDown = useSetRecoilState(ShowSearchDropDown);
   return (
     <Link
       onClick={() => {
