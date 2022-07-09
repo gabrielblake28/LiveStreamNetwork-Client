@@ -5,13 +5,10 @@ import CottageIcon from "@mui/icons-material/Cottage";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import SearchIcon from "@mui/icons-material/Search";
 import LoggedInMenu from "../LoggedInMenu/LoggedInMenu";
 import CreateEventWorkflow from "../CreateEventWorkflow/CreateEventWorkflow";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CurrentUserData, Authorized } from "../../Recoil/Users/UserAtoms";
-import cors from "cors";
-import { IconState } from "../../Recoil/Events/EventAtoms";
 import "./TopNav.css";
 import Cookies from "universal-cookie";
 import { UserAPI } from "../../API/Users/UserAPI";
@@ -20,8 +17,6 @@ import {
   IconButton,
   Avatar,
   Typography,
-  InputBase,
-  Paper,
   Divider,
   Tooltip,
   createTheme,
@@ -32,9 +27,12 @@ import React, { useEffect, useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import { Link } from "react-router-dom";
 import { IUser } from "../../API/Users/IUser";
-import { access } from "fs";
 import SubscriptionsMenu from "../SubscriptionsMenu/SubscriptionsMenu";
+import SearchBar from "../SearchBar/SearchBar";
+import { IconState, SubscribedToEvents } from "../../Recoil/Events/EventAtoms";
+import { EventAPI } from "../../API/Events/EventAPI";
 
+const eventAPI = new EventAPI();
 const userAPI = new UserAPI();
 const cookies = new Cookies();
 
@@ -94,12 +92,12 @@ export default function TopNav({ setOpen }: TopNavProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subsAnchorEl, setSubsAnchorEl] = useState<null | HTMLElement>(null);
   const [creatEventModalOpen, setCreateEventModalOpen] = useState(false);
-  const [subsModalOpen, setSubsModalOpen] = useState(false);
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
-  const [subIconFill, setSubIconFill] = useRecoilState(IconState);
-  const [createIconFill, setCreateIconFill] = useRecoilState(IconState);
+  const [subIconFill, setSubIconFill] = useState(false);
+  const [createIconFill, setCreateIconFill] = useState(false);
   const isLoggedIn = useAuth();
   const userInfo = useRecoilValue(CurrentUserData);
+  const setSubscribedToEvents = useSetRecoilState(SubscribedToEvents);
 
   const handleCreateEventModalOpen = () => setCreateEventModalOpen(true);
   const handleCreateEventModalClose = () => setCreateEventModalOpen(false);
@@ -108,9 +106,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleSubsMenu = (event: React.MouseEvent<HTMLElement>) => {
+  function handleSubsMenu(event: React.MouseEvent<HTMLElement>) {
     setSubsAnchorEl(event.currentTarget);
-  };
+    setSubIconFill(true);
+  }
 
   return (
     <div className="top-nav-container">
@@ -131,8 +130,14 @@ export default function TopNav({ setOpen }: TopNavProps) {
             marginRight: "30px",
           }}
         >
-          <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
-            Evently
+          <Typography
+            sx={{
+              fontFamily: "Source Sans Pro",
+              color: "#e5e5e5",
+              fontSize: "22px",
+            }}
+          >
+            Eventium
           </Typography>
         </Link>
         <Divider
@@ -142,42 +147,47 @@ export default function TopNav({ setOpen }: TopNavProps) {
           style={{ backgroundColor: "#545454" }}
         />
         <div className="top-nav-browse">
-          <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
-            Browse
-          </Typography>
+          <Link
+            to={"/browse"}
+            style={{
+              textDecoration: "none",
+              color: "#e5e5e5",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "Source Sans Pro",
+                color: "#e5e5e5",
+                fontSize: "22px",
+              }}
+            >
+              Browse
+            </Typography>
+          </Link>
         </div>
       </div>
       <div className="top-nav-center-layout">
         <div className="top-nav-search-bar">
-          <Paper
-            component="form"
-            sx={{
-              p: "px 02px",
-              display: "flex",
-              alignItems: "center",
-              height: 36,
-              width: 380,
-              backgroundColor: "#464648",
-            }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1, color: "#EFEFF1" }}
-              placeholder="Search"
-            />
-            <Divider sx={{ height: "36" }} orientation="vertical" />
-            <IconButton
-              sx={{ p: "10px", color: "#EFEFF1" }}
-              aria-label="directions"
-            >
-              <SearchIcon />
-            </IconButton>
-          </Paper>
+          <SearchBar />
         </div>
       </div>
       <div className="top-nav-right-layout">
         <div className="top-nav-notifications">
           <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
-            <Tooltip title="Home">
+            <Tooltip
+              arrow
+              title={
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontFamily: "Source Sans Pro",
+                    fontSize: "12px",
+                  }}
+                >
+                  Home
+                </Typography>
+              }
+            >
               <IconButton
                 disableRipple
                 style={{ color: "#EFEFF1" }}
@@ -187,23 +197,48 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 }}
               >
                 {homeIconFill === NavButtonStatus.HOME ? (
-                  <CottageIcon sx={{ width: "25px", height: "25px" }} />
+                  <CottageIcon
+                    sx={{ width: "25px", height: "25px", color: "#9552fa" }}
+                  />
                 ) : (
                   <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
                 )}
               </IconButton>
             </Tooltip>
           </Link>
-          <Tooltip title="Subscriptions">
+          <Tooltip
+            arrow
+            title={
+              <Typography
+                sx={{
+                  color: "#E5E5DE",
+                  fontFamily: "Source Sans Pro",
+                  fontSize: "12px",
+                }}
+              >
+                Subscriptions
+              </Typography>
+            }
+          >
             {isLoggedIn === true ? (
               <IconButton
                 disableRipple
                 style={{ color: "#EFEFF1" }}
                 aria-label="Subs"
-                onClick={handleSubsMenu}
+                onClick={(e) => {
+                  handleSubsMenu(e);
+                  eventAPI
+                    .GetSubscribedEvents(userInfo.user_id as string)
+                    .then((response) => {
+                      console.log(response);
+                      setSubscribedToEvents(response);
+                    });
+                }}
               >
-                {subIconFill === NavButtonStatus.SUBS ? (
-                  <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
+                {subIconFill === true ? (
+                  <SubscriptionsIcon
+                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                  />
                 ) : (
                   <SubscriptionsOutlinedIcon
                     sx={{ width: "23px", height: "23px" }}
@@ -216,10 +251,11 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 disableRipple
                 style={{ color: "#4a4a4a" }}
                 aria-label="Subs"
-                // onClick={handleSubsMenu}
               >
-                {subIconFill === NavButtonStatus.SUBS ? (
-                  <SubscriptionsIcon sx={{ width: "23px", height: "23px" }} />
+                {subIconFill === true ? (
+                  <SubscriptionsIcon
+                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                  />
                 ) : (
                   <SubscriptionsOutlinedIcon
                     sx={{ width: "23px", height: "23px" }}
@@ -228,7 +264,20 @@ export default function TopNav({ setOpen }: TopNavProps) {
               </IconButton>
             )}
           </Tooltip>
-          <Tooltip title="Create Event">
+          <Tooltip
+            arrow
+            title={
+              <Typography
+                sx={{
+                  color: "white",
+                  fontFamily: "Source Sans Pro",
+                  fontSize: "12px",
+                }}
+              >
+                Create Event
+              </Typography>
+            }
+          >
             {isLoggedIn === true ? (
               <IconButton
                 disableRipple
@@ -236,11 +285,13 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 aria-label="Create-Event"
                 onClick={() => {
                   handleCreateEventModalOpen();
-                  setCreateIconFill(NavButtonStatus.CREATE);
+                  setCreateIconFill(true);
                 }}
               >
-                {createIconFill === NavButtonStatus.CREATE ? (
-                  <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
+                {createIconFill === true ? (
+                  <AddBoxIcon
+                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                  />
                 ) : (
                   <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
                 )}
@@ -253,10 +304,9 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 aria-label="Create-Event"
                 onClick={() => {
                   handleCreateEventModalOpen();
-                  setCreateIconFill(NavButtonStatus.CREATE);
                 }}
               >
-                {createIconFill === NavButtonStatus.CREATE ? (
+                {createIconFill === true ? (
                   <AddBoxIcon sx={{ width: "23px", height: "23px" }} />
                 ) : (
                   <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
@@ -266,7 +316,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
           </Tooltip>
           <Modal open={creatEventModalOpen}>
             <CreateEventWorkflow
-              setHomeIconFill={setHomeIconFill}
               setCreateIconFill={setCreateIconFill}
               handleCreateEventModalClose={handleCreateEventModalClose}
             />
@@ -302,9 +351,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
 
           <ThemeProvider theme={theme}>
             <SubscriptionsMenu
+              setSubIconFill={setSubIconFill}
               subsAnchorEl={subsAnchorEl}
               setSubsAnchorEl={setSubsAnchorEl}
-            ></SubscriptionsMenu>
+            />
           </ThemeProvider>
         </div>
       </div>

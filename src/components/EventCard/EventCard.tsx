@@ -6,39 +6,32 @@ import {
   CardMedia,
   IconButton,
 } from "@mui/material";
+import schooled from "../../assets/Thumbnails/schooled.jpg";
 import { Link } from "react-router-dom";
+import { IEvent } from "../../API/Events/IEvent";
+import { IUser } from "../../API/Users/IUser";
 import { SubscriptionComponent } from "../SubscriptionComponent/SubscriptionComponent";
 import "./EventCard.css";
 
 type EventCardProps = {
-  EventTitle: string;
-  CreatorName: string;
-  EventTime: Date;
-  EventImg?: string;
-  ProfilePic?: string;
-  EventId: string;
-  SubscriptionId?: string;
+  Event: IEvent;
 };
 
-export default function EventCard({
-  EventTitle,
-  CreatorName,
-  EventTime,
-  EventImg,
-  ProfilePic,
-  EventId,
-  SubscriptionId,
-}: EventCardProps) {
+export default function EventCard({ Event }: EventCardProps) {
   return (
     <div className="card-column-wrapper">
       <div className="card-hover-translate">
         <Card className="event-card">
-          <CardActionArea onClick={() => {}}>
-            <Link to="event" style={{ textDecoration: "none" }}>
+          <CardActionArea>
+            <Link
+              to="event"
+              state={Event.event_id}
+              style={{ textDecoration: "none" }}
+            >
               <CardMedia
                 component="img"
                 height="185"
-                image={EventImg}
+                image={schooled}
                 onClick={() => {
                   // send data to the event details page
                 }}
@@ -53,7 +46,7 @@ export default function EventCard({
             <Link to="/user">
               <IconButton style={{ color: "#A970FF" }}>
                 <Avatar
-                  src={ProfilePic}
+                  src={Event.profile_pic}
                   sx={{
                     width: "40px",
                     height: "40px",
@@ -63,25 +56,26 @@ export default function EventCard({
             </Link>
           </div>
           <div className="title-creator-timestamp">
-            <Link to="event" style={{ textDecoration: "none" }}>
-              <div className="event-title">
-                {/* {eventTitle} */}
-                OTK Schooled Season Finale
-              </div>
+            <Link
+              to="event"
+              state={Event as IEvent}
+              style={{ textDecoration: "none" }}
+            >
+              <div className="event-title">{Event.title}</div>
             </Link>
             <Link to="/user" style={{ textDecoration: "none" }}>
               <div className="event-creator-name">
-                {CreatorName}
+                {/* {Event.name} */}
                 Mizkif
               </div>
             </Link>
             <div className="event-timestamp">{`${new Date(
-              EventTime
+              Event.start_timestamp
             ).toLocaleDateString("en-US", {
               weekday: "short",
               month: "long",
               day: "numeric",
-            })}, ${new Date(EventTime).toLocaleTimeString("en-US", {
+            })}, ${new Date(Event.start_timestamp).toLocaleTimeString("en-US", {
               hour: "numeric",
               minute: "2-digit",
             })}`}</div>
@@ -89,8 +83,8 @@ export default function EventCard({
         </div>
         <div className="event-footer__panel-right">
           <SubscriptionComponent
-            EventId={EventId}
-            SubscriptionId={SubscriptionId}
+            EventId={Event.event_id!}
+            SubscriptionId={Event.subscription_id}
           />
         </div>
       </div>

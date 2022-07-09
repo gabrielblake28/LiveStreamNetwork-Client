@@ -1,5 +1,6 @@
 import {
   Button,
+  createTheme,
   MenuItem,
   Select,
   styled,
@@ -7,10 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import FormHelperTexts from "@mui/material/FormHelperText";
+import { ThemeProvider } from "@mui/styles";
 import DatePicker from "react-datepicker";
 import "./CreateEventWorkflow.css";
-import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
-import DoNotDisturbOutlinedIcon from "@mui/icons-material/DoNotDisturbOutlined";
 const WhiteBorderTextField = styled(TextField)`
   & label.Mui-focused {
     color: #101012;
@@ -22,16 +22,34 @@ const WhiteBorderTextField = styled(TextField)`
   }
 `;
 
-const WhiteBorderSelect = styled(Select)`
-  & label.Mui-focused {
-    color: #101012;
-  }
-  & .MuiOutlinedInput-root {
-    &.Mui-focused fieldset {
-      border-color: #101012;
-    }
-  }
-`;
+const selectTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#9552fa",
+    },
+    secondary: {
+      main: "#aaaaaa",
+    },
+  },
+  components: {
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          "&:focus": {
+            backgroundColor: "#aaaaaa",
+            borderColor: "#aaaaaa",
+          },
+          "&:before": {
+            borderColor: "#aaaaaa",
+          },
+          "&:after": {
+            borderColor: "#aaaaaa",
+          },
+        },
+      },
+    },
+  },
+});
 
 type CreateEventDetailsComponentProps = {
   eventCategory: string;
@@ -65,7 +83,7 @@ export default function CreateEventDetailsComponent({
         <FormHelperTexts>
           <Typography
             style={{
-                marginLeft: "5px",
+              marginLeft: "5px",
               fontFamily: "Source Sans Pro",
             }}
             color="#ACACAC"
@@ -74,36 +92,21 @@ export default function CreateEventDetailsComponent({
             Categories
           </Typography>
         </FormHelperTexts>
-        <WhiteBorderSelect
-          autoFocus={false}
-          autoComplete="off"
-          sx={{
-            marginTop: "4px",
-            marginRight: 15,
-            backgroundColor: "#101012",
-            border: "2px solid #101012",
-            color: "#aaaaaa",
-            "&:hover": {
-              border: "2px solid #A970FF",
+        {/* <ThemeProvider theme={selectTheme}> */}
+        {/* <Select
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                color: "#aaaaaa",
+                "& .MuiMenuItem-root": {
+                  padding: 0,
+                  backgroundColor: "#18181b",
+                  color: "#aaaaaa",
+                },
+              },
             },
-            "& .MuiSvgIcon-root": {
-              color: "#aaaaaa",
-            },
-            "&:focus": {
-              border: "2px solid #101012",
-            },
-          }}
-          size="small"
-          variant="outlined"
-          fullWidth
-          value={eventCategory}
-          onChange={(e) => {
-            setEventCategory(e.target.value as string);
           }}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           <MenuItem value="1">Just Chatting</MenuItem>
           <MenuItem value="2">League of Legends</MenuItem>
           <MenuItem value="3">Valorant</MenuItem>
@@ -113,7 +116,65 @@ export default function CreateEventDetailsComponent({
           <MenuItem value="7">Minecraft</MenuItem>
           <MenuItem value="8">Apex Legends</MenuItem>
           <MenuItem value="9">Fortnite</MenuItem>
-        </WhiteBorderSelect>
+        </Select> */}
+        {/* </ThemeProvider> */}
+        <ThemeProvider theme={selectTheme}>
+          <Select
+            autoFocus={false}
+            autoComplete="off"
+            sx={{
+              marginTop: "4px",
+              backgroundColor: "#101012",
+              border: "2px solid #101012",
+              color: "#aaaaaa",
+              "&.Mui-focused fieldset": {
+                borderColor: "red",
+              },
+              "&:hover": {
+                border: "2px solid #A970FF",
+              },
+              "& .MuiSvgIcon-root": {
+                color: "#aaaaaa",
+              },
+            }}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  color: "#aaaaaa",
+                  "& .MuiMenuItem-root": {
+                    padding: "5px",
+                    fontSize: "17px",
+                    backgroundColor: "#18181b",
+                    color: "#aaaaaa",
+                    "&:hover": {
+                      backgroundColor: "#27272c",
+                    },
+                  },
+                },
+              },
+            }}
+            size="small"
+            variant="outlined"
+            fullWidth
+            value={eventCategory}
+            onChange={(e) => {
+              setEventCategory(e.target.value as string);
+            }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="1">Just Chatting</MenuItem>
+            <MenuItem value="2">League of Legends</MenuItem>
+            <MenuItem value="3">Valorant</MenuItem>
+            <MenuItem value="4">World of Warcraft</MenuItem>
+            <MenuItem value="5">Rocket League</MenuItem>
+            <MenuItem value="6">Among Us</MenuItem>
+            <MenuItem value="7">Minecraft</MenuItem>
+            <MenuItem value="8">Apex Legends</MenuItem>
+            <MenuItem value="9">Fortnite</MenuItem>
+          </Select>
+        </ThemeProvider>
       </div>
       <div className="create-event-title">
         <FormHelperTexts>

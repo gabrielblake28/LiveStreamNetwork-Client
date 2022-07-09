@@ -2,7 +2,15 @@ import { Typography } from "@mui/material";
 import { useEffect } from "react";
 import UserStreamEmbed from "./UserStreamEmbed";
 
-export default function UserPageProfile() {
+type userPageProfileProps = {
+  descriptionHeader: string;
+  description: string;
+};
+
+export default function UserPageProfile({
+  descriptionHeader,
+  description,
+}: userPageProfileProps) {
   return (
     <div className="user-page-profile-container">
       <div className="user-page-profile-description-container">
@@ -12,7 +20,7 @@ export default function UserPageProfile() {
               style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
               variant="h5"
             >
-              About Daunttx
+              About {descriptionHeader}
             </Typography>
           </div>
           <div className="user-page-profile-description-body">
@@ -20,14 +28,12 @@ export default function UserPageProfile() {
               style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
               variant="subtitle2"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              venenatis, eros eu posuere dignissim, lorem nibh sodales ipsum,
-              cursus venenatis neque ipsum a augue.
+              {description}
             </Typography>
           </div>
         </div>
         <div className="user-page-stream-embed">
-          <UserStreamEmbed />
+          <UserStreamEmbed stream_embed_name={descriptionHeader} />
         </div>
       </div>
     </div>
