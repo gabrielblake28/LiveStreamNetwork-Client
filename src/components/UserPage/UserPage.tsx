@@ -6,12 +6,9 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-
 import "./UserPage.css";
 import { useEffect, useState } from "react";
-
 import { useLocation } from "react-router-dom";
-
 import UserPageProfile from "./UserPageProfile";
 import { IUser } from "../../API/Users/IUser";
 import { UserAPI } from "../../API/Users/UserAPI";

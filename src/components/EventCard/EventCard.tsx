@@ -83,7 +83,7 @@ export default function EventCard({ Event }: EventCardProps) {
         </div>
         <div className="event-footer__panel-right">
           <SubscriptionComponent
-            EventId={Event.event_id}
+            EventId={Event.event_id!}
             SubscriptionId={Event.subscription_id}
           />
         </div>

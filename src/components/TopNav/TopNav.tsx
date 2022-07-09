@@ -110,14 +110,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
     setSubsAnchorEl(event.currentTarget);
     setSubIconFill(true);
   }
-  const checkUsersSubs = () => {
-    eventAPI
-      .GetSubscribedEvents(userInfo.user_id as string)
-      .then((response) => {
-        console.log(response);
-        setSubscribedToEvents(response);
-      });
-  };
 
   return (
     <div className="top-nav-container">
