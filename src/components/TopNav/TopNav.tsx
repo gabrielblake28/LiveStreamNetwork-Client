@@ -143,7 +143,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
         />
         <div className="top-nav-browse">
           <Typography variant="h5" sx={{ fontFamily: "Source Sans Pro" }}>
-            Browse
+            <Link to="browse">Browse</Link>
           </Typography>
         </div>
       </div>

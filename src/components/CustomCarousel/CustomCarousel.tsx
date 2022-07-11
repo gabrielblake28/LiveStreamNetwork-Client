@@ -16,17 +16,29 @@ const carouselController = new CarouselController();
 
 let transition = false;
 
-const useWindowSize = () => {
-  const [size, setSize] = useState(window.innerWidth);
+export const useWindowWidth = () => {
+  const [width, setWidth] = useState(window.innerWidth);
   useLayoutEffect(() => {
-    const updateSize = () => {
-      setSize(window.innerWidth);
+    const updateWidth = () => {
+      setWidth(window.innerWidth);
     };
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
+    window.addEventListener("resize", updateWidth);
+    updateWidth();
+    return () => window.removeEventListener("resize", updateWidth);
   }, []);
-  return size;
+  return width;
+};
+
+export const useWindowHeight = () => {
+  const [height, setHeight] = useState(window.innerHeight);
+  useLayoutEffect(() => {
+    const updateHeight = () => {
+      setHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", updateHeight);
+    updateHeight();
+    return () => window.removeEventListener("resize", updateHeight);
+  });
 };
 
 export default function CustomCarousel({
@@ -38,7 +50,7 @@ export default function CustomCarousel({
   const [progressBar, setProgressBar] = useState(0);
   const [index, setIndex] = useState(0);
   const [slideTransform, setSlideTransform] = useState(0);
-  const windowSize = useWindowSize();
+  const windowSize = useWindowWidth();
 
   useEffect(() => {
     setProgressBar(
