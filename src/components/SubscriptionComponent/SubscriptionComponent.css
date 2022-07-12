@@ -1,0 +1,19 @@
+.bounce {
+  animation: bounce 0.1s;
+}
+
+@keyframes bounce {
+  0%,
+  25%,
+  50%,
+  75%,
+  100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+}

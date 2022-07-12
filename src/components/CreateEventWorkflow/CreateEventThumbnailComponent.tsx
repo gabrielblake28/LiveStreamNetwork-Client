@@ -1,8 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useEffect } from "react";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 
 type CreateEventThumbnailComponentProps = {
   image: File | null;

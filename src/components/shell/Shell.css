@@ -4,6 +4,7 @@
   height: auto;
   overflow: auto;
   overflow-x: hidden;
+  z-index: 0;
 }
 
 .twe-shell-header {

@@ -12,6 +12,11 @@ export class UserAPI implements IUserAPI {
           : "http://localhost:3500/user",
     });
   }
+  
+  async GetUser(id: string): Promise<IUser> {
+    const result = await this.query.get(`/${id}`);
+    return result.data;
+  }
   async GetOrCreateUser(accessToken: string): Promise<IUser> {
     return await (
       await this.query.post("/", { accessToken })

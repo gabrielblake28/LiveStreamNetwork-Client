@@ -1,32 +1,11 @@
-import {
-  Breadcrumbs,
-  Button,
-  Divider,
-  IconButton,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { styled } from "@mui/material";
-import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import FormHelperTexts from "@mui/material/FormHelperText";
+import { Breadcrumbs, Divider, IconButton, Typography } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./CreateEventWorkflow.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
-import {
-  EventTitleState,
-  EventDescriptionState,
-  EventStartTimeState,
-  EventEndTimeState,
-  EventCategoryState,
-} from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { createSecureServer } from "http2";
+import {  useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import CreateEventDetailsComponent from "./CreateEventDetailsComponent";
 import CreateEventDescriptionComponent from "./CreateEventDescriptionComponent";
@@ -37,24 +16,20 @@ const fileAPI = new FileAPI();
 const eventAPI = new EventAPI();
 
 type CreateEventWorkflowProps = {
-  setHomeIconFill: Function;
   setCreateIconFill: Function;
   handleCreateEventModalClose: Function;
 };
 
 export default function CreateEventWorkflow({
-  setHomeIconFill,
   setCreateIconFill,
   handleCreateEventModalClose,
 }: CreateEventWorkflowProps) {
   const [activePage, setActivePage] = useState("details");
-  const [eventCategory, setEventCategory] = useRecoilState(EventCategoryState);
-  const [eventTitle, setEventTitle] = useRecoilState(EventTitleState);
-  const [startTime, setStartTime] = useRecoilState(EventStartTimeState);
-  const [endTime, setEndTime] = useRecoilState(EventEndTimeState);
-  const [eventDescription, setEventDescription] = useRecoilState(
-    EventDescriptionState
-  );
+  const [eventCategory, setEventCategory] = useState<string>("");
+  const [eventTitle, setEventTitle] = useState<string>("");
+  const [startTime, setStartTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
+  const [eventDescription, setEventDescription] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
@@ -83,7 +58,7 @@ export default function CreateEventWorkflow({
       setEventDescription("");
       setStartTime(new Date());
       setEndTime(new Date());
-      setCreateIconFill(NavButtonStatus.DISABLED);
+      setCreateIconFill(false);
     }
   };
 

@@ -9,9 +9,7 @@ import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import { Link } from "react-router-dom";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
 import { IconState } from "../../Recoil/Events/EventAtoms";
 
 type LoggedInMenuProps = {

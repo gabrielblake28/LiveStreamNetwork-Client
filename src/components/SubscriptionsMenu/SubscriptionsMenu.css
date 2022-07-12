@@ -1,9 +1,11 @@
 .subs-menu-wrapper {
-  width: 400px;
-  max-height: 510px;
+  width: 350px;
+  height: 400px;
+  /* max-height: 400px; */
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
+  border-top: none;
 }
 
 .subs-menu-header {
@@ -12,9 +14,7 @@
   align-items: center;
   margin: 5px 0 10px 0;
   padding: 0 0 13px 0;
-  -webkit-box-shadow: 0 5px 6px -6px black;
-  -moz-box-shadow: 0 5px 6px -6px black;
-  box-shadow: 0 5px 6px -6px black;
+  box-shadow: 0 5px 10px -6px black;
 }
 
 /* No Current Subs */
@@ -38,23 +38,22 @@
 .active-sub-card-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
-  margin: 0 10px 5px 10px;
   border-left: 2px solid #18181b;
-  /* border-right: 2px solid #18181b; */
 }
 
 .active-sub-card-wrapper:hover {
-  border-left: 2px solid #9552fa;
-  /* border-right: 2px solid #9552fa; */
+  background-color: #27272c;
 }
 
 .active-sub-card-avatar {
-  margin-right: 20px;
+  padding: 8px;
+  margin-left: 10px;
 }
 
 .active-sub-card-content {
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 }

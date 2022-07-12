@@ -2,6 +2,7 @@ import { NotificationsActive, SubscriptTwoTone } from "@mui/icons-material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useEffect, useState } from "react";
 import { SubscriptionAPI } from "../../API/Subscriptions/SubscriptionAPI";
+import "./SubscriptionComponent.css";
 
 const subscriptions = new SubscriptionAPI();
 
@@ -40,8 +41,8 @@ export function SubscriptionComponent({
 
   return subscriptionId ? (
     <NotificationsActive
-      className="event-footer__bell-icon"
-      sx={{ width: "35px", height: "35px", color: "#aaaaaa" }}
+      className="event-footer__bell-icon bounce"
+      sx={{ width: "35px", height: "35px", color: "#9552fa" }}
       onClick={handleClick}
     />
   ) : (

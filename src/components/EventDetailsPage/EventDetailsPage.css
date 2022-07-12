@@ -48,6 +48,7 @@
 .event-details-page-description {
   width: 500px;
   margin: 30px 0 0 0;
+  overflow: hidden;
 }
 
 /* .event-details-page-notification-button {

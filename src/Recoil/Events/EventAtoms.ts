@@ -27,31 +27,7 @@ export const UpcomingEvents = atom({
 
 // Events Atoms
 
-export const EventCategoryState = atom({
-  key: "EventCategory",
-  default: "" as string,
-});
-
-export const EventTitleState = atom({
-  key: "EventTitle",
-  default: "" as string,
-});
-
-export const EventStartTimeState = atom({
-  key: "EventStartTime",
-  default: new Date() as Date,
-});
-export const EventEndTimeState = atom({
-  key: "EventEndTime",
-  default: new Date() as Date,
-});
-
-export const EventDescriptionState = atom({
-  key: "EventDescription",
-  default: "" as string,
-});
-
-export const EventWorkflowPageState = atom({
-  key: "EventWorkflowPageState",
-  default: "details" as string,
+export const SubscribedToEvents = atom<Partial<IEvent>[]>({
+  key: "SubscribedToEvents",
+  default: [],
 });
