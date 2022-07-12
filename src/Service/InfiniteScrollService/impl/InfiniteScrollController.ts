@@ -46,10 +46,11 @@ export class InfiniteScrollController {
     const events = this.EventProvider.ProvideEvents(page, this.Limit);
 
     return new Promise((resolve) => {
-      const timeout = setTimeout(() => {
-        clearTimeout(timeout);
-        resolve(events);
-      }, 500);
+      resolve(events);
+      // const timeout = setTimeout(() => {
+      //   clearTimeout(timeout);
+      //   resolve(events);
+      // }, 500);
     });
   }
 }

@@ -1,4 +1,6 @@
+import { WindowOutlined } from "@mui/icons-material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { receiveMessageOnPort } from "worker_threads";
 import { IEvent } from "../../API/Events/IEvent";
 import {
   InfiniteScrollController,
@@ -7,20 +9,35 @@ import {
 import { MockEventProvider } from "../../Service/InfiniteScrollService/impl/MockEventProvider";
 import { InfiniteScrollPage } from "./InfiniteScrollPage";
 
-type InfiniteScrollContainerProps = {};
+type InfiniteScrollContainerProps = {
+  ScrollParent?: HTMLDivElement;
+};
 const eventProvider = new MockEventProvider();
 const scrollController = new InfiniteScrollController(eventProvider, 20);
-export function InfiniteScrollContainer({}: InfiniteScrollContainerProps) {
+
+export function InfiniteScrollContainer({
+  ScrollParent,
+}: InfiniteScrollContainerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState<IEvent[][]>([]);
   const [elementsCreated, setElementsCreated] = useState<number>(0);
   const [containerState, setContainerState] = useState<InfiniteScrollState>(
     InfiniteScrollState.Idle
   );
+  const GetScrollParent = () => (ScrollParent ? ScrollParent : ref?.current);
   const RenderPages = () => {
     const pagesToRender: JSX.Element[] = [];
-    for (let i = 0; i < pages.length; i++) {
-      pagesToRender.push(<InfiniteScrollPage Events={pages[i]} key={i} />);
+    const scrollParent = GetScrollParent();
+    if (scrollParent) {
+      for (let i = 0; i < pages.length; i++) {
+        pagesToRender.push(
+          <InfiniteScrollPage
+            Events={pages[i]}
+            key={i}
+            ScrollParent={scrollParent}
+          />
+        );
+      }
     }
 
     return pagesToRender;
@@ -77,23 +94,31 @@ export function InfiniteScrollContainer({}: InfiniteScrollContainerProps) {
   }, [pages]);
   useLayoutEffect(() => {
     AddPage();
-    window.addEventListener("scroll", () => {
-      if (ref && ref.current) {
+    let scrollEvent = () => {
+      const scrollParent = GetScrollParent();
+      if (scrollParent) {
         console.log(
-          window.pageYOffset + window.innerHeight,
-          ref.current.offsetTop + ref.current.offsetHeight
+          scrollParent.scrollHeight -
+            scrollParent.scrollTop -
+            scrollParent.clientHeight <
+            1
         );
         if (
-          window.pageYOffset + window.innerHeight >
-          ref.current.offsetTop + ref.current.offsetHeight
+          scrollParent.scrollHeight -
+            scrollParent.scrollTop -
+            scrollParent.clientHeight <
+          1
         ) {
           if (scrollController.ShouldGetPage(elementsCreated)) {
             AddPage();
           }
         }
       }
-    });
-  }, [ref]);
+    };
+
+    GetScrollParent()?.addEventListener("scroll", scrollEvent);
+    return () => GetScrollParent()?.removeEventListener("scroll", scrollEvent);
+  }, [ScrollParent]);
 
   return (
     <React.Fragment>

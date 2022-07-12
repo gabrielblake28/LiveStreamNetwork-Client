@@ -20,6 +20,9 @@
   font-family: "Inter", sans-serif;
   display: flex;
   flex-direction: row;
+  position: absolute;
+  bottom: 0;
+  height: calc(100vh - 55px);
   width: calc(100vw);
 }
 

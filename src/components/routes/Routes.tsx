@@ -4,7 +4,12 @@ import EventScrollPage from "../EventLandingPage/EventLandingPage";
 import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import UserPage from "../UserPage/UserPage";
-export default function Router() {
+
+type RouterProps = {
+  ParentRef?: HTMLDivElement;
+};
+
+export default function Router({ ParentRef }: RouterProps) {
   return (
     <Routes>
       <Route path="/" element={<EventScrollPage />} />
@@ -14,7 +19,11 @@ export default function Router() {
         path="browse"
         element={
           <div style={{ marginTop: "55px" }}>
-            <InfiniteScrollContainer />
+            {ParentRef ? (
+              <InfiniteScrollContainer ScrollParent={ParentRef} />
+            ) : (
+              <InfiniteScrollContainer />
+            )}
           </div>
         }
       />

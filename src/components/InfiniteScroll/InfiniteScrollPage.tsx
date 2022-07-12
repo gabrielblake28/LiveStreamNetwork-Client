@@ -10,9 +10,16 @@ import { useWindowWidth } from "../CustomCarousel/CustomCarousel";
 
 type InfiniteScrollPageProps = {
   Events: IEvent[];
+  ScrollParent: HTMLDivElement;
 };
 
-export function InfiniteScrollPage({ Events }: InfiniteScrollPageProps) {
+let timeout: NodeJS.Timeout;
+let scrollEvent: (this: HTMLDivElement, ev: Event) => any;
+
+export function InfiniteScrollPage({
+  Events,
+  ScrollParent,
+}: InfiniteScrollPageProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(true);
   const windowWidth = useWindowWidth();
@@ -21,14 +28,12 @@ export function InfiniteScrollPage({ Events }: InfiniteScrollPageProps) {
   );
 
   const PageIsVisible = (
-    windowScrollY: number,
-    windowInnerHeight: number,
     elementOffsetTop: number,
     elementHeight: number
   ): boolean => {
-    if (windowScrollY + windowInnerHeight < elementOffsetTop) {
+    if (ScrollParent.scrollTop + ScrollParent.clientHeight < elementOffsetTop) {
       return false;
-    } else if (windowScrollY <= elementOffsetTop + elementHeight) {
+    } else if (ScrollParent.scrollTop <= elementOffsetTop + elementHeight) {
       return true;
     }
 
@@ -66,30 +71,29 @@ export function InfiniteScrollPage({ Events }: InfiniteScrollPageProps) {
 
   useEffect(() => {
     if (ref?.current) {
-      PageIsVisible(
-        window.scrollY,
-        window.innerHeight,
-        ref.current?.offsetTop,
-        ref.current?.offsetHeight
+      console.log(
+        PageIsVisible(ref.current?.offsetTop, ref.current?.offsetHeight)
       );
-      window.addEventListener("scroll", (e) => {
-        const scrollY = window.scrollY;
-
-        setTimeout(() => {
-          if (scrollY == window.scrollY) {
-            if (ref?.current) {
-              setShow(
-                PageIsVisible(
-                  window.scrollY,
-                  window.innerHeight,
-                  ref.current?.offsetTop,
-                  ref.current?.offsetHeight
-                )
-              );
+      scrollEvent = () => {
+        const scrollY = ScrollParent.scrollTop;
+        clearTimeout(timeout);
+        new Promise((resolve) => {
+          timeout = setTimeout(() => {
+            if (scrollY == ScrollParent.scrollTop) {
+              if (ref?.current) {
+                setShow(
+                  PageIsVisible(
+                    ref.current?.offsetTop,
+                    ref.current?.offsetHeight
+                  )
+                );
+              }
+              resolve("");
             }
-          }
-        }, 5);
-      });
+          }, 5);
+        });
+      };
+      ScrollParent.addEventListener("scroll", scrollEvent);
     }
   }, [ref]);
   return show ? (
