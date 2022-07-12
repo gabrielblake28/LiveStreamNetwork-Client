@@ -23,8 +23,8 @@
   flex-direction: row;
   position: absolute;
   bottom: 0;
-  width: calc(100vw);
   height: calc(100vh - 55px);
+  width: calc(100vw);
 }
 
 ::-webkit-scrollbar {

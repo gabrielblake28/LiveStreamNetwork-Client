@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import Shell from "./components/Shell/Shell";
-import Router from "./components/Routes/Routes";
+import Shell from "./components/shell/Shell";
+import Router from "./components/routes/Routes";
 
 function App() {
   const [count, setCount] = useState(0);

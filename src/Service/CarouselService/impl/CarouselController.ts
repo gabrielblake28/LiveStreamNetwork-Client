@@ -98,26 +98,26 @@ export class CarouselController implements ICarouselController {
     let numberOfEvents: number;
 
     if (screenSize >= 2200) {
-      numberOfEvents = CarouselControllerConstants.numberOfEvents2200;
+      numberOfEvents = ScreenSizeConstants.numberOfEvents2200;
     } else if (screenSize >= 1950) {
-      numberOfEvents = CarouselControllerConstants.numberOfEvents1950;
+      numberOfEvents = ScreenSizeConstants.numberOfEvents1950;
     } else if (screenSize >= 1600) {
-      numberOfEvents = CarouselControllerConstants.numberOfEvents1600;
+      numberOfEvents = ScreenSizeConstants.numberOfEvents1600;
     } else if (screenSize >= 1250) {
-      numberOfEvents = CarouselControllerConstants.numberOfEvents1250;
+      numberOfEvents = ScreenSizeConstants.numberOfEvents1250;
     } else if (screenSize >= 900) {
-      numberOfEvents = CarouselControllerConstants.numberOfEvents900;
+      numberOfEvents = ScreenSizeConstants.numberOfEvents900;
     } else if (screenSize >= 500) {
-      numberOfEvents = CarouselControllerConstants.numberOfEvents500;
+      numberOfEvents = ScreenSizeConstants.numberOfEvents500;
     } else {
-      numberOfEvents = CarouselControllerConstants.numberOfEventsMin;
+      numberOfEvents = ScreenSizeConstants.numberOfEventsMin;
     }
 
     return numberOfEvents;
   }
 }
 
-class CarouselControllerConstants {
+export class ScreenSizeConstants {
   static numberOfEvents2200: number = 7;
   static numberOfEvents1950: number = 6;
   static numberOfEvents1600: number = 5;
@@ -125,4 +125,26 @@ class CarouselControllerConstants {
   static numberOfEvents900: number = 3;
   static numberOfEvents500: number = 2;
   static numberOfEventsMin: number = 1;
+
+  static GetNumberOfEventsPerSlide(screenSize: number): number {
+    let numberOfEvents: number;
+
+    if (screenSize >= 2200) {
+      numberOfEvents = ScreenSizeConstants.numberOfEvents2200;
+    } else if (screenSize >= 1950) {
+      numberOfEvents = ScreenSizeConstants.numberOfEvents1950;
+    } else if (screenSize >= 1600) {
+      numberOfEvents = ScreenSizeConstants.numberOfEvents1600;
+    } else if (screenSize >= 1250) {
+      numberOfEvents = ScreenSizeConstants.numberOfEvents1250;
+    } else if (screenSize >= 900) {
+      numberOfEvents = ScreenSizeConstants.numberOfEvents900;
+    } else if (screenSize >= 500) {
+      numberOfEvents = ScreenSizeConstants.numberOfEvents500;
+    } else {
+      numberOfEvents = ScreenSizeConstants.numberOfEventsMin;
+    }
+
+    return numberOfEvents;
+  }
 }
