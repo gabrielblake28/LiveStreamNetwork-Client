@@ -7,6 +7,7 @@ import EventScrollPage from "../EventLandingPage/EventLandingPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import UserPage from "../UserPage/UserPage";
 import BrowsePage from "../BrowsePage/BrowsePage";
+import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
 
 type RouterProps = {
   ParentRef?: HTMLDivElement;
