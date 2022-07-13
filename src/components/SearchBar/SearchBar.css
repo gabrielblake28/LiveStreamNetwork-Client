@@ -1,8 +1,8 @@
-*,
+/* *,
 *::after,
 *::before {
-  z-index: 1;
-}
+  z-index: 0;
+} */
 
 .search-drop-down-container {
   display: flex;
@@ -19,10 +19,6 @@
 
 .search-bar-container {
   display: absolute;
-}
-
-.search-bar-z-index {
-  z-index: 1;
 }
 
 /* All Search */

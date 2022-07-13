@@ -43,7 +43,7 @@ export default function EventCard({ Event }: EventCardProps) {
       <div className="event-footer__panel-container">
         <div className="event-footer__panel-left">
           <div className="event-avatar">
-            <Link to="/user">
+            <Link to="/user" state={Event.user_id}>
               <IconButton style={{ color: "#A970FF" }}>
                 <Avatar
                   src={Event.profile_pic}
@@ -63,7 +63,11 @@ export default function EventCard({ Event }: EventCardProps) {
             >
               <div className="event-title">{Event.title}</div>
             </Link>
-            <Link to="/user" style={{ textDecoration: "none" }}>
+            <Link
+              to="/user"
+              state={Event.user_id}
+              style={{ textDecoration: "none" }}
+            >
               <div className="event-creator-name">
                 {/* {Event.name} */}
                 Mizkif

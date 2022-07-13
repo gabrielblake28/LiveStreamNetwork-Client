@@ -1,14 +1,11 @@
 import {
   Button,
   createTheme,
-  MenuItem,
-  Select,
   styled,
   TextField,
   Typography,
 } from "@mui/material";
 import FormHelperTexts from "@mui/material/FormHelperText";
-import { ThemeProvider } from "@mui/styles";
 import DatePicker from "react-datepicker";
 import "./CreateEventWorkflow.css";
 const WhiteBorderTextField = styled(TextField)`
@@ -66,8 +63,6 @@ type CreateEventDetailsComponentProps = {
 };
 
 export default function CreateEventDetailsComponent({
-  eventCategory,
-  setEventCategory,
   eventTitle,
   setEventTitle,
   startTime,
@@ -78,191 +73,106 @@ export default function CreateEventDetailsComponent({
   onCancel,
 }: CreateEventDetailsComponentProps) {
   return (
-    <div>
-      <div className="create-event-categories">
-        <FormHelperTexts>
-          <Typography
-            style={{
-              marginLeft: "5px",
-              fontFamily: "Source Sans Pro",
-            }}
-            color="#ACACAC"
-            variant="caption"
-          >
-            Categories
-          </Typography>
-        </FormHelperTexts>
-        {/* <ThemeProvider theme={selectTheme}> */}
-        {/* <Select
-          MenuProps={{
-            PaperProps: {
-              sx: {
-                color: "#aaaaaa",
-                "& .MuiMenuItem-root": {
-                  padding: 0,
-                  backgroundColor: "#18181b",
-                  color: "#aaaaaa",
-                },
-              },
-            },
-          }}
-        >
-          <MenuItem value="1">Just Chatting</MenuItem>
-          <MenuItem value="2">League of Legends</MenuItem>
-          <MenuItem value="3">Valorant</MenuItem>
-          <MenuItem value="4">World of Warcraft</MenuItem>
-          <MenuItem value="5">Rocket League</MenuItem>
-          <MenuItem value="6">Among Us</MenuItem>
-          <MenuItem value="7">Minecraft</MenuItem>
-          <MenuItem value="8">Apex Legends</MenuItem>
-          <MenuItem value="9">Fortnite</MenuItem>
-        </Select> */}
-        {/* </ThemeProvider> */}
-        <ThemeProvider theme={selectTheme}>
-          <Select
-            autoFocus={false}
+    <div className="create-event-details-centered">
+      <div className="title-and-time-spacing">
+        <div className="create-event-title">
+          <FormHelperTexts>
+            <Typography
+              style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
+              color="#ACACAC"
+              variant="caption"
+            >
+              Title
+            </Typography>
+          </FormHelperTexts>
+          <WhiteBorderTextField
+            autoFocus
             autoComplete="off"
+            InputLabelProps={{
+              style: { color: "#aaaaaa" },
+            }}
             sx={{
-              marginTop: "4px",
-              backgroundColor: "#101012",
-              border: "2px solid #101012",
-              color: "#aaaaaa",
-              "&.Mui-focused fieldset": {
-                borderColor: "red",
-              },
-              "&:hover": {
-                border: "2px solid #A970FF",
-              },
-              "& .MuiSvgIcon-root": {
-                color: "#aaaaaa",
+              marginTop: "5px",
+              ".css-x2l1vy-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "white",
               },
             }}
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  color: "#aaaaaa",
-                  "& .MuiMenuItem-root": {
-                    padding: "5px",
-                    fontSize: "17px",
-                    backgroundColor: "#18181b",
-                    color: "#aaaaaa",
-                    "&:hover": {
-                      backgroundColor: "#27272c",
-                    },
+            InputProps={{
+              sx: {
+                height: "40px",
+                backgroundColor: "#101012",
+                color: "#aaaaaa",
+                ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                  border: "2px solid #101012",
+                },
+                "&:hover": {
+                  ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                    border: "2px solid #A970FF",
                   },
                 },
               },
             }}
-            size="small"
+            hiddenLabel={true}
+            size="medium"
             variant="outlined"
             fullWidth
-            value={eventCategory}
+            value={eventTitle}
             onChange={(e) => {
-              setEventCategory(e.target.value as string);
+              setEventTitle(e.target.value);
             }}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="1">Just Chatting</MenuItem>
-            <MenuItem value="2">League of Legends</MenuItem>
-            <MenuItem value="3">Valorant</MenuItem>
-            <MenuItem value="4">World of Warcraft</MenuItem>
-            <MenuItem value="5">Rocket League</MenuItem>
-            <MenuItem value="6">Among Us</MenuItem>
-            <MenuItem value="7">Minecraft</MenuItem>
-            <MenuItem value="8">Apex Legends</MenuItem>
-            <MenuItem value="9">Fortnite</MenuItem>
-          </Select>
-        </ThemeProvider>
-      </div>
-      <div className="create-event-title">
-        <FormHelperTexts>
-          <Typography
-            style={{ marginLeft: "5px", fontFamily: "Source Sans Pro" }}
-            color="#ACACAC"
-            variant="caption"
-          >
-            Title
-          </Typography>
-        </FormHelperTexts>
-        <WhiteBorderTextField
-          autoFocus
-          autoComplete="off"
-          InputLabelProps={{
-            style: { color: "#aaaaaa" },
-          }}
-          sx={{
-            marginTop: "5px",
-            ".css-x2l1vy-MuiInputBase-root-MuiOutlinedInput-root": {
-              color: "white",
-            },
-          }}
-          InputProps={{
-            sx: {
-              height: "40px",
-              backgroundColor: "#101012",
-              color: "#aaaaaa",
-              ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                border: "2px solid #101012",
-              },
-              "&:hover": {
-                ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                  border: "2px solid #A970FF",
-                },
-              },
-            },
-          }}
-          hiddenLabel={true}
-          size="medium"
-          variant="outlined"
-          fullWidth
-          value={eventTitle}
-          onChange={(e) => {
-            setEventTitle(e.target.value);
-          }}
-        />
-      </div>
-      <div className="date-time-input-wrapper">
-        <div className="event-start-time-input">
-          <FormHelperTexts>
-            <Typography
-              style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
-              color="#ACACAC"
-              variant="caption"
-            >
-              Start Time
-            </Typography>
-          </FormHelperTexts>
-          <DatePicker
-            selected={startTime}
-            onChange={(startTime) => setStartTime(startTime)}
-            showTimeSelect
-            timeIntervals={15}
-            timeCaption="Time"
-            dateFormat="MMMM d, h:mm aa"
-            className="select-event-start-time"
           />
         </div>
-        <div className="event-end-time-input">
-          <FormHelperTexts>
-            <Typography
-              style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
-              color="#ACACAC"
-              variant="caption"
-            >
-              End Time
-            </Typography>
-          </FormHelperTexts>
-          <DatePicker
-            selected={endTime}
-            onChange={(date) => setEndTime(date)}
-            showTimeSelect
-            timeIntervals={15}
-            timeCaption="Time"
-            dateFormat="MMMM d, h:mm aa"
-            className="select-event-end-time"
-          />
+        <div className="date-time-input-wrapper">
+          <div className="event-start-time-input">
+            <FormHelperTexts>
+              <Typography
+                style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
+                color="#ACACAC"
+                variant="caption"
+              >
+                Start Time
+              </Typography>
+            </FormHelperTexts>
+            <DatePicker
+              isClearable
+              showPopperArrow={false}
+              selected={startTime}
+              onChange={(startTime) => setStartTime(startTime)}
+              showTimeSelect
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="MMM d, h:mm a"
+              className="select-event-start-time"
+              dayClassName={(date) =>
+                31 == 31 ? "calendar-day-color" : undefined
+              }
+            />
+          </div>
+          <div className="event-end-time-input">
+            <FormHelperTexts>
+              <Typography
+                style={{ marginLeft: "10px", fontFamily: "Source Sans Pro" }}
+                color="#ACACAC"
+                variant="caption"
+              >
+                End Time
+              </Typography>
+            </FormHelperTexts>
+            <DatePicker
+              isClearable
+              showPopperArrow={false}
+              selected={endTime}
+              onChange={(date) => setEndTime(date)}
+              showTimeSelect
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="MMM d, h:mm a"
+              className="select-event-end-time"
+              dayClassName={(date) =>
+                31 == 31 ? "calendar-day-color" : undefined
+              }
+            />
+          </div>
         </div>
       </div>
       <div className="create-event-button-wrapper">
@@ -270,6 +180,7 @@ export default function CreateEventDetailsComponent({
           {" "}
           <Button
             style={{
+              marginTop: "45px",
               color: "#101012",
               height: "35px",
               width: "150px",
@@ -291,6 +202,7 @@ export default function CreateEventDetailsComponent({
         <div className="create-event-right-button">
           <Button
             style={{
+              marginTop: "45px",
               color: "#101012",
               height: "35px",
               width: "150px",

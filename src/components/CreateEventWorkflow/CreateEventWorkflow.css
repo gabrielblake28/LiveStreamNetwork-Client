@@ -14,26 +14,14 @@
   padding: 4px;
 }
 
+.create-event-active-component {
+  height: calc(400px - 52px);
+}
+
 .create-event-header-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.create-event-categories {
-  display: flex;
-  justify-self: center;
-  justify-content: center;
-  margin: 10px 35px 10px 35px;
-  flex-direction: column;
-}
-
-.create-event-title {
-  display: flex;
-  justify-self: center;
-  justify-content: center;
-  margin: 10px 35px 10px 35px;
-  flex-direction: column;
 }
 
 .create-event-header {
@@ -48,11 +36,73 @@
   align-items: center;
 }
 
-.date-time-input-wrapper {
+/* Buttons */
+
+.create-event-button-wrapper {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  z-index: 1;
+}
+
+.create-event-left-button {
+  margin: 0 6px 0 0;
+}
+
+.create-event-right-button {
+  margin: 0 0 0 6px;
+}
+
+.confirm-create-event-button {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Details */
+
+.create-event-details-centered {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.title-and-time-spacing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 200px;
+  z-index: 2;
+}
+
+.event-start-time-input {
+  z-index: 2;
+  margin: 3px 0;
+}
+
+.event-end-time-input {
+  margin: 3px 0;
+  z-index: 1;
+}
+
+.create-event-title {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  margin: 40px 35px 5px 35px;
+  flex-direction: column;
+}
+
+.date-time-input-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: center;
+  color: #aaaaaa;
+  margin: 0 35px;
 }
 
 .event-date-input:focus {
@@ -63,7 +113,6 @@
   width: 155px;
   height: 40px;
   text-align: center;
-  margin: 5px 5px 5px 5px;
   color: #aaaaaa;
   background-color: #101012;
   border: none;
@@ -74,7 +123,6 @@
   width: 155px;
   height: 40px;
   text-align: center;
-  margin: 5px 5px 5px 5px;
   color: #aaaaaa;
   background-color: #101012;
   border: none;
@@ -89,25 +137,103 @@
   border: 2px solid #a970ff;
 }
 
-.create-event-button-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 25px;
+.calendar-day-color {
+  color: #aaaaaa !important;
+  /* background-color: #101012; */
 }
 
-.create-event-left-button {
-  margin: 0 6px 0 0;
+.react-datepicker {
+  border: 1px solid #18181b !important;
+  color: #aaaaaa !important;
+  background-color: #18181b !important;
 }
 
-.create-event-right-button {
-  margin: 0 0 0 6px;
+.react-datepicker__header__dropdown--scroll {
+  z-index: 4;
 }
+.react-datepicker__month {
+  background-color: #101012;
+}
+
+.react-datepicker__month-container {
+  float: left;
+  background-color: #101012;
+}
+
+.react-datepicker__header {
+  background-color: #101012 !important;
+  border-bottom: 1px solid #303036 !important;
+}
+
+.react-datepicker-time__header {
+  color: #aaaaaa !important;
+}
+.react-datepicker__current-month {
+  color: #aaaaaa !important;
+}
+
+.react-datepicker__day-name {
+  color: #aaaaaa !important;
+}
+
+.react-datepicker__time-container {
+  border-left: 1px solid #18181b !important;
+}
+
+.react-datepicker__time-list-item {
+  color: #aaaaaa;
+}
+
+.react-datepicker__time-list {
+  background-color: #101012;
+}
+
+.react-datepicker__triangle::after {
+  border-bottom-color: #101012 !important;
+}
+
+.react-datepicker__triangle::before {
+  border-bottom-color: #101012 !important;
+}
+
+.react-datepicker__time-list-item--selected {
+  background-color: #a970ff !important;
+  color: #101012 !important;
+}
+
+.react-datepicker__day--selected {
+  background-color: #a970ff !important;
+  color: #101012 !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: #27272c !important;
+}
+
+.react-datepicker__time-list-item:hover {
+  background-color: #27272c !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #a970ff !important;
+  color: #101012 !important;
+}
+
+.react-datepicker__input-container {
+  width: 200px !important;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: rgb(173, 7, 7) !important;
+}
+
+/* Description */
 
 .create-event-description {
   margin: 15px 35px 35px 35px;
 }
+
+/* Thumbnail */
 
 .create-event-image-container {
   margin: 13px 35px 35px 35px;
@@ -153,11 +279,4 @@
 
 #file-explore-button {
   display: none;
-}
-
-.confirm-create-event-button {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

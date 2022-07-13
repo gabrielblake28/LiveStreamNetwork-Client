@@ -37,9 +37,7 @@ export default function ProfilePage() {
   };
 
   const ActiveComponent = (value) => {
-    if (value === "profile") {
-      return <ProfilePageProfile />;
-    } else if (value === "settings") {
+    if (value === "settings") {
       return <ProfilePageSettings />;
     } else if (value === "events") {
       return <div></div>;
@@ -93,10 +91,10 @@ export default function ProfilePage() {
                         fontSize: "15px",
                       }}
                     >
-                      Profile
+                      Events
                     </Typography>
                   }
-                  value="profile"
+                  value="events"
                 />
                 <Tab
                   disableRipple
@@ -112,21 +110,6 @@ export default function ProfilePage() {
                     </Typography>
                   }
                   value="settings"
-                />
-                <Tab
-                  disableRipple
-                  label={
-                    <Typography
-                      sx={{
-                        color: "#CCCCCC",
-                        fontFamily: "Source Sans Pro",
-                        fontSize: "15px",
-                      }}
-                    >
-                      Events
-                    </Typography>
-                  }
-                  value="events"
                 />
               </Tabs>
             </ThemeProvider>

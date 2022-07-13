@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
 import { EventAPI } from "../../API/Events/EventAPI";
-import {  useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import CreateEventDetailsComponent from "./CreateEventDetailsComponent";
 import CreateEventDescriptionComponent from "./CreateEventDescriptionComponent";
@@ -27,8 +27,8 @@ export default function CreateEventWorkflow({
   const [activePage, setActivePage] = useState("details");
   const [eventCategory, setEventCategory] = useState<string>("");
   const [eventTitle, setEventTitle] = useState<string>("");
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const [startTime, setStartTime] = useState<Date | undefined>(undefined);
+  const [endTime, setEndTime] = useState<Date | undefined>(undefined);
   const [eventDescription, setEventDescription] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
@@ -38,7 +38,7 @@ export default function CreateEventWorkflow({
   const userInfo = useRecoilValue(CurrentUserData);
 
   const CompleteWorkflow = () => {
-    if (image !== null) {
+    if (image !== null && startTime !== undefined && endTime !== undefined) {
       eventAPI.CreateEvent({
         event: {
           featured: false,
@@ -70,9 +70,9 @@ export default function CreateEventWorkflow({
           setEventCategory={setEventCategory}
           eventTitle={eventTitle}
           setEventTitle={setEventTitle}
-          startTime={startTime}
+          startTime={startTime as Date}
           setStartTime={setStartTime}
-          endTime={endTime}
+          endTime={endTime as Date}
           setEndTime={setEndTime}
           setActivePage={setActivePage}
           onNext={() => {
@@ -127,8 +127,16 @@ export default function CreateEventWorkflow({
             <Typography
               style={
                 activePage === "details"
-                  ? { color: "#A970FF" }
-                  : { color: "#aaaaaa" }
+                  ? {
+                      color: "#A970FF",
+                      fontFamily: "Source Sans Pro",
+                      fontSize: "17px",
+                    }
+                  : {
+                      color: "#aaaaaa",
+                      fontFamily: "Source Sans Pro",
+                      fontSize: "17px",
+                    }
               }
             >
               Details
@@ -136,8 +144,16 @@ export default function CreateEventWorkflow({
             <Typography
               style={
                 activePage === "description"
-                  ? { color: "#A970FF" }
-                  : { color: "#aaaaaa" }
+                  ? {
+                      color: "#A970FF",
+                      fontFamily: "Source Sans Pro",
+                      fontSize: "17px",
+                    }
+                  : {
+                      color: "#aaaaaa",
+                      fontFamily: "Source Sans Pro",
+                      fontSize: "17px",
+                    }
               }
             >
               Description
@@ -145,8 +161,16 @@ export default function CreateEventWorkflow({
             <Typography
               style={
                 activePage === "thumbnail"
-                  ? { color: "#A970FF" }
-                  : { color: "#aaaaaa" }
+                  ? {
+                      color: "#A970FF",
+                      fontFamily: "Source Sans Pro",
+                      fontSize: "17px",
+                    }
+                  : {
+                      color: "#aaaaaa",
+                      fontFamily: "Source Sans Pro",
+                      fontSize: "17px",
+                    }
               }
             >
               Thumbnail

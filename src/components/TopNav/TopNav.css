@@ -2,7 +2,6 @@
   color: #e5e5e5;
   display: flex;
   height: 100%;
-  z-index: 1;
 }
 
 .top-nav-left-layout {
@@ -12,7 +11,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* margin-left: 15px; */
 }
 
 .top-nav-center-layout {
