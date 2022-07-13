@@ -4,9 +4,9 @@ import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 import EventDetailsPage from "../EventDetailsPage/EventDetailsPage";
 import EventScrollPage from "../EventLandingPage/EventLandingPage";
-import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import UserPage from "../UserPage/UserPage";
+import BrowsePage from "../BrowsePage/BrowsePage";
 
 type RouterProps = {
   ParentRef?: HTMLDivElement;

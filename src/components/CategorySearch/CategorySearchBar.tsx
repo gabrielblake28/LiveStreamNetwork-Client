@@ -5,12 +5,17 @@ import {
   InputBase,
   Paper,
 } from "@mui/material";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { SearchAPI } from "../../API/Search/SearchAPI";
+import { SearchResult } from "../../API/Search/SearchResult";
 import "./CategorySearchBar.css";
 import CategorySearchDropDown from "./CategorySearchDropDown";
 
+const searchApi = new SearchAPI();
+
+let timeout: NodeJS.Timeout;
 export default function CategorySearchBar() {
+  const [searchData, setSearchData] = useState<SearchResult[]>([]);
   const [showSearchDropDown, setShowSearchDropDown] = useState<string>("none");
   const [searchBarBorderColor, setSearchBarBorderColor] =
     useState<string>("#101012");
@@ -20,6 +25,20 @@ export default function CategorySearchBar() {
     setShowSearchDropDown("none");
     setSearchBarBorderColor("101012");
   };
+
+  useEffect(() => {
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      if (term != "") {
+        searchApi.Search(term, "events").then((response) => {
+          setSearchData(response);
+        });
+      } else {
+        setSearchData([]);
+      }
+    }, 250);
+  }, [term]);
 
   return (
     <div className="category-search-container">
@@ -33,13 +52,13 @@ export default function CategorySearchBar() {
               alignItems: "center",
               height: 40,
               width: 318,
-              backgroundColor: "#101012",
+              backgroundColor: "#26262b",
               border: `2px solid ${searchBarBorderColor}`,
             }}
           >
             <InputBase
               sx={{ ml: 1, flex: 1, color: "#aaaaaa" }}
-              placeholder="Search Categories"
+              placeholder="Search Events"
               autoComplete="true"
               value={term}
               onFocus={(e) => {
@@ -54,6 +73,7 @@ export default function CategorySearchBar() {
             />
           </Paper>
           <CategorySearchDropDown
+            searchData={searchData}
             setShowSearchDropDown={setShowSearchDropDown}
             showSearchDropDown={showSearchDropDown}
             setSearchBarBorderColor={setSearchBarBorderColor}

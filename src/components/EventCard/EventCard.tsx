@@ -1,4 +1,3 @@
-import { Slideshow } from "@mui/icons-material";
 import {
   Avatar,
   Card,
@@ -9,7 +8,6 @@ import {
 import schooled from "../../assets/Thumbnails/schooled.jpg";
 import { Link } from "react-router-dom";
 import { IEvent } from "../../API/Events/IEvent";
-import { IUser } from "../../API/Users/IUser";
 import { SubscriptionComponent } from "../SubscriptionComponent/SubscriptionComponent";
 import "./EventCard.css";
 
