@@ -2,21 +2,19 @@ import { WindowOutlined } from "@mui/icons-material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { receiveMessageOnPort } from "worker_threads";
 import { IEvent } from "../../API/Events/IEvent";
-import {
-  InfiniteScrollController,
-  InfiniteScrollState,
-} from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
-import { MockEventProvider } from "../../Service/InfiniteScrollService/impl/MockEventProvider";
+import { IEventProvider } from "../../Service/InfiniteScrollService/def/IEventProvider";
+import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
+import { InfiniteScrollState } from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
 import { InfiniteScrollPage } from "./InfiniteScrollPage";
 
 type InfiniteScrollContainerProps = {
   ScrollParent?: HTMLDivElement;
+  EventProvider: IEventProvider;
 };
-const eventProvider = new MockEventProvider();
-const scrollController = new InfiniteScrollController(eventProvider, 20);
 
 export function InfiniteScrollContainer({
   ScrollParent,
+  EventProvider,
 }: InfiniteScrollContainerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState<IEvent[][]>([]);
@@ -80,20 +78,22 @@ export function InfiniteScrollContainer({
 
   const AddPage = async () => {
     setContainerState(InfiniteScrollState.Loading);
-    const page = await scrollController.GetPage(pages?.length || 0);
+    const page = await EventProvider.ProvideEvents(pages?.length || 0, 30);
     setPages((prev: IEvent[][]) => {
-      return ([] as IEvent[][]).concat(prev, [page]);
+      prev.push(page);
+      return prev;
     });
     setContainerState(InfiniteScrollState.Idle);
   };
-
+  useEffect(() => {
+    AddPage();
+  }, []);
   useEffect(() => {
     if (elementsCreated && pages) {
       setElementsCreated(elementsCreated + pages[pages.length - 1].length);
     }
   }, [pages]);
   useLayoutEffect(() => {
-    AddPage();
     let scrollEvent = () => {
       const scrollParent = GetScrollParent();
       if (scrollParent) {
@@ -109,9 +109,7 @@ export function InfiniteScrollContainer({
             scrollParent.clientHeight <
           1
         ) {
-          if (scrollController.ShouldGetPage(elementsCreated)) {
-            AddPage();
-          }
+          AddPage();
         }
       }
     };

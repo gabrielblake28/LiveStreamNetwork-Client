@@ -71,9 +71,13 @@ export class EventAPI implements IEventAPI {
     return result.data;
   }
 
-  async GetUpcomingEvents(limit: number, page: number): Promise<IEvent[]> {
-    const result = await this.query.get("/upcoming", {
-      params: { limit, page },
+  async GetUpcomingEvents(
+    limit: number,
+    page: number,
+    user_id: string
+  ): Promise<IEvent[]> {
+    const result = await this.query.get("/", {
+      params: { limit, page, user_id },
     });
     return result.data;
   }

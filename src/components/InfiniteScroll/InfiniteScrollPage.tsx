@@ -46,16 +46,7 @@ export function InfiniteScrollPage({
     Events?.forEach((event) => {
       eventsToRender.push(
         <div>
-          <EventCard
-            EventId={event.event_id!}
-            CreatorName={event.name}
-            EventTime={event.start_timestamp}
-            EventTitle={event.title}
-            EventImg={event.image || schooled}
-            ProfilePic={event.profile_pic}
-            SubscriptionId={event.subscription_id}
-            key={event.event_id!}
-          />
+          <EventCard Event={event} key={event.event_id!} />
         </div>
       );
     });
