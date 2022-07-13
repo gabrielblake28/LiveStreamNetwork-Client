@@ -1,6 +1,5 @@
-import { WindowOutlined } from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { receiveMessageOnPort } from "worker_threads";
 import { IEvent } from "../../API/Events/IEvent";
 import { IEventProvider } from "../../Service/InfiniteScrollService/def/IEventProvider";
 import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
@@ -49,12 +48,11 @@ export function InfiniteScrollContainer({
             display: "flex",
             justifyContent: "space-around",
             fontSize: "25px",
-            padding: "10px",
+            height: "140px",
             cursor: "pointer",
+            color: "#aaaaaa",
           }}
-        >
-          Load More
-        </div>
+        ></div>
       );
     } else if (containerState == InfiniteScrollState.Loading) {
       return (
@@ -68,7 +66,13 @@ export function InfiniteScrollContainer({
             overflowX: "hidden",
           }}
         >
-          Loading...
+          <CircularProgress
+            disableShrink
+            sx={{
+              margin: "40px",
+              color: "#aaaaaa",
+            }}
+          />
         </div>
       );
     }
@@ -83,7 +87,6 @@ export function InfiniteScrollContainer({
       prev.push(page);
       return prev;
     });
-    setContainerState(InfiniteScrollState.Idle);
   };
   useEffect(() => {
     AddPage();
@@ -120,16 +123,15 @@ export function InfiniteScrollContainer({
 
   return (
     <React.Fragment>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-around",
-          marginTop: "70px",
-          overflowY: "scroll",
-        }}
-        ref={ref}
-      >
+      <div>
+        <div
+          style={{
+            width: "320px",
+            marginLeft: "119px",
+          }}
+        ></div>
+      </div>
+      <div style={InfiniteScrollStyle} ref={ref}>
         {RenderPages()}
       </div>
       <div className="scroll-footer" style={{}}>

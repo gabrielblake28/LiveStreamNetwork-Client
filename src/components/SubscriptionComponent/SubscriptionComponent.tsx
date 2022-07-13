@@ -1,7 +1,9 @@
 import { NotificationsActive, SubscriptTwoTone } from "@mui/icons-material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import { SubscriptionAPI } from "../../API/Subscriptions/SubscriptionAPI";
+import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import "./SubscriptionComponent.css";
 
 const subscriptions = new SubscriptionAPI();
@@ -15,6 +17,7 @@ export function SubscriptionComponent({
   EventId,
   SubscriptionId,
 }: SubscriptionComponentProps) {
+  const userInfo = useRecoilValue(CurrentUserData);
   const [subscriptionId, setSubscriptionId] = useState<string>();
 
   useEffect(() => {
@@ -33,7 +36,7 @@ export function SubscriptionComponent({
       setSubscriptionId(
         await subscriptions.addSubscription({
           event_id: EventId,
-          user_id: "1",
+          user_id: userInfo.user_id,
         })
       );
     }

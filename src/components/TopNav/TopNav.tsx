@@ -29,8 +29,9 @@ import { Link } from "react-router-dom";
 import { IUser } from "../../API/Users/IUser";
 import SubscriptionsMenu from "../SubscriptionsMenu/SubscriptionsMenu";
 import SearchBar from "../SearchBar/SearchBar";
-import { IconState, SubscribedToEvents } from "../../Recoil/Events/EventAtoms";
+import { IconState } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
+import { IEvent } from "../../API/Events/IEvent";
 
 const eventAPI = new EventAPI();
 const userAPI = new UserAPI();
@@ -95,10 +96,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
   const [subIconFill, setSubIconFill] = useState(false);
   const [createIconFill, setCreateIconFill] = useState(false);
+  const [subscribedToEvents, setSubscribedToEvents] =
+    useState<Partial<IEvent>[]>([]);
   const isLoggedIn = useAuth();
   const userInfo = useRecoilValue(CurrentUserData);
-  const setSubscribedToEvents = useSetRecoilState(SubscribedToEvents);
-
   const handleCreateEventModalOpen = () => setCreateEventModalOpen(true);
   const handleCreateEventModalClose = () => setCreateEventModalOpen(false);
 
@@ -348,9 +349,9 @@ export default function TopNav({ setOpen }: TopNavProps) {
             />
             <div></div>
           </ThemeProvider>
-
           <ThemeProvider theme={theme}>
             <SubscriptionsMenu
+            subscribedToEvents={subscribedToEvents}
               setSubIconFill={setSubIconFill}
               subsAnchorEl={subsAnchorEl}
               setSubsAnchorEl={setSubsAnchorEl}

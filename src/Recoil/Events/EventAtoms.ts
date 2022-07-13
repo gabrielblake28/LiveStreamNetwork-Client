@@ -25,9 +25,3 @@ export const UpcomingEvents = atom({
   default: [] as IEvent[],
 });
 
-// Events Atoms
-
-export const SubscribedToEvents = atom<Partial<IEvent>[]>({
-  key: "SubscribedToEvents",
-  default: [],
-});
