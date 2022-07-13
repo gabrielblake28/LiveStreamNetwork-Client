@@ -14,7 +14,11 @@ export default interface IEventAPI {
   ): Promise<IEvent[]>;
   GetTrendingEvents(limit: number, page: number): Promise<IEvent[]>;
   GetSponsoredEvents(limit: number, page: number): Promise<IEvent[]>;
-  GetUpcomingEvents(limit: number, page: number): Promise<IEvent[]>;
+  GetUpcomingEvents(
+    limit: number,
+    page: number,
+    user_id: string
+  ): Promise<IEvent[]>;
   GetEventsWithMatchingUserIds(
     limit: number,
     page: number,
