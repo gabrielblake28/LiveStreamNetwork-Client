@@ -14,6 +14,7 @@
   position: fixed;
   top: 0px;
   left: 0px;
+  z-index: 1;
 }
 
 .twe-shell-container {
@@ -35,6 +36,7 @@
 /* Track */
 ::-webkit-scrollbar-track {
   background: #101010;
+  border-radius: 8px;
 }
 
 /* Handle */

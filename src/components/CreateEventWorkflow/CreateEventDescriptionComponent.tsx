@@ -40,6 +40,7 @@ export default function CreateEventDescriptionComponent({
           </Typography>
         </FormHelperTexts>
         <WhiteBorderTextField
+          placeholder="500 character limit"
           inputProps={{
             maxLength: 500,
           }}

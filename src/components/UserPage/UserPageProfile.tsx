@@ -17,8 +17,11 @@ export default function UserPageProfile({
         <div>
           <div className="user-page-profile-description-header">
             <Typography
-              style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
-              variant="h5"
+              style={{
+                fontFamily: "Source Sans Pro",
+                color: "#aaaaaa",
+                fontSize: "21px",
+              }}
             >
               About {descriptionHeader}
             </Typography>

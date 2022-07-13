@@ -137,7 +137,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               fontSize: "22px",
             }}
           >
-            Eventium
+            WhatsLive
           </Typography>
         </Link>
         <Divider

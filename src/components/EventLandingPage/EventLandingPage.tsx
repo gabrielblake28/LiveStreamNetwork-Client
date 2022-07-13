@@ -32,41 +32,11 @@ export default function EventLandingPage() {
         <CustomCarousel slideTitle={"Sponsored"} slides={upcomingEvents} />
         <CustomCarousel slideTitle={"Upcoming"} slides={featuredEvents} />
       </div>
-      <Divider
-        variant="middle"
+      <div
         style={{
-          margin: "60px 150px 0 150px",
-          backgroundColor: "#aaaaaa",
+          margin: "50px",
         }}
       />
-      <div className="category-section-container">
-        <div className="category-section-title">
-          <Typography
-            variant="h5"
-            style={{
-              color: "white",
-              fontFamily: "Source Sans Pro",
-            }}
-          >
-            Categories
-          </Typography>
-        </div>
-        <div className="category-section">
-          {CategoryCardData.map((card, index) => {
-            return (
-              <CategoryCard
-                category={card.category}
-                categoryImage={card.categoryImage}
-              />
-            );
-          })}
-        </div>
-      </div>
-      <div className="all-events-section"></div>
-
-      <div className="infinite-scroll-section">
-        <InfiniteScrollContainer />
-      </div>
     </div>
   );
 }

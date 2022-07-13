@@ -34,16 +34,16 @@ export default function EventsSearchCard({
         <div className="event-search-thumbnail">
           <img src={SearchResult.image} height="35px" width="35px" />
         </div>
-        <div className="event-search-title"></div>
-        <Typography
-          sx={{
-            fontFamily: "Source Sans Pro",
-            color: "#aaaaaaa",
-            fontSize: "15px",
-          }}
-        >
-          {SearchResult.title}
-        </Typography>
+        <div className="event-search-title">
+          <Typography
+            sx={{
+              fontFamily: "Source Sans Pro",
+              fontSize: "15px",
+            }}
+          >
+            {SearchResult.title}
+          </Typography>
+        </div>
       </div>
     </Link>
   );
