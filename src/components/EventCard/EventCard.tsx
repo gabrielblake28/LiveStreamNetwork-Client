@@ -25,13 +25,13 @@ export default function EventCard({ Event }: EventCardProps) {
           <CardActionArea>
             <Link
               to="event"
-              state={Event.event_id}
+              state={Event?.event_id}
               style={{ textDecoration: "none" }}
             >
               <CardMedia
                 component="img"
                 height="185"
-                image={schooled}
+                image={Event?.image || schooled}
                 onClick={() => {
                   // send data to the event details page
                 }}
@@ -43,10 +43,10 @@ export default function EventCard({ Event }: EventCardProps) {
       <div className="event-footer__panel-container">
         <div className="event-footer__panel-left">
           <div className="event-avatar">
-            <Link to="/user" state={Event.user_id}>
+            <Link to="/user" state={Event?.user_id}>
               <IconButton style={{ color: "#A970FF" }}>
                 <Avatar
-                  src={Event.profile_pic}
+                  src={Event?.profile_pic}
                   sx={{
                     width: "40px",
                     height: "40px",
@@ -61,11 +61,11 @@ export default function EventCard({ Event }: EventCardProps) {
               state={Event as IEvent}
               style={{ textDecoration: "none" }}
             >
-              <div className="event-title">{Event.title}</div>
+              <div className="event-title">{Event?.title}</div>
             </Link>
             <Link
               to="/user"
-              state={Event.user_id}
+              state={Event?.user_id}
               style={{ textDecoration: "none" }}
             >
               <div className="event-creator-name">
@@ -74,21 +74,24 @@ export default function EventCard({ Event }: EventCardProps) {
               </div>
             </Link>
             <div className="event-timestamp">{`${new Date(
-              Event.start_timestamp
+              Event?.start_timestamp
             ).toLocaleDateString("en-US", {
               weekday: "short",
               month: "long",
               day: "numeric",
-            })}, ${new Date(Event.start_timestamp).toLocaleTimeString("en-US", {
-              hour: "numeric",
-              minute: "2-digit",
-            })}`}</div>
+            })}, ${new Date(Event?.start_timestamp).toLocaleTimeString(
+              "en-US",
+              {
+                hour: "numeric",
+                minute: "2-digit",
+              }
+            )}`}</div>
           </div>
         </div>
         <div className="event-footer__panel-right">
           <SubscriptionComponent
-            EventId={Event.event_id!}
-            SubscriptionId={Event.subscription_id}
+            EventId={Event?.event_id!}
+            SubscriptionId={Event?.subscription_id}
           />
         </div>
       </div>
