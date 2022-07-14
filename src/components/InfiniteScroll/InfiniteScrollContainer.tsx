@@ -2,13 +2,18 @@ import { CircularProgress } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IEvent } from "../../API/Events/IEvent";
 import { IEventProvider } from "../../Service/InfiniteScrollService/def/IEventProvider";
-import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 import { InfiniteScrollState } from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
 import { InfiniteScrollPage } from "./InfiniteScrollPage";
 
 type InfiniteScrollContainerProps = {
   ScrollParent?: HTMLDivElement;
   EventProvider: IEventProvider;
+};
+
+const InfiniteScrollStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-around",
 };
 
 export function InfiniteScrollContainer({

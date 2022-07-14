@@ -5,17 +5,24 @@ import {
   CardMedia,
   IconButton,
 } from "@mui/material";
-import schooled from "../../assets/Thumbnails/schooled.jpg";
 import { Link } from "react-router-dom";
 import { IEvent } from "../../API/Events/IEvent";
 import { SubscriptionComponent } from "../SubscriptionComponent/SubscriptionComponent";
 import "./EventCard.css";
+import { useState } from "react";
+import EditDeleteEventComponent from "../EditDeleteEventComponent/EditDeleteEventComponent";
 
 type EventCardProps = {
   Event: IEvent;
 };
 
 export default function EventCard({ Event }: EventCardProps) {
+  const [isUsersEvent, setIsUsersEvent] = useState<boolean>(true);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const handleEditMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
     <div className="card-column-wrapper">
       <div className="card-hover-translate">
@@ -26,14 +33,7 @@ export default function EventCard({ Event }: EventCardProps) {
               state={Event?.event_id}
               style={{ textDecoration: "none" }}
             >
-              <CardMedia
-                component="img"
-                height="185"
-                image={Event?.image || schooled}
-                onClick={() => {
-                  // send data to the event details page
-                }}
-              />
+              <CardMedia component="img" height="185" image={Event?.image} />
             </Link>
           </CardActionArea>
         </Card>
@@ -42,7 +42,7 @@ export default function EventCard({ Event }: EventCardProps) {
         <div className="event-footer__panel-left">
           <div className="event-avatar">
             <Link to="/user" state={Event?.user_id}>
-              <IconButton style={{ color: "#A970FF" }}>
+              <IconButton style={{ color: "#A970FF" }} size="small">
                 <Avatar
                   src={Event?.profile_pic}
                   sx={{
@@ -86,12 +86,18 @@ export default function EventCard({ Event }: EventCardProps) {
             )}`}</div>
           </div>
         </div>
-        <div className="event-footer__panel-right">
-          <SubscriptionComponent
-            EventId={Event?.event_id!}
-            SubscriptionId={Event?.subscription_id}
-          />
-        </div>
+        {!isUsersEvent ? (
+          <div className="event-footer__panel-right">
+            <SubscriptionComponent
+              EventId={Event?.event_id!}
+              SubscriptionId={Event?.subscription_id}
+            />
+          </div>
+        ) : (
+          <div>
+            <EditDeleteEventComponent />
+          </div>
+        )}
       </div>
     </div>
   );

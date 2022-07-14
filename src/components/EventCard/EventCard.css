@@ -33,7 +33,10 @@
 }
 
 .event-avatar {
-  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .event-title {

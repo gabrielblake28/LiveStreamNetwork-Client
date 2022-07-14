@@ -45,13 +45,21 @@ export function SubscriptionComponent({
   return subscriptionId ? (
     <NotificationsActive
       className="event-footer__bell-icon bounce"
-      sx={{ width: "35px", height: "35px", color: "#9552fa" }}
+      sx={{
+        width: "30px",
+        height: "30px",
+        color: "#9552fa",
+      }}
       onClick={handleClick}
     />
   ) : (
     <NotificationsNoneOutlinedIcon
       className="event-footer__bell-icon"
-      sx={{ width: "35px", height: "35px", color: "#aaaaaa" }}
+      sx={{
+        width: "30px",
+        height: "30px",
+        color: "#aaaaaa",
+      }}
       onClick={handleClick}
     />
   );
