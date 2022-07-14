@@ -42,7 +42,7 @@ export function InfiniteScrollPage({
     Events?.forEach((event) => {
       eventsToRender.push(
         <div>
-          <EventCard Event={event} />
+          <EventCard Event={event} key={event.event_id!} />
         </div>
       );
     });
@@ -52,7 +52,7 @@ export function InfiniteScrollPage({
 
   useLayoutEffect(() => {
     setElementsToDisplay(
-      ScreenSizeConstants.GetNumberOfEventsPerSlide(windowWidth)
+      ScreenSizeConstants.GetNumberOfEventsPerSlide(ScrollParent.clientWidth)
     );
   }, [windowWidth]);
 

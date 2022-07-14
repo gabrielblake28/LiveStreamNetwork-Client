@@ -87,7 +87,14 @@ export function InfiniteScrollContainer({
 
   const AddPage = async () => {
     setContainerState(InfiniteScrollState.Loading);
-    const page = await EventProvider.ProvideEvents(pages?.length || 0, 30);
+    const page = await EventProvider.ProvideEvents(
+      pages?.length || 0,
+      30 +
+        (30 %
+          ScreenSizeConstants.GetNumberOfEventsPerSlide(
+            GetScrollParent()?.clientWidth!
+          ))
+    );
     setPages((prev: IEvent[][]) => {
       prev.push(page);
       return prev;
