@@ -7,6 +7,8 @@ import { useState } from "react";
 
 import ProfilePageSettings from "./ProfilePageSettings";
 import ProfilePageProfile from "./ProfilePageProfile";
+import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
+import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 
 const tabsTheme = createTheme({
   palette: {
@@ -40,7 +42,11 @@ export default function ProfilePage() {
     if (value === "settings") {
       return <ProfilePageSettings />;
     } else if (value === "events") {
-      return <div></div>;
+      return (
+        <InfiniteScrollContainer
+          EventProvider={new EventProvider(userInfo?.user_id)}
+        />
+      );
     }
   };
 
@@ -117,7 +123,7 @@ export default function ProfilePage() {
         </div>
       </div>
       <div className="profile-page-content-container">
-        {ActiveComponent(value)};
+        {ActiveComponent(value)}
       </div>
     </div>
   );

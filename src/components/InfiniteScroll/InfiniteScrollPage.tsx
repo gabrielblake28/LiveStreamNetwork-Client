@@ -56,7 +56,7 @@ export function InfiniteScrollPage({
 
   useLayoutEffect(() => {
     setElementsToDisplay(
-      ScreenSizeConstants.GetNumberOfEventsPerSlide(windowWidth)
+      ScreenSizeConstants.GetNumberOfEventsPerSlide(ScrollParent.clientWidth)
     );
   }, [windowWidth]);
 

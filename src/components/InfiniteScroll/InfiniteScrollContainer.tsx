@@ -2,6 +2,7 @@ import { WindowOutlined } from "@mui/icons-material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { receiveMessageOnPort } from "worker_threads";
 import { IEvent } from "../../API/Events/IEvent";
+import { ScreenSizeConstants } from "../../Service/CarouselService/impl/CarouselController";
 import { IEventProvider } from "../../Service/InfiniteScrollService/def/IEventProvider";
 import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 import { InfiniteScrollState } from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
@@ -78,7 +79,14 @@ export function InfiniteScrollContainer({
 
   const AddPage = async () => {
     setContainerState(InfiniteScrollState.Loading);
-    const page = await EventProvider.ProvideEvents(pages?.length || 0, 30);
+    const page = await EventProvider.ProvideEvents(
+      pages?.length || 0,
+      30 +
+        (30 %
+          ScreenSizeConstants.GetNumberOfEventsPerSlide(
+            GetScrollParent()?.clientWidth!
+          ))
+    );
     setPages((prev: IEvent[][]) => {
       prev.push(page);
       return prev;

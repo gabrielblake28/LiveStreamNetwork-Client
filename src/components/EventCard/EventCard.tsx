@@ -46,7 +46,7 @@ export default function EventCard({ Event }: EventCardProps) {
             <Link to="/user" state={Event?.user_id}>
               <IconButton style={{ color: "#A970FF" }}>
                 <Avatar
-                  src={Event?.profile_pic}
+                  src={Event?.profile_image_url}
                   sx={{
                     width: "40px",
                     height: "40px",
@@ -68,10 +68,7 @@ export default function EventCard({ Event }: EventCardProps) {
               state={Event?.user_id}
               style={{ textDecoration: "none" }}
             >
-              <div className="event-creator-name">
-                {/* {Event.name} */}
-                Mizkif
-              </div>
+              <div className="event-creator-name">{Event?.display_name}</div>
             </Link>
             <div className="event-timestamp">{`${new Date(
               Event?.start_timestamp
