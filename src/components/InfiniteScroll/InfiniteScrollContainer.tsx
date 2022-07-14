@@ -1,6 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IEvent } from "../../API/Events/IEvent";
+import { ScreenSizeConstants } from "../../Service/CarouselService/impl/CarouselController";
 import { IEventProvider } from "../../Service/InfiniteScrollService/def/IEventProvider";
 import { InfiniteScrollState } from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
 import { InfiniteScrollPage } from "./InfiniteScrollPage";
