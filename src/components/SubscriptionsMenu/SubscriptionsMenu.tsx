@@ -1,28 +1,22 @@
 import { Menu, Typography } from "@mui/material";
-
-import { useRecoilValue } from "recoil";
 import { IEvent } from "../../API/Events/IEvent";
-import { SubscribedToEvents } from "../../Recoil/Events/EventAtoms";
 import ActiveSubCard from "./ActiveSubCard";
 import NoCurrentSubs from "./NoCurrentSubs";
-import { UserAPI } from "../../API/Users/UserAPI";
 import "./SubscriptionsMenu.css";
-import { useState } from "react";
-
-const userAPI = new UserAPI();
 
 type SubscriptionsMenuProps = {
   setSubIconFill: Function;
   subsAnchorEl: null | HTMLElement;
   setSubsAnchorEl: Function;
+  subscribedToEvents: Partial<IEvent>[];
 };
 
 export default function SubscriptionsMenu({
   setSubIconFill,
   subsAnchorEl,
   setSubsAnchorEl,
+  subscribedToEvents,
 }: SubscriptionsMenuProps) {
-  const subcribedEventsData = useRecoilValue(SubscribedToEvents);
   const handleClose = () => {
     setSubsAnchorEl(null);
     setSubIconFill(false);
@@ -75,7 +69,7 @@ export default function SubscriptionsMenu({
           </Typography>
         </div>
         <div className="subs-menu-content">
-          <div>{Results(subcribedEventsData)}</div>
+          <div>{Results(subscribedToEvents)}</div>
         </div>
       </div>
     </Menu>

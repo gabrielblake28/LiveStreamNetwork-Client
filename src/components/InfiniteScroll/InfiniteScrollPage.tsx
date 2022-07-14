@@ -1,10 +1,6 @@
-import { current } from "@reduxjs/toolkit";
-import { RefObject, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IEvent } from "../../API/Events/IEvent";
 import EventCard from "../EventCard/EventCard";
-import schooled from "../../assets/Thumbnails/schooled.jpg";
-import { repeat } from "cypress/types/lodash";
-import { TransitionGroup } from "react-transition-group";
 import { ScreenSizeConstants } from "../../Service/CarouselService/impl/CarouselController";
 import { useWindowWidth } from "../CustomCarousel/CustomCarousel";
 
@@ -95,10 +91,6 @@ export function InfiniteScrollPage({
         gridTemplateRows: "auto",
         gridTemplateColumns: `repeat(${elementsToDisplay}, 300px)`,
         transition: ".5s all ease-in",
-        marginLeft: "auto",
-        marginRight: "auto",
-        paddingLeft: "1em",
-        paddingRight: "1em",
       }}
     >
       {renderEvents()}

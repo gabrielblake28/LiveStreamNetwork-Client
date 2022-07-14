@@ -1,7 +1,7 @@
 /* Category Search Bar */
 
 .category-search-container {
-  z-index: 2;
+  position: relative;
 }
 
 /* Category Drop Down */
@@ -14,6 +14,7 @@
   border: 2px solid #464648;
   border-radius: 8px;
   border-top: none;
+  z-index: 1;
 }
 
 .category-search-data-container {

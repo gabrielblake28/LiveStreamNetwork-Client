@@ -1,7 +1,6 @@
 .subs-menu-wrapper {
   width: 350px;
   height: 400px;
-  /* max-height: 400px; */
   display: flex;
   flex-direction: column;
   overflow: auto;

@@ -1,6 +1,5 @@
 import {
   Checkbox,
-  Divider,
   FormControlLabel,
   FormGroup,
   Typography,
@@ -16,15 +15,6 @@ const checkboxTheme = createTheme({
       main: "#aaaaaa",
     },
   },
-  // components: {
-  //   MuiTab: {
-  //     styleOverrides: {
-  //       root: {
-  //         color: "#aaaaaa",
-  //       },
-  //     },
-  //   },
-  // },
 });
 
 export default function ProfilePageSettings() {
