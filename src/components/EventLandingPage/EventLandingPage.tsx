@@ -1,15 +1,10 @@
 import "./EventLandingPage.css";
 import CustomCarousel from "../CustomCarousel/CustomCarousel";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { FeaturedEvents, UpcomingEvents } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
-import CategoryCard from "../CategoryCard/CategoryCards";
-import { Divider, Typography } from "@mui/material";
-import { CategoryCardData } from "../CategoryCard/CategoryCardData";
-import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
-import { InfiniteScrollPage } from "../InfiniteScroll/InfiniteScrollPage";
 
 export default function EventLandingPage() {
   const featuredEvents = useRecoilValue(FeaturedEvents);
@@ -22,6 +17,7 @@ export default function EventLandingPage() {
 
     api.GetFeaturedEvents(24, 1, "1").then((result: IEvent[]) => {
       setFeaturedEvents(() => result);
+      console.log(featuredEvents);
     });
   }, []);
   return (

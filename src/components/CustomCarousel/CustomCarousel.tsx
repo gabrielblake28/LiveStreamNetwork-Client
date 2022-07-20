@@ -99,10 +99,10 @@ export default function CustomCarousel({
       <div className="row">
         <div className="section-header">
           <Typography
-            variant="h5"
             sx={{
-              color: "white",
+              color: "#fff",
               fontFamily: "Source Sans Pro",
+              fontSize: "25px",
             }}
           >
             {slideTitle}

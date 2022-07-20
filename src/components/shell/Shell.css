@@ -1,5 +1,5 @@
 .twe-shell-content-body {
-  background: #101010;
+  background: #1f2124;
   width: 100vw;
   height: auto;
   overflow: auto;
@@ -8,7 +8,7 @@
 }
 
 .twe-shell-header {
-  background: #18181b;
+  background: #3a3d45;
   width: 100vw;
   height: 55px;
   position: fixed;

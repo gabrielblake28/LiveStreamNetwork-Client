@@ -10,18 +10,20 @@ import { IEvent } from "../../API/Events/IEvent";
 import { SubscriptionComponent } from "../SubscriptionComponent/SubscriptionComponent";
 import "./EventCard.css";
 import { useState } from "react";
-import EditDeleteEventComponent from "../EditDeleteEventComponent/EditDeleteEventComponent";
+import { useRecoilValue } from "recoil";
+import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 
 type EventCardProps = {
   Event: IEvent;
 };
 
 export default function EventCard({ Event }: EventCardProps) {
-  const [isUsersEvent, setIsUsersEvent] = useState<boolean>(true);
+  const [isUsersEvent, setIsUsersEvent] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleEditMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const userInfo = useRecoilValue(CurrentUserData);
 
   return (
     <div className="card-column-wrapper">
@@ -29,8 +31,8 @@ export default function EventCard({ Event }: EventCardProps) {
         <Card className="event-card">
           <CardActionArea>
             <Link
-              to="event"
-              state={Event?.event_id}
+              to="/event"
+              state={Event as IEvent}
               style={{ textDecoration: "none" }}
             >
               <CardMedia component="img" height="185" image={Event?.image} />
@@ -59,7 +61,10 @@ export default function EventCard({ Event }: EventCardProps) {
               state={Event as IEvent}
               style={{ textDecoration: "none" }}
             >
-              <div className="event-title">{Event?.title}</div>
+              <div className="event-title">
+              {/* fsadfasdfasdfasdfasdfsadfasdfasdfasdfasdfasdfgfdhdfgjjsdtjretjthdfghasrgfgdhdfgjgadg */}
+                {Event?.title}
+              </div>
             </Link>
             <Link
               to="/user"
@@ -83,16 +88,14 @@ export default function EventCard({ Event }: EventCardProps) {
             )}`}</div>
           </div>
         </div>
-        {!isUsersEvent ? (
+        {Event.user_id == userInfo.user_id ? (
+          <></>
+        ) : (
           <div className="event-footer__panel-right">
             <SubscriptionComponent
               EventId={Event?.event_id!}
               SubscriptionId={Event?.subscription_id}
             />
-          </div>
-        ) : (
-          <div>
-            <EditDeleteEventComponent />
           </div>
         )}
       </div>

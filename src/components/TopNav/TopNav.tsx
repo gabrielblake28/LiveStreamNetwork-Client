@@ -22,6 +22,7 @@ import {
   createTheme,
   ThemeProvider,
   Modal,
+  Button,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
@@ -96,8 +97,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
   const [subIconFill, setSubIconFill] = useState(false);
   const [createIconFill, setCreateIconFill] = useState(false);
-  const [subscribedToEvents, setSubscribedToEvents] =
-    useState<Partial<IEvent>[]>([]);
+  const [subscribedToEvents, setSubscribedToEvents] = useState<IEvent[]>([]);
   const isLoggedIn = useAuth();
   const userInfo = useRecoilValue(CurrentUserData);
   const handleCreateEventModalOpen = () => setCreateEventModalOpen(true);
@@ -117,7 +117,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
       <div className="top-nav-left-layout">
         <div className="top-nav-logo">
           <EventNoteIcon
-            sx={{ width: "35px", height: "35px", color: "#9552fa" }}
+            sx={{ width: "35px", height: "35px", color: "#8126E2" }}
           />
         </div>
         <Link
@@ -135,10 +135,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
             sx={{
               fontFamily: "Source Sans Pro",
               color: "#e5e5e5",
-              fontSize: "22px",
+              fontSize: "20px",
             }}
           >
-            WhatsLive
+            LiveStreamNetwork
           </Typography>
         </Link>
         <Divider
@@ -152,7 +152,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
             to={"/browse"}
             style={{
               textDecoration: "none",
-              color: "#e5e5e5",
             }}
           >
             <Typography
@@ -199,7 +198,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {homeIconFill === NavButtonStatus.HOME ? (
                   <CottageIcon
-                    sx={{ width: "25px", height: "25px", color: "#9552fa" }}
+                    sx={{ width: "25px", height: "25px", color: "#8126E2" }}
                   />
                 ) : (
                   <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
@@ -238,7 +237,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {subIconFill === true ? (
                   <SubscriptionsIcon
-                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                    sx={{ width: "23px", height: "23px", color: "#8126E2" }}
                   />
                 ) : (
                   <SubscriptionsOutlinedIcon
@@ -291,7 +290,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {createIconFill === true ? (
                   <AddBoxIcon
-                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                    sx={{ width: "23px", height: "23px", color: "#8126E2" }}
                   />
                 ) : (
                   <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
@@ -317,6 +316,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
           </Tooltip>
           <Modal open={creatEventModalOpen}>
             <CreateEventWorkflow
+              Event={null}
               setCreateIconFill={setCreateIconFill}
               handleCreateEventModalClose={handleCreateEventModalClose}
             />
@@ -324,8 +324,34 @@ export default function TopNav({ setOpen }: TopNavProps) {
         </div>
         <div className="top-nav-user-avatar">
           {isLoggedIn === false ? (
-            <a href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3500/auth/twitch/callback&scope=user:read:email">
-              Login with twitch
+            <a
+              style={{
+                textDecoration: "none",
+              }}
+              href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3500/auth/twitch/callback&scope=user:read:email"
+            >
+              <Button
+                sx={{
+                  backgroundColor: "#8126E2",
+                  ml: 1,
+                  "&.MuiButtonBase-root:hover": {
+                    bgcolor: "#8126E2",
+                  },
+                }}
+                variant="contained"
+                size="small"
+                onClick={() => {}}
+              >
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    fontFamily: "Source Sans Pro",
+                    fontSize: "15px",
+                  }}
+                >
+                  Login With Twitch
+                </Typography>
+              </Button>
             </a>
           ) : (
             <IconButton onClick={handleProfileMenu}>
@@ -351,7 +377,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
           </ThemeProvider>
           <ThemeProvider theme={theme}>
             <SubscriptionsMenu
-            subscribedToEvents={subscribedToEvents}
+              subscribedToEvents={subscribedToEvents}
               setSubIconFill={setSubIconFill}
               subsAnchorEl={subsAnchorEl}
               setSubsAnchorEl={setSubsAnchorEl}

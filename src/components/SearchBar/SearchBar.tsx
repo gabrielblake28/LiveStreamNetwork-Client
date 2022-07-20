@@ -16,17 +16,17 @@ const searchApi = new SearchAPI();
 let timeout: NodeJS.Timeout;
 export default function SearchBar() {
   const [term, setTerm] = useState<string>("");
-  const [searchBarColor, setSearchBarColor] = useState<string>("#464648");
+  const [searchBarColor, setSearchBarColor] = useState<string>("#1f2124");
   const [showClear, setShowClear] = useState(false);
   const [searchData, setSearchData] = useState<SearchResult[]>([]);
   const [searchType, setSearchType] = useState<string>("all");
   const [showSearchDropDown, setShowSearchDropDown] = useState<string>("none");
   const [searchBarBorderColor, setSearchBarBorderColor] =
-    useState<string>("#464648");
+    useState<string>("#1f2124");
 
   const handleClickAway = () => {
-    setSearchBarColor("#464648");
-    setSearchBarBorderColor("#464648");
+    setSearchBarColor("#1f2124");
+    setSearchBarBorderColor("#1f2124");
     setShowSearchDropDown("none");
   };
 

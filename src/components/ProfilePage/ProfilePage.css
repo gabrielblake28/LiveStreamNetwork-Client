@@ -4,14 +4,13 @@
   justify-content: start;
   align-items: center;
   height: 100%;
-  background-color: #101010;
+  background-color: #1f2124;
 }
 
 /* Header Content */
 
 .profile-page-header-container {
-  background-color: #18181b;
-  margin-top: 10px;
+  background-color: #2e3137;
   margin-bottom: 10px;
   width: 720px;
   display: flex;
@@ -25,9 +24,8 @@
 /* Profile Page Content */
 
 .profile-page-content-container {
-  background-color: #18181b;
+  background-color: #2e3137;
   height: 650px;
-  margin-bottom: 35px;
   width: 720px;
   padding: 0 25px 0 25px;
   display: flex;
