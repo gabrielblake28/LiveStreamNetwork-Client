@@ -1,20 +1,25 @@
 import { Avatar, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
 
 type ActiveSubProps = {
   handleClose: Function;
-  data: Partial<IEvent>;
+  data: IEvent;
 };
 
+const eventAPI = new EventAPI();
+
 export default function ActiveSubCard({ handleClose, data }: ActiveSubProps) {
+
   return (
     <Link
       to="event"
       onClick={() => {
         handleClose();
       }}
-      state={data.event_id}
+      state={data}
       style={{ textDecoration: "none", color: "#aaaaaa" }}
     >
       <div className="active-sub-card-wrapper">

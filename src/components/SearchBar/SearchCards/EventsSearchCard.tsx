@@ -23,8 +23,9 @@ export default function EventsSearchCard({
       to="/event"
       onClick={() => {
         setShowSearchDropDown("none");
+        console.log(SearchResult);
       }}
-      state={SearchResult.event_id}
+      state={SearchResult}
       style={{
         textDecoration: "none",
         color: "#aaaaaa",

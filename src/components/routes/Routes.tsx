@@ -26,16 +26,6 @@ export default function Router({ ParentRef }: RouterProps) {
             ParentRef={ParentRef}
             EventProvider={new EventProvider(user?.user_id as string)}
           />
-          // <div style={{ marginTop: "55px" }}>
-          //   {ParentRef && user.user_id ? (
-          //     <InfiniteScrollContainer
-          //       ScrollParent={ParentRef}
-          //       EventProvider={new EventProvider(user?.user_id)}
-          //     />
-          //   ) : (
-          //     <></>
-          //   )}
-          // </div>
         }
       />
       <Route path="user" element={<UserPage />} />

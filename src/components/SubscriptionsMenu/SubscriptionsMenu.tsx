@@ -8,7 +8,7 @@ type SubscriptionsMenuProps = {
   setSubIconFill: Function;
   subsAnchorEl: null | HTMLElement;
   setSubsAnchorEl: Function;
-  subscribedToEvents: Partial<IEvent>[];
+  subscribedToEvents: IEvent[];
 };
 
 export default function SubscriptionsMenu({
@@ -22,7 +22,7 @@ export default function SubscriptionsMenu({
     setSubIconFill(false);
   };
 
-  function Results(result: Partial<IEvent>[]): JSX.Element[] {
+  function Results(result: IEvent[]): JSX.Element[] {
     const elementsToRender: JSX.Element[] = [];
 
     if (result.length < 1) {

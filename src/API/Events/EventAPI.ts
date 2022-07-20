@@ -98,7 +98,7 @@ export class EventAPI implements IEventAPI {
     throw new Error("Method not implemented.");
   }
 
-  async GetSubscribedEvents(user_id: string): Promise<Partial<IEvent>[]> {
+  async GetSubscribedEvents(user_id: string): Promise<IEvent[]> {
     const result = await this.query.get(`/subscribed/${user_id}`);
     return result.data;
   }

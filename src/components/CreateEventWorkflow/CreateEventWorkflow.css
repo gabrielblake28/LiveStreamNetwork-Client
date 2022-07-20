@@ -2,16 +2,15 @@
 
 .create-event-modal-wrapper {
   position: absolute;
-  top: 50%;
+  top: 49%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  background-color: #18181b;
-  border: 2px solid #101012;
-  border-radius: 10px;
-  box-shadow: 24px;
-  padding: 4px;
+  width: 650px;
+  height: 804px;
+  background-color: #1f2124;
+  border-radius: 5px;
+
+  border-top: none;
 }
 
 .create-event-active-component {
@@ -22,6 +21,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: #3a3d45;
+  border-radius: 4px;
+  box-shadow: 0 1px 7px black;
 }
 
 .create-event-header {
@@ -40,10 +42,11 @@
 
 .create-event-button-wrapper {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
   align-items: center;
-  margin-top: 25px;
   z-index: 1;
 }
 
@@ -70,29 +73,35 @@
   height: 100%;
 }
 
-.title-and-time-spacing {
+.create-event-component-container {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0 0 0;
+}
+
+.create-event-component-content {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 200px;
+  justify-content: center;
+  width: 536px;
   z-index: 2;
 }
 
 .event-start-time-input {
-  z-index: 2;
-  margin: 3px 0;
+  z-index: 1;
 }
 
 .event-end-time-input {
-  margin: 3px 0;
-  z-index: 1;
+  z-index: 2;
+  margin-top: 10px;
 }
 
 .create-event-title {
   display: flex;
   justify-self: center;
   justify-content: center;
-  margin: 40px 35px 5px 35px;
+  margin-top: 10px;
   flex-direction: column;
 }
 
@@ -102,7 +111,7 @@
   width: 100%;
   justify-content: center;
   color: #aaaaaa;
-  margin: 0 35px;
+  margin-top: 10px;
 }
 
 .event-date-input:focus {
@@ -113,8 +122,9 @@
   width: 155px;
   height: 40px;
   text-align: center;
-  color: #aaaaaa;
-  background-color: #101012;
+  color: #9AA4B8;
+  background-color: #1f2124;
+  border: 1px solid #aaaaaa !important;
   border: none;
   border-radius: 4px;
 }
@@ -123,23 +133,28 @@
   width: 155px;
   height: 40px;
   text-align: center;
-  color: #aaaaaa;
-  background-color: #101012;
+  color: #9AA4B8;
+  background-color: #1f2124;
+  border: 1px solid #aaaaaa !important;
   border: none;
   border-radius: 4px;
 }
 
 .select-event-start-time:hover {
-  border: 2px solid #a970ff;
+  border: 1px solid #a970ff !important;
 }
 
 .select-event-end-time:hover {
-  border: 2px solid #a970ff;
+  border: 1px solid #a970ff !important;
 }
 
 .calendar-day-color {
   color: #aaaaaa !important;
-  /* background-color: #101012; */
+}
+
+.react-datepicker-wrapper {
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .react-datepicker {
@@ -162,7 +177,7 @@
 
 .react-datepicker__header {
   background-color: #101012 !important;
-  border-bottom: 1px solid #303036 !important;
+  border-bottom: 1px solid #aaaaaa !important;
 }
 
 .react-datepicker-time__header {
@@ -177,7 +192,7 @@
 }
 
 .react-datepicker__time-container {
-  border-left: 1px solid #18181b !important;
+  border-left: 1px solid #aaaaaa !important;
 }
 
 .react-datepicker__time-list-item {
@@ -221,6 +236,8 @@
 
 .react-datepicker__input-container {
   width: 200px !important;
+  display: flex !important;
+  justify-content: end !important;
 }
 
 .react-datepicker__close-icon::after {
@@ -230,20 +247,23 @@
 /* Description */
 
 .create-event-description {
-  margin: 15px 35px 35px 35px;
+  margin-top: 20px;
 }
 
 /* Thumbnail */
 
 .create-event-image-container {
-  margin: 13px 35px 35px 35px;
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .create-event-image-preview-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .create-event-image-preview:hover {
@@ -251,15 +271,20 @@
 }
 
 .create-event-image-preview {
-  height: 194px;
-  width: 318px;
+  height: 185px;
+  width: 322px;
   margin-top: 5px;
-  background-color: #101012;
+  background-color: #1f2124;
   border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border: 1px solid #aaaaaa !important;
+}
+
+.create-event-image-preview:hover {
+  border: 1px solid #a970ff !important;
 }
 
 .image-upload-button {
@@ -279,4 +304,48 @@
 
 #file-explore-button {
   display: none;
+}
+
+/* Delete Event Modal */
+
+.delete-event-modal-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 350px;
+  height: 200px;
+  background-color: #18181b;
+  border: 2px solid #414040;
+  border-radius: 10px;
+  box-shadow: 24px;
+  /* padding: 4px; */
+}
+
+.delete-event-modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 10px; */
+  /* margin-left: 10px; */
+  margin: 20px 184px 0 10px;
+}
+
+.delete-event-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 40px 80px 20px;
+}
+
+.delete-event-modal-buttons {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  /* padding: 10px; */
+  margin: 0 0 10px 172px;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  background: transparent !important;
 }
