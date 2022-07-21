@@ -1,23 +1,23 @@
 .event-details-page-container {
   height: 100%;
   width: 100%;
-  padding: 0 0 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1f2124;
 }
 
 .event-details-page-content {
   height: 100%;
   width: 720px;
-  background-color: #2e3137;
+  background-color: #1f2124;
+  border: 2px solid #3a3d45;
 }
 
 .event-details-page-header-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 2px solid #3a3d45;
 }
 
 .event-details-page-header {
@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 30px;
+  margin: 30px 0 30px 0;
 }
 
 .event-details-header-display-column {

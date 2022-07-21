@@ -101,8 +101,7 @@ export default function CustomCarousel({
           <Typography
             sx={{
               color: "#fff",
-              fontFamily: "Source Sans Pro",
-              fontSize: "25px",
+              fontSize: "20px",
             }}
           >
             {slideTitle}
@@ -149,9 +148,7 @@ export default function CustomCarousel({
           {slides.map((slide, index) => {
             return (
               <div className="slider-class">
-                <EventCard
-                  Event={slide}   
-                />
+                <EventCard key={index} Event={slide} />
               </div>
             );
           })}

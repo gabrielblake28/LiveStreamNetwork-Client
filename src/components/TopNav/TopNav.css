@@ -1,6 +1,7 @@
 .top-nav-container {
   color: #e5e5e5;
   display: flex;
+  justify-content: space-between;
   height: 100%;
   box-shadow: 5px 1px 8px black;
 }

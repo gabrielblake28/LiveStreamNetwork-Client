@@ -43,7 +43,7 @@ const theme = createTheme({
     MuiMenu: {
       styleOverrides: {
         list: {
-          backgroundColor: "#18181b",
+          backgroundColor: "#3a3d45",
         },
       },
     },
@@ -117,7 +117,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
       <div className="top-nav-left-layout">
         <div className="top-nav-logo">
           <EventNoteIcon
-            sx={{ width: "35px", height: "35px", color: "#8126E2" }}
+            sx={{ width: "35px", height: "35px", color: "#CF5579" }}
           />
         </div>
         <Link
@@ -133,7 +133,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
         >
           <Typography
             sx={{
-              fontFamily: "Source Sans Pro",
               color: "#e5e5e5",
               fontSize: "20px",
             }}
@@ -156,12 +155,11 @@ export default function TopNav({ setOpen }: TopNavProps) {
           >
             <Typography
               sx={{
-                fontFamily: "Source Sans Pro",
                 color: "#e5e5e5",
-                fontSize: "22px",
+                fontSize: "20px",
               }}
             >
-              Browse
+              Explore
             </Typography>
           </Link>
         </div>
@@ -179,7 +177,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               title={
                 <Typography
                   sx={{
-                    color: "white",
+                    color: "#fff",
                     fontFamily: "Source Sans Pro",
                     fontSize: "12px",
                   }}
@@ -190,7 +188,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             >
               <IconButton
                 disableRipple
-                style={{ color: "#EFEFF1" }}
+                style={{ color: "#e5e5e5" }}
                 aria-label="Home"
                 onClick={(e) => {
                   setHomeIconFill(NavButtonStatus.HOME);
@@ -198,7 +196,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {homeIconFill === NavButtonStatus.HOME ? (
                   <CottageIcon
-                    sx={{ width: "25px", height: "25px", color: "#8126E2" }}
+                    sx={{ width: "25px", height: "25px", color: "#CF5579" }}
                   />
                 ) : (
                   <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
@@ -211,7 +209,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             title={
               <Typography
                 sx={{
-                  color: "#E5E5DE",
+                  color: "#fff",
                   fontFamily: "Source Sans Pro",
                   fontSize: "12px",
                 }}
@@ -223,7 +221,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             {isLoggedIn === true ? (
               <IconButton
                 disableRipple
-                style={{ color: "#EFEFF1" }}
+                style={{ color: "#e5e5e5" }}
                 aria-label="Subs"
                 onClick={(e) => {
                   handleSubsMenu(e);
@@ -237,7 +235,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {subIconFill === true ? (
                   <SubscriptionsIcon
-                    sx={{ width: "23px", height: "23px", color: "#8126E2" }}
+                    sx={{ width: "23px", height: "23px", color: "#CF5579" }}
                   />
                 ) : (
                   <SubscriptionsOutlinedIcon
@@ -269,7 +267,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             title={
               <Typography
                 sx={{
-                  color: "white",
+                  color: "#fff",
                   fontFamily: "Source Sans Pro",
                   fontSize: "12px",
                 }}
@@ -281,7 +279,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             {isLoggedIn === true ? (
               <IconButton
                 disableRipple
-                style={{ color: "#EFEFF1" }}
+                style={{ color: "#e5e5e5" }}
                 aria-label="Create-Event"
                 onClick={() => {
                   handleCreateEventModalOpen();
@@ -290,7 +288,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {createIconFill === true ? (
                   <AddBoxIcon
-                    sx={{ width: "23px", height: "23px", color: "#8126E2" }}
+                    sx={{ width: "23px", height: "23px", color: "#CF5579" }}
                   />
                 ) : (
                   <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />
@@ -332,10 +330,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
             >
               <Button
                 sx={{
-                  backgroundColor: "#8126E2",
+                  backgroundColor: "#CF5579",
                   ml: 1,
                   "&.MuiButtonBase-root:hover": {
-                    bgcolor: "#8126E2",
+                    bgcolor: "#CF5579",
                   },
                 }}
                 variant="contained"

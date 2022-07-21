@@ -1,3 +1,4 @@
+
 .subs-menu-wrapper {
   width: 350px;
   height: 400px;
@@ -39,11 +40,10 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  border-left: 2px solid #18181b;
 }
 
 .active-sub-card-wrapper:hover {
-  background-color: #27272c;
+  background-color: #464a53;
 }
 
 .active-sub-card-avatar {

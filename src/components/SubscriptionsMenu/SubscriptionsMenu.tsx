@@ -1,3 +1,4 @@
+import { DataArray } from "@mui/icons-material";
 import { Menu, Typography } from "@mui/material";
 import { IEvent } from "../../API/Events/IEvent";
 import ActiveSubCard from "./ActiveSubCard";
@@ -30,7 +31,7 @@ export default function SubscriptionsMenu({
     } else {
       result.forEach((data) => {
         elementsToRender.push(
-          <ActiveSubCard handleClose={handleClose} data={data} />
+          <ActiveSubCard key={data.user_id} handleClose={handleClose} data={data} />
         );
       });
     }
@@ -41,7 +42,7 @@ export default function SubscriptionsMenu({
   return (
     <Menu
       sx={{
-        mt: "36px",
+        mt: "42px",
       }}
       anchorEl={subsAnchorEl}
       anchorOrigin={{
