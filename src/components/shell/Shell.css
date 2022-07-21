@@ -5,6 +5,8 @@
   overflow: auto;
   overflow-x: hidden;
   z-index: 0;
+  /* background-image: url("../../assets/SiteBackground/networ.png"); */
+  /* background-position: center; */
 }
 
 .twe-shell-header {

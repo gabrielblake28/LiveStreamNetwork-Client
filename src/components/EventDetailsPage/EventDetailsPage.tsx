@@ -9,13 +9,14 @@ import { useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import EditDeleteEventComponent from "../EditDeleteEventComponent/EditDeleteEventComponent";
 import { UserAPI } from "../../API/Users/UserAPI";
+import { IUser } from "../../API/Users/IUser";
 
 const userApi = new UserAPI();
 const eventApi = new EventAPI();
 
 export default function EventDetailsPage() {
   const [userName, setUserName] = useState("");
-  const [eventUserInfo, setEventUserInfo] = useState<IEvent>();
+  const [eventUserInfo, setEventUserInfo] = useState<IUser>();
   // const [eventUserId, setEventUserId] = useState("");
 
   const location = useLocation();
@@ -25,11 +26,6 @@ export default function EventDetailsPage() {
   useEffect(() => {
     userApi.GetUser(Event?.user_id as string).then((response) => {
       setUserName(response.display_name);
-    });
-  }, [Event]);
-
-  useEffect(() => {
-    eventApi.GetEvent(Event.event_id as string).then((response) => {
       setEventUserInfo(response);
     });
   }, [Event]);
@@ -59,11 +55,10 @@ export default function EventDetailsPage() {
                     style={{
                       fontFamily: "Source Sans Pro",
                       color: "white",
-                      fontSize: "22px",
+                      fontSize: "20px",
                     }}
                   >
                     {Event?.title}
-                    {/* This is a test title and if my calculations are correct this text will wrap around to a second line */}
                   </Typography>
                 </div>
                 <Link
@@ -129,8 +124,11 @@ export default function EventDetailsPage() {
           </div>
           <div className="event-details-page-description">
             <Typography
-              variant="body2"
-              style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
+              style={{
+                fontFamily: "Source Sans Pro",
+                color: "#fff",
+                fontSize: "17px",
+              }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed

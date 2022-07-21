@@ -30,7 +30,7 @@ const WhiteBorderTextField = styled(TextField)`
 `;
 
 type CreateEventComponentProps = {
-  Event: IEvent | null;
+  Event?: IEvent;
   handleCreateEventModalClose: Function;
   setCreateIconFill: Function;
 };
@@ -57,15 +57,12 @@ export default function CreateEventComponent({
   const handleCloseDeleteEventModal = () => setOpenDeleteEventModal(false);
 
   useEffect(() => {
-    if (Event?.user_id == userInfo.user_id) {
-      eventAPI.GetEvent(Event?.event_id as string).then((response) => {
-        console.log(response);
-        setEventTitle(response.title);
-        setStartTime(new Date(response.start_timestamp));
-        setEndTime(new Date(response.end_timestamp));
-        setEventDescription(response.description);
-        setImagePreview(response.image);
-      });
+    if (Event) {
+      setEventTitle(Event.title);
+      setStartTime(new Date(Event.start_timestamp));
+      setEndTime(new Date(Event.end_timestamp));
+      setEventDescription(Event.description);
+      setImagePreview(Event.image);
     }
   }, [Event]);
 
@@ -129,8 +126,8 @@ export default function CreateEventComponent({
             <Typography
               style={{
                 fontFamily: "Source Sans Pro",
-                fontSize: "15px",
-                color: "#aaaaaa",
+                fontSize: "12px",
+                color: "#fff",
                 marginBottom: "4px",
               }}
             >
@@ -138,7 +135,7 @@ export default function CreateEventComponent({
             </Typography>
           </FormHelperTexts>
           <WhiteBorderTextField
-          placeholder="100 Character Limit"
+            placeholder="100 Character Limit"
             inputProps={{
               maxLength: 100,
             }}
@@ -151,13 +148,13 @@ export default function CreateEventComponent({
               sx: {
                 height: "40px",
                 backgroundColor: "#1f2124",
-                color: "#9AA4B8",
+                color: "#fff",
                 ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
                   border: "1px solid #aaaaaa",
                 },
                 "&:hover": {
                   ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                    border: "1px solid #A970FF",
+                    border: "1px solid #d4d4d4",
                   },
                 },
               },
@@ -175,8 +172,8 @@ export default function CreateEventComponent({
             <Typography
               style={{
                 fontFamily: "Source Sans Pro",
-                fontSize: "15px",
-                color: "#aaaaaa",
+                fontSize: "12px",
+                color: "#fff",
                 marginBottom: "4px",
               }}
             >
@@ -201,13 +198,13 @@ export default function CreateEventComponent({
             InputProps={{
               sx: {
                 backgroundColor: "#1f2124",
-                color: "#9AA4B8",
+                color: "#fff",
                 ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
                   border: "1px solid #aaaaaa",
                 },
                 "&:hover": {
                   ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                    border: "1px solid #A970FF",
+                    border: "1px solid #d4d4d4",
                   },
                 },
               },
@@ -231,8 +228,8 @@ export default function CreateEventComponent({
               <Typography
                 style={{
                   fontFamily: "Source Sans Pro",
-                  fontSize: "15px",
-                  color: "#aaaaaa",
+                  fontSize: "12px",
+                  color: "#fff",
                 }}
               >
                 Thumbnail
@@ -269,7 +266,11 @@ export default function CreateEventComponent({
                       }}
                     >
                       <CloudUploadOutlinedIcon
-                        sx={{ height: "150px", width: "150px" }}
+                        sx={{
+                          height: "150px",
+                          width: "150px",
+                          color: "#02BD82",
+                        }}
                       />
                     </div>
                   </label>
@@ -298,8 +299,8 @@ export default function CreateEventComponent({
                     style={{
                       fontFamily: "Source Sans Pro",
                       paddingLeft: "55px",
-                      fontSize: "15px",
-                      color: "#aaaaaa",
+                      fontSize: "12px",
+                      color: "#fff",
                       marginBottom: "3px",
                     }}
                   >
@@ -310,7 +311,7 @@ export default function CreateEventComponent({
                   popperPlacement="right"
                   isClearable
                   showPopperArrow={false}
-                  selected={startTime}
+                  selected={startTime || new Date()}
                   onChange={(startTime) => setStartTime(startTime)}
                   showTimeSelect
                   timeIntervals={15}
@@ -328,8 +329,8 @@ export default function CreateEventComponent({
                     style={{
                       fontFamily: "Source Sans Pro",
                       paddingLeft: "55px",
-                      fontSize: "15px",
-                      color: "#aaaaaa",
+                      fontSize: "12px",
+                      color: "#fff",
                       marginBottom: "3px",
                     }}
                   >
@@ -340,7 +341,7 @@ export default function CreateEventComponent({
                   popperPlacement="right"
                   isClearable
                   showPopperArrow={false}
-                  selected={endTime}
+                  selected={endTime || new Date()}
                   onChange={(date) => setEndTime(date)}
                   showTimeSelect
                   timeIntervals={15}
@@ -363,7 +364,7 @@ export default function CreateEventComponent({
               style={{
                 marginTop: "45px",
                 height: "35px",
-                width: "150px",
+                width: "80px",
                 backgroundColor: "rgb(173, 7, 7)",
               }}
               variant="contained"
@@ -385,8 +386,8 @@ export default function CreateEventComponent({
               style={{
                 marginTop: "45px",
                 height: "35px",
-                width: "150px",
-                backgroundColor: "#8126E2",
+                width: "80px",
+                backgroundColor: "#02BD82",
               }}
               variant="contained"
               onClick={() => {
@@ -421,8 +422,8 @@ export default function CreateEventComponent({
               style={{
                 marginTop: "45px",
                 height: "35px",
-                width: "150px",
-                backgroundColor: "#8126E2",
+                width: "80px",
+                backgroundColor: "#02BD82",
               }}
               variant="contained"
               onClick={() => {

@@ -13,7 +13,7 @@ import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventPro
 const tabsTheme = createTheme({
   palette: {
     primary: {
-      main: "#9552fa",
+      main: "#CF5579",
     },
     secondary: {
       main: "#aaaaaa",
@@ -64,9 +64,9 @@ export default function ProfilePage() {
               src={userInfo.profile_image_url}
             />
             <Typography
-              variant="h4"
               sx={{
-                color: "#CCCCCC",
+                fontSize: "25px",
+                color: "#fff",
                 fontFamily: "Source Sans Pro",
               }}
             >
@@ -77,7 +77,7 @@ export default function ProfilePage() {
             <ThemeProvider theme={tabsTheme}>
               <Tabs
                 style={{
-                  color: "#CCCCCC",
+                  color: "#fff",
                   textTransform: "none",
                 }}
                 value={value}
@@ -92,9 +92,9 @@ export default function ProfilePage() {
                   label={
                     <Typography
                       sx={{
-                        color: "#CCCCCC",
+                        color: "#fff",
                         fontFamily: "Source Sans Pro",
-                        fontSize: "15px",
+                        fontSize: "12px",
                       }}
                     >
                       Events
@@ -107,9 +107,9 @@ export default function ProfilePage() {
                   label={
                     <Typography
                       sx={{
-                        color: "#CCCCCC",
+                        color: "#fff",
                         fontFamily: "Source Sans Pro",
-                        fontSize: "15px",
+                        fontSize: "12px",
                       }}
                     >
                       Settings

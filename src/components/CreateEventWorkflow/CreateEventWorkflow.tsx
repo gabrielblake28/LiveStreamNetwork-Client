@@ -55,29 +55,37 @@ export default function CreateEventWorkflow({
           <IconButton
             onClick={() => {
               handleCreateEventModalClose();
-              setEventTitle("");
-              setEventDescription("");
-              setStartTime(new Date());
-              setEndTime(new Date());
+              // setEventTitle("");
+              // setEventDescription("");
+              // setStartTime(new Date());
+              // setEndTime(new Date());
               setCreateIconFill(NavButtonStatus.DISABLED);
             }}
           >
             <CloseRoundedIcon
+            
               sx={{
                 width: "22px",
                 height: "22px",
-                color: "#fff",
+                color: "#7a7a7a",
               }}
             ></CloseRoundedIcon>
           </IconButton>
         </div>
       </div>
       <div>
-        <CreateEventComponent
-          Event={Event}
-          handleCreateEventModalClose={handleCreateEventModalClose}
-          setCreateIconFill={setCreateIconFill}
-        />
+        {Event ? (
+          <CreateEventComponent
+            Event={Event}
+            handleCreateEventModalClose={handleCreateEventModalClose}
+            setCreateIconFill={setCreateIconFill}
+          />
+        ) : (
+          <CreateEventComponent
+            handleCreateEventModalClose={handleCreateEventModalClose}
+            setCreateIconFill={setCreateIconFill}
+          />
+        )}
       </div>
       <script src="https://unpkg.com/react-image-crop/dist/ReactCrop.min.js"></script>
     </div>

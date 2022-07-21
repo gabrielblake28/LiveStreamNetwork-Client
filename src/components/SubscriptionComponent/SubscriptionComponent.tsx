@@ -48,7 +48,7 @@ export function SubscriptionComponent({
       sx={{
         width: "30px",
         height: "30px",
-        color: "#9552fa",
+        color: "#CF5579",
       }}
       onClick={handleClick}
     />

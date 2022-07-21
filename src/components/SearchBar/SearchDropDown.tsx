@@ -14,7 +14,7 @@ import SearchResults from "./SearchResultsContainer";
 const AntTabs = styled(Tabs)({
   "& .MuiTabs-indicator": {
     margin: "17px 0",
-    backgroundColor: "#9552fa",
+    backgroundColor: "#CF5579",
     justifyContent: "center",
   },
   "& .MuiButtonBase-root": {
@@ -43,22 +43,22 @@ const AntTab = styled((props: StyledTabProps) => (
   marginRight: theme.spacing(0),
   color: "#aaaaaa",
   "&:hover": {
-    color: "#9552fa",
+    color: "#CF5579",
     opacity: 1,
   },
   "&.Mui-selected": {
-    color: "#9552fa",
+    color: "#CF5579",
     fontWeight: theme.typography.fontWeightMedium,
   },
   "&.Mui-focusVisible": {
-    backgroundColor: "#ac77fc",
+    backgroundColor: "#CF5579",
   },
 }));
 
 const tabsTheme = createTheme({
   palette: {
     primary: {
-      main: "#9552fa",
+      main: "#CF5579",
     },
     secondary: {
       main: "#aaaaaa",
@@ -132,7 +132,7 @@ export default function SearchDropDown({
                 <Typography
                   sx={{ fontFamily: "Source Sans Pro", fontSize: "10px" }}
                 >
-                  Users
+                  Creators
                 </Typography>
               }
               value="users"

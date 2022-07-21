@@ -79,7 +79,7 @@ export default function SearchBar() {
               value={term}
               onFocus={(e) => {
                 setSearchBarColor("black");
-                setSearchBarBorderColor("#9552fa");
+                setSearchBarBorderColor("#CF5579");
                 setShowSearchDropDown("flex");
                 setShowClear(true);
               }}
