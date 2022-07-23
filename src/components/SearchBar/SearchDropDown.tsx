@@ -14,7 +14,7 @@ import SearchResults from "./SearchResultsContainer";
 const AntTabs = styled(Tabs)({
   "& .MuiTabs-indicator": {
     margin: "17px 0",
-    backgroundColor: "#CF5579",
+    backgroundColor: "#eb4034",
     justifyContent: "center",
   },
   "& .MuiButtonBase-root": {
@@ -43,11 +43,11 @@ const AntTab = styled((props: StyledTabProps) => (
   marginRight: theme.spacing(0),
   color: "#aaaaaa",
   "&:hover": {
-    color: "#CF5579",
+    color: "#fff",
     opacity: 1,
   },
   "&.Mui-selected": {
-    color: "#CF5579",
+    color: "#eb4034",
     fontWeight: theme.typography.fontWeightMedium,
   },
   "&.Mui-focusVisible": {

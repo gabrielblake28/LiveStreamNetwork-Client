@@ -2,15 +2,12 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  IconButton,
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 
 const checkboxTheme = createTheme({
   palette: {
@@ -24,7 +21,8 @@ const checkboxTheme = createTheme({
 });
 
 export default function ProfilePageSettings() {
-  const [showHideDetails, setShowHideDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const userInfo = useRecoilValue(CurrentUserData);
   return (
     <ThemeProvider theme={checkboxTheme}>
       <div className="profile-page-settings-container">
@@ -52,16 +50,16 @@ export default function ProfilePageSettings() {
                       Current Email:
                     </Typography>
                   </div>
-                  {showHideDetails == true ? (
+                  {showDetails == true ? (
                     <div className="profile-page-phone-email">
                       <Typography
                         variant="body1"
                         style={{
                           fontFamily: "Source Sans Pro",
-                          color: "#CF5579",
+                          color: "#EB4034",
                         }}
                       >
-                        gabriel.blake28@gmail.com
+                        {userInfo.email}
                       </Typography>
                     </div>
                   ) : (
@@ -70,7 +68,7 @@ export default function ProfilePageSettings() {
                         variant="body1"
                         style={{
                           fontFamily: "Source Sans Pro",
-                          color: "#CF5579",
+                          color: "#EB4034",
                         }}
                       >
                         *************
@@ -90,16 +88,30 @@ export default function ProfilePageSettings() {
                       Current Phone:
                     </Typography>
                   </div>
-                  {showHideDetails == true ? (
+                  {showDetails == true ? (
                     <div className="profile-page-phone-email">
                       <Typography
                         variant="body1"
                         style={{
                           fontFamily: "Source Sans Pro",
-                          color: "#CF5579",
+                          color: "#EB4034",
                         }}
                       >
-                        863-398-5277
+                        {userInfo.phone ? (
+                          userInfo.phone
+                        ) : (
+                          <Typography
+                            onClick={() => {}}
+                            style={{
+                              fontFamily: "Source Sans Pro",
+                              color: "#EB4034",
+                              fontSize: "14px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Add Phone
+                          </Typography>
+                        )}
                       </Typography>
                     </div>
                   ) : (
@@ -107,26 +119,40 @@ export default function ProfilePageSettings() {
                       <Typography
                         style={{
                           fontFamily: "Source Sans Pro",
-                          color: "#CF5579",
+                          color: "#EB4034",
                           fontSize: "18px",
                         }}
                       >
-                        *** *** ****
+                        {userInfo.phone ? (
+                          "*** *** ****"
+                        ) : (
+                          <Typography
+                            onClick={() => {}}
+                            style={{
+                              fontFamily: "Source Sans Pro",
+                              color: "#EB4034",
+                              fontSize: "14px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Add Phone
+                          </Typography>
+                        )}
                       </Typography>
                     </div>
                   )}
                 </div>
-                {showHideDetails == true ? (
+                {showDetails == true ? (
                   <div
                     className="profile-page-show-hide"
                     onClick={() => {
-                      setShowHideDetails(false);
+                      setShowDetails(false);
                     }}
                   >
                     <Typography
                       style={{
                         fontFamily: "Source Sans Pro",
-                        color: "#CF5579",
+                        color: "#EB4034",
                         fontSize: "13px",
                       }}
                     >
@@ -137,13 +163,13 @@ export default function ProfilePageSettings() {
                   <div
                     className="profile-page-show-hide"
                     onClick={() => {
-                      setShowHideDetails(true);
+                      setShowDetails(true);
                     }}
                   >
                     <Typography
                       style={{
                         fontFamily: "Source Sans Pro",
-                        color: "#CF5579",
+                        color: "#EB4034",
                         fontSize: "13px",
                       }}
                     >

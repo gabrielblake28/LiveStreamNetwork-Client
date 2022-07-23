@@ -10,6 +10,8 @@
   background-color: #1f2124;
   border-radius: 6px;
   border-top: none;
+  box-shadow: 10px 5px 5px black;
+  margin-top: 30px;
 }
 
 .create-event-active-component {
@@ -20,10 +22,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #1f2124;
+  background-color: #3a3d45;
   border-left: none;
-  border-bottom: 1px solid #aaaaaa;
+  /* border-bottom: 1px solid #aaaaaa; */
   border-radius: 6px;
+  box-shadow: 0 5px 10px -6px black;
+  margin: 15px;
 }
 
 .create-event-header {
@@ -56,6 +60,8 @@
 
 .create-event-right-button {
   margin: 0 0 0 6px;
+  display: flex;
+  flex-direction: row;
 }
 
 .confirm-create-event-button {
@@ -104,6 +110,55 @@
   margin-top: 10px;
   flex-direction: column;
 }
+/* Form CSS */
+
+.create-event-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 35px 0 0 0;
+}
+
+.create-event-form-title {
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  box-shadow: 0 5px 10px -6px black;
+}
+
+.create-event-form-description {
+  margin-top: 20px;
+  box-shadow: 0 5px 10px -6px black;
+  /* border-radius: 4px; */
+}
+
+/* .create-event-form-image {
+} */
+
+.create-event-form-image-preview {
+  height: 185px;
+  width: 322px;
+  margin-top: 2px;
+  background-color: #3a3d45;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 5px 10px -6px black;
+  border: 1px solid #3a3d45;
+}
+
+.create-event-form-image-preview:hover {
+  border: 1px solid #34dfeb;
+}
+
+.image-time-date-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
 
 .date-time-input-wrapper {
   display: flex;
@@ -114,19 +169,16 @@
   margin-top: 10px;
 }
 
-.event-date-input:focus {
-  border: 2px solid purple !important;
-}
-
 .select-event-start-time {
   width: 155px;
   height: 40px;
   text-align: center;
   color: #fff;
-  background-color: #1f2124;
-  border: 1px solid #aaaaaa !important;
+  background-color: #3a3d45;
+  border: 1px solid #3a3d45;
   border: none;
   border-radius: 4px;
+  box-shadow: 0 5px 10px -6px black;
 }
 
 .select-event-end-time {
@@ -134,21 +186,30 @@
   height: 40px;
   text-align: center;
   color: #fff;
-  background-color: #1f2124;
-  border: 1px solid #aaaaaa !important;
+  background-color: #3a3d45;
+  border: 1px solid #3a3d45;
   border: none;
   border-radius: 4px;
+  box-shadow: 0 5px 10px -6px black;
 }
 
 .select-event-start-time:hover {
-  border: 1px solid #d4d4d4 !important;
+  border: 1px solid #34dfeb;
 }
 
 .select-event-end-time:hover {
-  border: 1px solid #d4d4d4 !important;
+  border: 1px solid #34dfeb;
 }
 
 .calendar-day-color {
+  color: #fff !important;
+}
+
+.calendar-day-color {
+  color: #fff !important;
+}
+
+.react-datepicker__day--disabled {
   color: #aaaaaa !important;
 }
 
@@ -159,7 +220,7 @@
 
 .react-datepicker {
   border: 2px solid black !important;
-  color: #aaaaaa !important;
+  /* color: #fff !important; */
   background-color: #18181b !important;
 }
 
@@ -181,14 +242,14 @@
 }
 
 .react-datepicker-time__header {
-  color: #aaaaaa !important;
+  color: #fff !important;
 }
 .react-datepicker__current-month {
-  color: #aaaaaa !important;
+  color: #fff !important;
 }
 
 .react-datepicker__day-name {
-  color: #aaaaaa !important;
+  color: #fff !important;
 }
 
 .react-datepicker__time-container {
@@ -196,8 +257,9 @@
 }
 
 .react-datepicker__time-list-item {
-  color: #aaaaaa;
+  color: #fff;
 }
+
 
 .react-datepicker__time-list {
   background-color: #1f2124;
@@ -212,12 +274,12 @@
 }
 
 .react-datepicker__time-list-item--selected {
-  background-color: #cf5579 !important;
+  background-color: #34dfeb !important;
   color: #101012 !important;
 }
 
 .react-datepicker__day--selected {
-  background-color: #cf5579 !important;
+  background-color: #34dfeb !important;
   color: #101012 !important;
 }
 
@@ -315,15 +377,13 @@
   border: 2px solid #414040;
   border-radius: 10px;
   box-shadow: 24px;
-  /* padding: 4px; */
 }
 
 .delete-event-modal-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 10px; */
-  /* margin-left: 10px; */
+
   margin: 20px 184px 0 10px;
 }
 
@@ -338,10 +398,21 @@
   display: flex;
   justify-content: start;
   align-items: start;
-  /* padding: 10px; */
   margin: 0 0 10px 172px;
 }
 
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   background: transparent !important;
+}
+
+.helper-text-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.time-error-container {
+  display: flex;
+  margin-top: 10px;
+  margin: 0 20px 10px 0;
+  align-items: end;
 }

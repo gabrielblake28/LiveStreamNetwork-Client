@@ -117,7 +117,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
       <div className="top-nav-left-layout">
         <div className="top-nav-logo">
           <EventNoteIcon
-            sx={{ width: "35px", height: "35px", color: "#CF5579" }}
+            sx={{ width: "35px", height: "35px", color: "#eb4034" }}
           />
         </div>
         <Link
@@ -196,7 +196,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {homeIconFill === NavButtonStatus.HOME ? (
                   <CottageIcon
-                    sx={{ width: "25px", height: "25px", color: "#CF5579" }}
+                    sx={{ width: "25px", height: "25px", color: "#eb4034" }}
                   />
                 ) : (
                   <CottageOutlinedIcon sx={{ width: "25px", height: "25px" }} />
@@ -235,7 +235,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {subIconFill === true ? (
                   <SubscriptionsIcon
-                    sx={{ width: "23px", height: "23px", color: "#CF5579" }}
+                    sx={{ width: "23px", height: "23px", color: "#eb4034" }}
                   />
                 ) : (
                   <SubscriptionsOutlinedIcon
@@ -252,7 +252,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {subIconFill === true ? (
                   <SubscriptionsIcon
-                    sx={{ width: "23px", height: "23px", color: "#9552fa" }}
+                    sx={{ width: "23px", height: "23px", color: "#eb4034" }}
                   />
                 ) : (
                   <SubscriptionsOutlinedIcon
@@ -288,7 +288,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               >
                 {createIconFill === true ? (
                   <AddBoxIcon
-                    sx={{ width: "23px", height: "23px", color: "#CF5579" }}
+                    sx={{ width: "23px", height: "23px", color: "#eb4034" }}
                   />
                 ) : (
                   <AddBoxOutlinedIcon sx={{ width: "23px", height: "23px" }} />

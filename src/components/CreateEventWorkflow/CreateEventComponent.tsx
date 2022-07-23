@@ -1,12 +1,11 @@
 import {
   Button,
   Dialog,
-  Modal,
+  FormHelperText,
   styled,
   TextField,
   Typography,
 } from "@mui/material";
-import FormHelperTexts from "@mui/material/FormHelperText";
 import DatePicker from "react-datepicker";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import "./CreateEventWorkflow.css";
@@ -18,16 +17,6 @@ import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import DeleteEventModal from "./DeleteEventModal";
 
 const eventAPI = new EventAPI();
-const WhiteBorderTextField = styled(TextField)`
-  & label.Mui-focused {
-    color: #101012;
-  }
-  & .MuiOutlinedInput-root {
-    &.Mui-focused fieldset {
-      border-color: #101012;
-    }
-  }j
-`;
 
 type CreateEventComponentProps = {
   Event?: IEvent;
@@ -35,23 +24,55 @@ type CreateEventComponentProps = {
   setCreateIconFill: Function;
 };
 
+const CustomTitleField = styled(TextField)({
+  "& .MuiOutlinedInput-root": {
+    "&:hover fieldset": {
+      borderColor: "#34dfeb",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#34dfeb",
+    },
+    color: "#fff",
+  },
+});
+
+const CustomDescriptionField = styled(TextField)({
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#3A3D45",
+    },
+    "&:hover fieldset": {
+      borderColor: "#34dfeb",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#34dfeb",
+    },
+    color: "#fff",
+  },
+});
+
 export default function CreateEventComponent({
   Event,
   handleCreateEventModalClose,
   setCreateIconFill,
 }: CreateEventComponentProps) {
-  const [eventCategory, setEventCategory] = useState<string>("");
-  const [eventTitle, setEventTitle] = useState<string>("");
+  const [eventCategory, setEventCategory] = useState("");
+  const [eventTitle, setEventTitle] = useState("");
   const [startTime, setStartTime] = useState<Date | undefined>(undefined);
   const [endTime, setEndTime] = useState<Date | undefined>(undefined);
-  const [eventDescription, setEventDescription] = useState<string>("");
+  const [eventDescription, setEventDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
   );
   const [imageURL, setImageURL] = useState<string>("");
-  const userInfo = useRecoilValue(CurrentUserData);
+  const [titleError, setTitleError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [thumbnailError, setThumbnailError] = useState(false);
+  const [timeError, setTimeError] = useState(false);
+  const [noTimeError, setNoTimeError] = useState(false);
   const [showImagePreview, setShowImagePreview] = useState<string>("none");
+  const userInfo = useRecoilValue(CurrentUserData);
   const [openDeleteEventModal, setOpenDeleteEventModal] = useState(false);
   const handleOpenDeleteEventModal = () => setOpenDeleteEventModal(true);
   const handleCloseDeleteEventModal = () => setOpenDeleteEventModal(false);
@@ -67,7 +88,7 @@ export default function CreateEventComponent({
   }, [Event]);
 
   useEffect(() => {
-    if (image !== null) {
+    if (image) {
       const reader = new FileReader();
 
       reader.onloadend = () => {
@@ -79,7 +100,7 @@ export default function CreateEventComponent({
       setImageURL("");
     }
 
-    if (image !== null) {
+    if (image) {
       const reader = new FileReader();
 
       reader.onloadend = () => {
@@ -118,241 +139,313 @@ export default function CreateEventComponent({
     }
   };
 
+  function dateComparison(a, b) {
+    const date1: any = new Date(a);
+    const date2: any = new Date(b);
+
+    return date1 - date2;
+  }
+
   return (
-    <div className="create-event-component-container">
-      <div className="create-event-component-content">
-        <div className="create-event-title">
-          <FormHelperTexts>
-            <Typography
+    <div className="create-event-form-container">
+      <div
+        style={{
+          margin: "10px",
+        }}
+      >
+        <div className="create-event-form-title">
+          <div className="helper-text-container">
+            <FormHelperText
+              id="create-event-form-helper-text"
               style={{
-                fontFamily: "Source Sans Pro",
                 fontSize: "12px",
                 color: "#fff",
-                marginBottom: "4px",
+                margin: "0 0 0 5px",
               }}
             >
               Title
-            </Typography>
-          </FormHelperTexts>
-          <WhiteBorderTextField
-            placeholder="100 Character Limit"
+            </FormHelperText>
+            <FormHelperText
+              id="create-event-form-helper-text"
+              style={{
+                fontSize: "10px",
+                color: "#aaaaaa",
+                margin: "0 0 0 15px",
+              }}
+            >
+              Required * (100 Character Limit)
+            </FormHelperText>
+            {titleError ? (
+              <FormHelperText
+                id="create-event-form-helper-text"
+                style={{
+                  fontSize: "10px",
+                  color: "#eb4034",
+                  margin: "0 0 0 15px",
+                }}
+              >
+                Invalid Input
+              </FormHelperText>
+            ) : (
+              <div></div>
+            )}
+          </div>
+          <CustomTitleField
+            sx={{
+              backgroundColor: "#3A3D45",
+              color: "#fff",
+              width: "536px",
+              height: "56px",
+              borderRadius: "4px",
+            }}
             inputProps={{
               maxLength: 100,
+              minLength: 1,
+              type: "text",
             }}
-            autoFocus
-            autoComplete="off"
-            InputLabelProps={{
-              style: { color: "#aaaaaa" },
-            }}
-            InputProps={{
-              sx: {
-                height: "40px",
-                backgroundColor: "#1f2124",
-                color: "#fff",
-                ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #aaaaaa",
-                },
-                "&:hover": {
-                  ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                    border: "1px solid #d4d4d4",
-                  },
-                },
-              },
-            }}
-            hiddenLabel={true}
-            size="medium"
-            variant="outlined"
-            fullWidth
             value={eventTitle}
             onChange={(e) => setEventTitle(e.target.value)}
           />
         </div>
-        <div className="create-event-description">
-          <FormHelperTexts>
-            <Typography
+        <div className="create-event-form-description">
+          <div className="helper-text-container">
+            <FormHelperText
+              id="create-event-form-helper-text"
               style={{
-                fontFamily: "Source Sans Pro",
                 fontSize: "12px",
                 color: "#fff",
-                marginBottom: "4px",
+                margin: "0 0 0 5px",
               }}
             >
-              Describe your Event
-            </Typography>
-          </FormHelperTexts>
-          <WhiteBorderTextField
-            placeholder="500 character limit"
-            inputProps={{
-              maxLength: 500,
-            }}
-            autoComplete="off"
-            InputLabelProps={{
-              style: { color: "#aaaaaa" },
-            }}
-            sx={{
-              margin: "5px 0 0 0",
-              ".css-x2l1vy-MuiInputBase-root-MuiOutlinedInput-root": {
-                color: "white",
-              },
-            }}
-            InputProps={{
-              sx: {
-                backgroundColor: "#1f2124",
-                color: "#fff",
-                ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #aaaaaa",
-                },
-                "&:hover": {
-                  ".css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                    border: "1px solid #d4d4d4",
-                  },
-                },
-              },
-            }}
-            hiddenLabel={true}
-            size="medium"
-            variant="outlined"
-            fullWidth
-            multiline
-            maxRows={7}
-            minRows={7}
+              Description
+            </FormHelperText>
+            <FormHelperText
+              id="create-event-form-helper-text"
+              style={{
+                fontSize: "10px",
+                color: "#aaaaaa",
+                margin: "0 0 0 15px",
+              }}
+            >
+              (500 Character Limit)
+            </FormHelperText>
+            {descriptionError ? (
+              <FormHelperText
+                id="create-event-form-helper-text"
+                style={{
+                  fontSize: "10px",
+                  color: "#eb4034",
+                  margin: "0 0 0 15px",
+                }}
+              >
+                Invalid Input
+              </FormHelperText>
+            ) : (
+              <div></div>
+            )}
+          </div>
+          <CustomDescriptionField
             value={eventDescription}
             onChange={(e) => {
               setEventDescription(e.target.value);
             }}
+            multiline
+            maxRows={7}
+            minRows={7}
+            sx={{
+              backgroundColor: "#3A3D45",
+              color: "#fff",
+              width: "536px",
+              borderRadius: "4px",
+            }}
+            inputProps={{
+              maxLength: 500,
+              type: "text",
+            }}
           />
         </div>
-        <div>
-          <div className="create-event-image-container">
-            <div>
-              <Typography
+        <div className="image-time-date-wrapper">
+          <div className="create-event-form-image">
+            <div className="helper-text-container">
+              <FormHelperText
+                id="create-event-form-helper-text"
                 style={{
-                  fontFamily: "Source Sans Pro",
                   fontSize: "12px",
                   color: "#fff",
+                  margin: "0 0 0 5px",
                 }}
               >
                 Thumbnail
-              </Typography>
-              <div className="create-event-image-preview-container">
-                <form
-                  action="/profile"
-                  method="post"
-                  encType="multipart/form-data"
+              </FormHelperText>
+              <FormHelperText
+                id="create-event-form-helper-text"
+                style={{
+                  fontSize: "10px",
+                  color: "#aaaaaa",
+                  margin: "0 0 0 15px",
+                }}
+              >
+                Required *
+              </FormHelperText>
+              {thumbnailError ? (
+                <FormHelperText
+                  id="create-event-form-helper-text"
+                  style={{
+                    fontSize: "10px",
+                    color: "#eb4034",
+                    margin: "0 0 0 15px",
+                  }}
                 >
-                  <input
-                    id="file-explore-icon-button"
-                    accept="image/jpeg, image/png"
-                    type="file"
-                    onChange={(e) => {
-                      const files = e?.target?.files;
-
-                      if (files) {
-                        console.log(files[0]);
-                        setImage(files[0]);
-                      } else {
-                        setImage(null);
-                      }
-                    }}
-                  />
-                </form>
-
-                {!imagePreview ? (
-                  <label htmlFor="file-explore-icon-button">
-                    <div
-                      className="create-event-image-preview"
-                      onClick={() => {
-                        setImage(null);
-                      }}
-                    >
-                      <CloudUploadOutlinedIcon
-                        sx={{
-                          height: "150px",
-                          width: "150px",
-                          color: "#02BD82",
-                        }}
-                      />
-                    </div>
-                  </label>
-                ) : (
-                  <img
-                    style={{
-                      marginTop: "5px",
-                      height: "185px",
-                      width: "322px",
-                      objectFit: "cover",
-                      borderRadius: "4px",
-                    }}
-                    src={imagePreview}
-                    onClick={() => {
-                      setImage(null);
-                      setImagePreview(undefined);
-                    }}
-                  />
-                )}
-              </div>
+                  Invalid File
+                </FormHelperText>
+              ) : (
+                <div></div>
+              )}
             </div>
-            <div className="date-time-input-wrapper">
-              <div className="event-start-time-input">
-                <FormHelperTexts>
+            <form action="/profile" method="post" encType="multipart/form-data">
+              <input
+                id="file-explore-icon-button"
+                accept="image/jpeg, image/png"
+                type="file"
+                onChange={(e) => {
+                  const files = e?.target?.files;
+
+                  if (files) {
+                    console.log(files[0]);
+                    setImage(files[0]);
+                  } else {
+                    setImage(null);
+                  }
+                }}
+              />
+            </form>
+            {!imagePreview ? (
+              <label htmlFor="file-explore-icon-button">
+                <div
+                  className="create-event-form-image-preview"
+                  onClick={() => {
+                    setImage(null);
+                  }}
+                >
+                  <CloudUploadOutlinedIcon
+                    sx={{
+                      height: "150px",
+                      width: "150px",
+                      color: "#34dfeb",
+                    }}
+                  />
+                </div>
+              </label>
+            ) : (
+              <img
+                style={{
+                  marginTop: "5px",
+                  height: "185px",
+                  width: "322px",
+                  objectFit: "cover",
+                  borderRadius: "4px",
+                }}
+                src={Event ? (Event.image) : imagePreview}
+                onClick={() => {
+                  setImage(null);
+                  setImagePreview(undefined);
+                }}
+              />
+            )}
+          </div>
+          <div className="date-time-input-wrapper">
+            <div className="event-start-time-input">
+              <div className="helper-text-container">
+                <FormHelperText>
                   <Typography
-                    style={{
-                      fontFamily: "Source Sans Pro",
-                      paddingLeft: "55px",
+                    sx={{
                       fontSize: "12px",
                       color: "#fff",
-                      marginBottom: "3px",
+                      margin: "0 0 3px 5px",
+                      paddingLeft: "50px",
                     }}
                   >
                     Start Time
                   </Typography>
-                </FormHelperTexts>
-                <DatePicker
-                  popperPlacement="right"
-                  isClearable
-                  showPopperArrow={false}
-                  selected={startTime || new Date()}
-                  onChange={(startTime) => setStartTime(startTime)}
-                  showTimeSelect
-                  timeIntervals={15}
-                  timeCaption="Time"
-                  dateFormat="MMM d, h:mm a"
-                  className="select-event-start-time"
-                  dayClassName={(date) =>
-                    31 == 31 ? "calendar-day-color" : undefined
-                  }
-                />
+                </FormHelperText>
+                <FormHelperText
+                  id="create-event-form-helper-text"
+                  style={{
+                    fontSize: "10px",
+                    color: "#aaaaaa",
+                    margin: "0 0 0 15px",
+                  }}
+                >
+                  Required *
+                </FormHelperText>
               </div>
-              <div className="event-end-time-input">
-                <FormHelperTexts>
+              <DatePicker
+                popperPlacement="right"
+                isClearable
+                minDate={new Date()}
+                showPopperArrow={false}
+                selected={startTime || new Date()}
+                onChange={(startTime) => setStartTime(startTime)}
+                showTimeSelect
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="MMM d, h:mm a"
+                className="select-event-start-time"
+                dayClassName={(date) =>
+                  31 == 31 ? "calendar-day-color" : undefined
+                }
+              />
+            </div>
+            <div className="event-end-time-input">
+              <div className="helper-text-container">
+                <FormHelperText>
                   <Typography
-                    style={{
-                      fontFamily: "Source Sans Pro",
-                      paddingLeft: "55px",
+                    sx={{
                       fontSize: "12px",
                       color: "#fff",
-                      marginBottom: "3px",
+                      margin: "0 0 3px 5px",
+                      paddingLeft: "50px",
                     }}
                   >
                     End Time
                   </Typography>
-                </FormHelperTexts>
-                <DatePicker
-                  popperPlacement="right"
-                  isClearable
-                  showPopperArrow={false}
-                  selected={endTime || new Date()}
-                  onChange={(date) => setEndTime(date)}
-                  showTimeSelect
-                  timeIntervals={15}
-                  timeCaption="Time"
-                  dateFormat="MMM d, h:mm a"
-                  className="select-event-end-time"
-                  dayClassName={(date) =>
-                    31 == 31 ? "calendar-day-color" : undefined
-                  }
-                />
+                </FormHelperText>
+                <FormHelperText
+                  id="create-event-form-helper-text"
+                  style={{
+                    fontSize: "10px",
+                    color: "#aaaaaa",
+                    margin: "0 0 0 15px",
+                  }}
+                >
+                  Required *
+                </FormHelperText>
               </div>
+              <DatePicker
+                popperPlacement="right"
+                isClearable
+                minDate={new Date()}
+                // minTime={
+                //   new Date(
+                //     new Date().setHours(
+                //       new Date().getHours(),
+                //       new Date().getMinutes()
+                //     )
+                //   )
+                // }
+                // maxTime={new Date(new Date().setHours(23, 59))}
+                showPopperArrow={false}
+                selected={endTime || new Date()}
+                onChange={(date) => setEndTime(date)}
+                showTimeSelect
+                timeIntervals={15}
+                timeCaption="Time"
+                dateFormat="MMM d, h:mm a"
+                className="select-event-end-time"
+                dayClassName={(date) =>
+                  31 == 31 ? "calendar-day-color" : undefined
+                }
+              />
             </div>
           </div>
         </div>
@@ -387,7 +480,7 @@ export default function CreateEventComponent({
                 marginTop: "45px",
                 height: "35px",
                 width: "80px",
-                backgroundColor: "#02BD82",
+                backgroundColor: "#34dfeb",
               }}
               variant="contained"
               onClick={() => {
@@ -406,7 +499,7 @@ export default function CreateEventComponent({
               <Typography
                 style={{
                   fontFamily: "Source Sans Pro",
-                  color: "#fff",
+                  color: "black",
                   fontSize: "15px",
                 }}
               >
@@ -418,22 +511,84 @@ export default function CreateEventComponent({
       ) : (
         <div className="create-event-button-wrapper">
           <div className="create-event-right-button">
+            {noTimeError ? (
+              <div className="time-error-container">
+                <FormHelperText
+                  id="create-event-form-helper-text"
+                  style={{
+                    fontSize: "10px",
+                    color: "#eb4034",
+                    margin: "0 0 0 15px",
+                  }}
+                >
+                  A Valid Time Must Be Selected
+                </FormHelperText>
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {timeError ? (
+              <div className="time-error-container">
+                <FormHelperText
+                  id="create-event-form-helper-text"
+                  style={{
+                    fontSize: "10px",
+                    color: "#eb4034",
+                    margin: "0 0 0 15px",
+                  }}
+                >
+                  Start Time Must Come Before End Time
+                </FormHelperText>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
             <Button
               style={{
                 marginTop: "45px",
                 height: "35px",
                 width: "80px",
-                backgroundColor: "#02BD82",
+                backgroundColor: "#34dfeb",
               }}
               variant="contained"
               onClick={() => {
-                onCreate();
+                if (eventTitle == "" || eventTitle.length < 1) {
+                  setTitleError(true);
+                } else {
+                  setTitleError(false);
+                }
+                if (eventDescription == "" || eventDescription.length < 1) {
+                  setDescriptionError(true);
+                } else {
+                  setDescriptionError(false);
+                }
+                const timeArray = [startTime, endTime];
+                timeArray.sort(dateComparison);
+                if (timeArray[0] != startTime) {
+                  setTimeError(true);
+                } else {
+                  setTimeError(false);
+                }
+
+                if (!startTime || !endTime) {
+                  setNoTimeError(true);
+                } else {
+                  setNoTimeError(false);
+                }
+
+                if (!image) {
+                  setThumbnailError(true);
+                } else {
+                  setThumbnailError(false);
+                }
+                // onCreate();
               }}
             >
               <Typography
                 style={{
                   fontFamily: "Source Sans Pro",
-                  color: "#fff",
+                  color: "black",
                   fontSize: "15px",
                 }}
               >
