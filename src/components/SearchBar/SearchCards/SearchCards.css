@@ -39,6 +39,8 @@
 
 .event-search-title {
   margin-left: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 /* Empty Search Bar */

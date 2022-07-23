@@ -13,7 +13,7 @@ import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventPro
 const tabsTheme = createTheme({
   palette: {
     primary: {
-      main: "#CF5579",
+      main: "#EB4034",
     },
     secondary: {
       main: "#aaaaaa",
@@ -85,7 +85,6 @@ export default function ProfilePage() {
                 indicatorColor="primary"
                 textColor="primary"
                 variant="standard"
-                aria-label="action tabs example"
               >
                 <Tab
                   disableRipple

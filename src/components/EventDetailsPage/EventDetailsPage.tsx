@@ -130,15 +130,15 @@ export default function EventDetailsPage() {
                 fontSize: "17px",
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed
               augue lacus viverra vitae. Eu nisl nunc mi ipsum faucibus vitae
               aliquet nec ullamcorper. Ac placerat vestibulum lectus mauris
               ultrices eros in cursus turpis. Bibendum at varius vel pharetra
               vel turpis nunc eget. Sit amet facilisis magna etiam tempor orci
               eu lobortis. Diam maecenas ultricies mi eget mauris pharetra.
-              Turpis in eu mi bibendum neque egestas congue quisque
-              {/* {Event?.description} */}
+              Turpis in eu mi bibendum neque egestas congue quisque */}
+              {Event?.description}
             </Typography>
           </div>
         </div>
