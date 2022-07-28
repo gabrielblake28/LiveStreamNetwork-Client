@@ -1,0 +1,70 @@
+.feedback-modal-container {
+  height: 500px;
+  width: 500px;
+  background-color: #1f2124;
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #cacaca;
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px black;
+}
+
+.feedback-modal-header {
+  background-color: #3a3d45;
+  height: 55px;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  box-shadow: 0 5px 10px -6px black;
+  border-radius: 4px;
+}
+
+.feedback-modal-subheader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.feedback-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.feedback-description-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-description-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.feedback-description {
+  box-shadow: 0 5px 10px -6px black;
+}
+
+.feedback-modal-button {
+  height: 55px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  margin: 0 10px 10px 0;
+}

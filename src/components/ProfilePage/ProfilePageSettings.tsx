@@ -30,8 +30,8 @@ export default function ProfilePageSettings() {
           <div className="profile-page-notification-settings">
             <div className="settings-section-header">
               <Typography
-                variant="h5"
-                style={{ fontFamily: "Source Sans Pro", color: "#fff" }}
+                // variant="h5"
+                style={{ fontSize: "25px", color: "#fff" }}
               >
                 Notification Settings
               </Typography>
@@ -43,7 +43,6 @@ export default function ProfilePageSettings() {
                     <Typography
                       variant="subtitle1"
                       style={{
-                        fontFamily: "Source Sans Pro",
                         color: "#fff",
                       }}
                     >
@@ -55,7 +54,6 @@ export default function ProfilePageSettings() {
                       <Typography
                         variant="body1"
                         style={{
-                          fontFamily: "Source Sans Pro",
                           color: "#EB4034",
                         }}
                       >
@@ -67,7 +65,6 @@ export default function ProfilePageSettings() {
                       <Typography
                         variant="body1"
                         style={{
-                          fontFamily: "Source Sans Pro",
                           color: "#EB4034",
                         }}
                       >
@@ -81,7 +78,6 @@ export default function ProfilePageSettings() {
                     <Typography
                       variant="body1"
                       style={{
-                        fontFamily: "Source Sans Pro",
                         color: "#fff",
                       }}
                     >
@@ -93,7 +89,6 @@ export default function ProfilePageSettings() {
                       <Typography
                         variant="body1"
                         style={{
-                          fontFamily: "Source Sans Pro",
                           color: "#EB4034",
                         }}
                       >
@@ -103,7 +98,6 @@ export default function ProfilePageSettings() {
                           <Typography
                             onClick={() => {}}
                             style={{
-                              fontFamily: "Source Sans Pro",
                               color: "#EB4034",
                               fontSize: "14px",
                               cursor: "pointer",
@@ -118,7 +112,6 @@ export default function ProfilePageSettings() {
                     <div className="profile-page-phone-email">
                       <Typography
                         style={{
-                          fontFamily: "Source Sans Pro",
                           color: "#EB4034",
                           fontSize: "18px",
                         }}
@@ -129,7 +122,6 @@ export default function ProfilePageSettings() {
                           <Typography
                             onClick={() => {}}
                             style={{
-                              fontFamily: "Source Sans Pro",
                               color: "#EB4034",
                               fontSize: "14px",
                               cursor: "pointer",
@@ -151,7 +143,6 @@ export default function ProfilePageSettings() {
                   >
                     <Typography
                       style={{
-                        fontFamily: "Source Sans Pro",
                         color: "#EB4034",
                         fontSize: "13px",
                       }}
@@ -168,7 +159,6 @@ export default function ProfilePageSettings() {
                   >
                     <Typography
                       style={{
-                        fontFamily: "Source Sans Pro",
                         color: "#EB4034",
                         fontSize: "13px",
                       }}

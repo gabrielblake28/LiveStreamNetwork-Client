@@ -26,8 +26,8 @@ export default function CreateEventWorkflow({
         <div className="create-event-header">
           <Typography
             sx={{
-              fontFamily: "Source Sans Pro",
-              fontSize: "22px",
+              // fontFamily: "Source Sans Pro",
+              fontSize: "20px",
               color: "#fff",
             }}
           >

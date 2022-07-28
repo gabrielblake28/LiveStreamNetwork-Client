@@ -18,7 +18,7 @@ const userAPI = new UserAPI();
 const tabsTheme = createTheme({
   palette: {
     primary: {
-      main: "#CF5579",
+      main: "#eb4034",
     },
     secondary: {
       main: "#aaaaaa",
@@ -80,8 +80,8 @@ export default function UserPage() {
             <Typography
               sx={{
                 color: "#fff",
+                fontSize: "23px",
                 fontFamily: "Source Sans Pro",
-                fontSize: "25px",
               }}
             >
               {userDetails.display_name}
@@ -107,8 +107,7 @@ export default function UserPage() {
                     <Typography
                       sx={{
                         color: "#fff",
-                        fontFamily: "Source Sans Pro",
-                        fontSize: "12px",
+                        fontSize: "13px",
                       }}
                     >
                       Profile
@@ -122,8 +121,8 @@ export default function UserPage() {
                     <Typography
                       sx={{
                         color: "#fff",
-                        fontFamily: "Source Sans Pro",
-                        fontSize: "12px",
+                        fontSize: "13px",
+                        
                       }}
                     >
                       Events

@@ -3,6 +3,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Modal,
   Paper,
   Typography,
 } from "@mui/material";
@@ -11,8 +12,11 @@ import { Link } from "react-router-dom";
 import PortraitIcon from "@mui/icons-material/Portrait";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
+import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { useRecoilState } from "recoil";
 import { IconState } from "../../Recoil/Events/EventAtoms";
+import FeedbackModal from "../FeedbackModal/FeedbackModal";
+import { useState } from "react";
 
 type LoggedInMenuProps = {
   anchorEl: null | HTMLElement;
@@ -26,10 +30,14 @@ export default function LoggedInMenu({
   logout,
 }: LoggedInMenuProps) {
   const [homeIconFill, setHomeIconFill] = useRecoilState(IconState);
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleFeedbackModalOpen = () => setFeedbackModalOpen(true);
+  const handleFeedbackModalClose = () => setFeedbackModalOpen(false);
 
   return (
     <Paper sx={{ width: 150 }}>
@@ -71,7 +79,12 @@ export default function LoggedInMenu({
           </MenuItem>
         </Link>
         <Divider variant="middle" color="#aaaaaa" />
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleFeedbackModalOpen();
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <FeedbackOutlinedIcon
               sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
@@ -79,6 +92,24 @@ export default function LoggedInMenu({
           </ListItemIcon>
           <Typography sx={{ color: "#EFEFF1", fontSize: "12px" }}>
             Feedback
+          </Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            window.open(
+              "https://www.paypal.com/paypalme/BlakesBusiness",
+              "_blank"
+            );
+          }}
+        >
+          <ListItemIcon>
+            <LocalAtmIcon
+              sx={{ width: "20px", height: "20px", color: "#EFEFF1" }}
+            />
+          </ListItemIcon>
+          <Typography sx={{ color: "#EFEFF1", fontSize: "12px" }}>
+            Support
           </Typography>
         </MenuItem>
         <MenuItem
@@ -99,6 +130,10 @@ export default function LoggedInMenu({
           </Typography>
         </MenuItem>
       </Menu>
+
+      <Modal open={feedbackModalOpen}>
+        <FeedbackModal handleFeedbackModalClose={handleFeedbackModalClose} />
+      </Modal>
     </Paper>
   );
 }
