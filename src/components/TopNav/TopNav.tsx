@@ -2,7 +2,6 @@ import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import CottageIcon from "@mui/icons-material/Cottage";
-import EventNoteIcon from "@mui/icons-material/EventNote";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import LoggedInMenu from "../LoggedInMenu/LoggedInMenu";
@@ -12,12 +11,12 @@ import { CurrentUserData, Authorized } from "../../Recoil/Users/UserAtoms";
 import "./TopNav.css";
 import Cookies from "universal-cookie";
 import { UserAPI } from "../../API/Users/UserAPI";
+import TopNavLogo from "../../assets/WebsiteLogo/TopNavLogo.png";
 
 import {
   IconButton,
   Avatar,
   Typography,
-  Divider,
   Tooltip,
   createTheme,
   ThemeProvider,
@@ -115,11 +114,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
   return (
     <div className="top-nav-container">
       <div className="top-nav-left-layout">
-        <div className="top-nav-logo">
-          <EventNoteIcon
-            sx={{ width: "35px", height: "35px", color: "#eb4034" }}
-          />
-        </div>
         <Link
           onClick={() => {
             setHomeIconFill(NavButtonStatus.HOME);
@@ -131,21 +125,15 @@ export default function TopNav({ setOpen }: TopNavProps) {
             marginRight: "30px",
           }}
         >
-          <Typography
-            sx={{
-              color: "#e5e5e5",
-              fontSize: "20px",
-            }}
-          >
-            LiveStreamNetwork
-          </Typography>
+          <img src={TopNavLogo} height="225px" width="225px" />
         </Link>
-        <Divider
-          orientation="vertical"
-          variant="middle"
-          flexItem
-          style={{ backgroundColor: "#545454" }}
-        />
+      </div>
+      <div className="top-nav-center-layout">
+        <div className="top-nav-search-bar">
+          <SearchBar />
+        </div>
+      </div>
+      <div className="top-nav-right-layout">
         <div className="top-nav-browse">
           <Link
             to={"/browse"}
@@ -155,21 +143,14 @@ export default function TopNav({ setOpen }: TopNavProps) {
           >
             <Typography
               sx={{
-                color: "#e5e5e5",
-                fontSize: "20px",
+                color: "#ffffff",
+                fontSize: "18px",
               }}
             >
               Explore
             </Typography>
           </Link>
         </div>
-      </div>
-      <div className="top-nav-center-layout">
-        <div className="top-nav-search-bar">
-          <SearchBar />
-        </div>
-      </div>
-      <div className="top-nav-right-layout">
         <div className="top-nav-notifications">
           <Link to="/" style={{ textDecoration: "none", color: "#e5e5e5" }}>
             <Tooltip
@@ -177,8 +158,8 @@ export default function TopNav({ setOpen }: TopNavProps) {
               title={
                 <Typography
                   sx={{
-                    color: "#fff",
-                    fontFamily: "Source Sans Pro",
+                    color: "#ffffff",
+                    // fontFamily: "Source Sans Pro",
                     fontSize: "12px",
                   }}
                 >
@@ -188,7 +169,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             >
               <IconButton
                 disableRipple
-                style={{ color: "#e5e5e5" }}
+                style={{ color: "#ffffff" }}
                 aria-label="Home"
                 onClick={(e) => {
                   setHomeIconFill(NavButtonStatus.HOME);
@@ -209,8 +190,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             title={
               <Typography
                 sx={{
-                  color: "#fff",
-                  fontFamily: "Source Sans Pro",
+                  color: "#ffffff",
                   fontSize: "12px",
                 }}
               >
@@ -221,7 +201,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
             {isLoggedIn === true ? (
               <IconButton
                 disableRipple
-                style={{ color: "#e5e5e5" }}
+                style={{ color: "#ffffff" }}
                 aria-label="Subs"
                 onClick={(e) => {
                   handleSubsMenu(e);
@@ -267,19 +247,18 @@ export default function TopNav({ setOpen }: TopNavProps) {
             title={
               <Typography
                 sx={{
-                  color: "#fff",
-                  fontFamily: "Source Sans Pro",
+                  color: "#ffffff",
                   fontSize: "12px",
                 }}
               >
-                Create Event
+                Create
               </Typography>
             }
           >
             {isLoggedIn === true ? (
               <IconButton
                 disableRipple
-                style={{ color: "#e5e5e5" }}
+                style={{ color: "#ffffff" }}
                 aria-label="Create-Event"
                 onClick={() => {
                   handleCreateEventModalOpen();

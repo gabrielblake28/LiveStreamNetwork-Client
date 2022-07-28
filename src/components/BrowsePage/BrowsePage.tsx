@@ -31,7 +31,7 @@ export default function BrowsePage({ ParentRef }: BrowsePageProps) {
             fontFamily: "Source Sans Pro",
           }}
         >
-          Browse Events
+          Event Catalog
         </Typography>
       </div>
       <div className="browse-page-content">

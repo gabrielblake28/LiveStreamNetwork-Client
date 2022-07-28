@@ -18,9 +18,9 @@ export default function UserPageProfile({
           <div className="user-page-profile-description-header">
             <Typography
               style={{
-                fontFamily: "Source Sans Pro",
                 color: "#fff",
-                fontSize: "21px",
+                fontSize: "20px",
+                fontFamily: "Source Sans Pro",
               }}
             >
               About {descriptionHeader}
@@ -28,8 +28,9 @@ export default function UserPageProfile({
           </div>
           <div className="user-page-profile-description-body">
             <Typography
-              style={{ fontFamily: "Source Sans Pro", color: "#fff", fontSize: "15px" }}
+              style={{ fontFamily: "Source Sans Pro",  color: "#fff", fontSize: "14px" }}
               variant="subtitle2"
+              
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed
@@ -39,7 +40,7 @@ export default function UserPageProfile({
               vel turpis nunc eget. Sit amet facilisis magna etiam tempor orci
               eu lobortis. Diam maecenas ultricies mi eget mauris pharetra.
               Turpis in eu mi bibendum neque egestas congue quisque
-              {/* {description} */}
+              {description}
             </Typography>
           </div>
         </div>

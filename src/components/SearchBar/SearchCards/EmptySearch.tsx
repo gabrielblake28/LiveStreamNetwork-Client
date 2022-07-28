@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import search from "../../../assets/illustrations/search2.svg";
+import search from "../../../assets/illustrations/search.svg";
 import "./SearchCards.css";
 
 export default function EmptySearch() {

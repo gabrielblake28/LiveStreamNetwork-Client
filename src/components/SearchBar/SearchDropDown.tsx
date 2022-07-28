@@ -47,7 +47,7 @@ const AntTab = styled((props: StyledTabProps) => (
     opacity: 1,
   },
   "&.Mui-selected": {
-    color: "#eb4034",
+    color: "#ffffff",
     fontWeight: theme.typography.fontWeightMedium,
   },
   "&.Mui-focusVisible": {
