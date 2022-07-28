@@ -1,4 +1,4 @@
-export interface ElementPosition {
+export interface ElementverticalPosition {
   PositionY: number;
   Height: number;
 }

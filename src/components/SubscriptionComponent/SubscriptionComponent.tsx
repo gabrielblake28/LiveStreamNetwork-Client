@@ -37,6 +37,7 @@ export function SubscriptionComponent({
         await subscriptions.addSubscription({
           event_id: EventId,
           user_id: userInfo.user_id,
+          created_date: new Date(),
         })
       );
     }

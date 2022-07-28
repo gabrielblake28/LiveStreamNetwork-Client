@@ -3,7 +3,10 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IEvent } from "../../API/Events/IEvent";
 import { ScreenSizeConstants } from "../../Service/CarouselService/impl/CarouselController";
 import { IEventProvider } from "../../Service/InfiniteScrollService/def/IEventProvider";
-import { InfiniteScrollState } from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
+import {
+  InfiniteScrollController,
+  InfiniteScrollState,
+} from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
 import { InfiniteScrollPage } from "./InfiniteScrollPage";
 
 type InfiniteScrollContainerProps = {
@@ -17,16 +20,34 @@ const InfiniteScrollStyle: React.CSSProperties = {
   justifyContent: "space-around",
 };
 
+let scrollController: InfiniteScrollController;
 export function InfiniteScrollContainer({
   ScrollParent,
   EventProvider,
 }: InfiniteScrollContainerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState<IEvent[][]>([]);
-  const [elementsCreated, setElementsCreated] = useState<number>(0);
   const [containerState, setContainerState] = useState<InfiniteScrollState>(
     InfiniteScrollState.Idle
   );
+
+  useEffect(() => {
+    const container = GetScrollParent();
+    if (EventProvider && container) {
+      scrollController = new InfiniteScrollController(
+        EventProvider,
+        container.clientWidth,
+        1000
+      );
+
+      AddPage();
+    }
+
+    if (EventProvider !== scrollController.EventProvider) {
+      scrollController.EventProvider = EventProvider;
+    }
+  }, [EventProvider, ScrollParent, ref?.current]);
+
   const GetScrollParent = () => (ScrollParent ? ScrollParent : ref?.current);
   const RenderPages = () => {
     const pagesToRender: JSX.Element[] = [];
@@ -38,6 +59,7 @@ export function InfiniteScrollContainer({
             Events={pages[i]}
             key={i}
             ScrollParent={scrollParent}
+            ScrollController={scrollController}
           />
         );
       }
@@ -68,8 +90,6 @@ export function InfiniteScrollContainer({
             justifyContent: "space-around",
             fontSize: "25px",
             padding: "10px",
-            overflowY: "scroll",
-            overflowX: "hidden",
           }}
         >
           <CircularProgress
@@ -87,38 +107,24 @@ export function InfiniteScrollContainer({
   };
 
   const AddPage = async () => {
-    setContainerState(InfiniteScrollState.Loading);
-    const page = await EventProvider.ProvideEvents(
-      pages?.length || 0,
-      30 +
-        (30 %
-          ScreenSizeConstants.GetNumberOfEventsPerSlide(
-            GetScrollParent()?.clientWidth!
-          ))
-    );
-    setPages((prev: IEvent[][]) => {
-      prev.push(page);
-      return prev;
-    });
-  };
-  useEffect(() => {
-    AddPage();
-  }, []);
-  useEffect(() => {
-    if (elementsCreated && pages) {
-      setElementsCreated(elementsCreated + pages[pages.length - 1].length);
+    if (scrollController.ShouldGetPage()) {
+      setContainerState(InfiniteScrollState.Loading);
+
+      const page = await scrollController.NextPage();
+
+      setPages((prev: IEvent[][]) => {
+        prev.push(page);
+        return prev;
+      });
+
+      setContainerState(InfiniteScrollState.Idle);
     }
-  }, [pages]);
+  };
+
   useLayoutEffect(() => {
     let scrollEvent = () => {
       const scrollParent = GetScrollParent();
       if (scrollParent) {
-        console.log(
-          scrollParent.scrollHeight -
-            scrollParent.scrollTop -
-            scrollParent.clientHeight <
-            1
-        );
         if (
           scrollParent.scrollHeight -
             scrollParent.scrollTop -
@@ -130,8 +136,37 @@ export function InfiniteScrollContainer({
       }
     };
 
+    let resizeEvent = () => {
+      const container = GetScrollParent();
+      if (container) {
+        const width = container.clientWidth;
+        setTimeout(() => {
+          if (width != container.clientWidth) {
+            return;
+          }
+
+          if (container.clientWidth !== scrollController.ContainerWidth) {
+            scrollController
+              .CalculatePagesOnScreenResize(container.clientWidth)
+              .then((result) => {
+                setPages(result);
+                container.scrollTo({});
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          }
+        }, 500);
+      }
+    };
+
     GetScrollParent()?.addEventListener("scroll", scrollEvent);
-    return () => GetScrollParent()?.removeEventListener("scroll", scrollEvent);
+    window?.addEventListener("resize", resizeEvent);
+
+    return () => {
+      GetScrollParent()?.removeEventListener("scroll", scrollEvent);
+      window?.removeEventListener("resized", resizeEvent);
+    };
   }, [ScrollParent]);
 
   return (

@@ -6,13 +6,21 @@ export default interface IEventAPI {
   GetEvent(id: string): Promise<IEvent>;
   UpdateEvent(id: string, resource: IEvent): Promise<IEvent>;
   DeleteEvent(id: string): Promise<void>;
-  GetLiveEvents(limit: number, page: number): Promise<IEvent[]>;
+  GetLiveEvents(
+    limit: number,
+    page: number,
+    user_id: string
+  ): Promise<IEvent[]>;
   GetFeaturedEvents(
     limit: number,
     page: number,
     user_id: string
   ): Promise<IEvent[]>;
-  GetTrendingEvents(limit: number, page: number): Promise<IEvent[]>;
+  GetTrendingEvents(
+    limit: number,
+    page: number,
+    user_id: string
+  ): Promise<IEvent[]>;
   GetSponsoredEvents(limit: number, page: number): Promise<IEvent[]>;
   GetUpcomingEvents(
     limit: number,
