@@ -3,24 +3,23 @@ import { IEvent } from "../../API/Events/IEvent";
 import EventCard from "../EventCard/EventCard";
 import { ScreenSizeConstants } from "../../Service/CarouselService/impl/CarouselController";
 import { useWindowWidth } from "../CustomCarousel/CustomCarousel";
+import { InfiniteScrollController } from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
 
 type InfiniteScrollPageProps = {
   Events: IEvent[];
   ScrollParent: HTMLDivElement;
+  ScrollController: InfiniteScrollController;
 };
-
-let timeout: NodeJS.Timeout;
-let scrollEvent: (this: HTMLDivElement, ev: Event) => any;
 
 export function InfiniteScrollPage({
   Events,
   ScrollParent,
+  ScrollController,
 }: InfiniteScrollPageProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(true);
-  const windowWidth = useWindowWidth();
-  const [elementsToDisplay, setElementsToDisplay] = useState(
-    ScreenSizeConstants.GetNumberOfEventsPerSlide(windowWidth)
+  const [rowLength, setRowLength] = useState(
+    ScreenSizeConstants.GetNumberOfEventsPerSlide(ScrollParent.clientWidth)
   );
 
   const PageIsVisible = (
@@ -51,45 +50,56 @@ export function InfiniteScrollPage({
   };
 
   useLayoutEffect(() => {
-    setElementsToDisplay(
-      ScreenSizeConstants.GetNumberOfEventsPerSlide(ScrollParent.clientWidth)
-    );
-  }, [windowWidth]);
-
-  useEffect(() => {
-    if (ref?.current) {
-      console.log(
-        PageIsVisible(ref.current?.offsetTop, ref.current?.offsetHeight)
-      );
-      scrollEvent = () => {
+    if (ScrollParent) {
+      let scrollEvent = () => {
         const scrollY = ScrollParent.scrollTop;
-        clearTimeout(timeout);
-        new Promise((resolve) => {
-          timeout = setTimeout(() => {
-            if (scrollY == ScrollParent.scrollTop) {
-              if (ref?.current) {
-                setShow(
-                  PageIsVisible(
-                    ref.current?.offsetTop,
-                    ref.current?.offsetHeight
-                  )
-                );
-              }
-              resolve("");
-            }
-          }, 5);
-        });
+        setTimeout(() => {
+          if (scrollY == ScrollParent.scrollTop && ref?.current) {
+            setShow(
+              ScrollController.IsPageInViewPort(
+                {
+                  Height: ScrollParent.clientHeight,
+                  PositionY: ScrollParent.scrollTop,
+                },
+                {
+                  Height: ref.current.clientHeight,
+                  PositionY: ref.current?.offsetTop,
+                }
+              )
+            );
+          }
+        }, 0);
+      };
+
+      let resizeEvent = () => {
+        const width = ScrollParent.clientWidth;
+
+        setTimeout(() => {
+          if (ScrollParent.clientWidth == width) {
+            setRowLength(
+              ScreenSizeConstants.GetNumberOfEventsPerSlide(
+                ScrollParent.clientWidth
+              )
+            );
+          }
+        }, 100);
       };
       ScrollParent.addEventListener("scroll", scrollEvent);
+      window.addEventListener("resize", resizeEvent);
+
+      return () => {
+        ScrollParent.removeEventListener("scroll", scrollEvent);
+        window.removeEventListener("resize", resizeEvent);
+      };
     }
-  }, [ref]);
+  });
   return show ? (
     <div
       ref={ref}
       style={{
         display: "grid",
         gridTemplateRows: "auto",
-        gridTemplateColumns: `repeat(${elementsToDisplay}, 300px)`,
+        gridTemplateColumns: `repeat(${rowLength}, 1fr)`,
         transition: ".5s all ease-in",
       }}
     >

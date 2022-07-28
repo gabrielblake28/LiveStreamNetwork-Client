@@ -57,9 +57,13 @@ export class EventAPI implements IEventAPI {
     return result.data;
   }
 
-  async GetTrendingEvents(limit: number, page: number): Promise<IEvent[]> {
+  async GetTrendingEvents(
+    limit: number,
+    page: number,
+    user_id: string
+  ): Promise<IEvent[]> {
     const result = await this.query.get("/trending", {
-      params: { limit, page },
+      params: { limit, page, user_id },
     });
     return result.data;
   }

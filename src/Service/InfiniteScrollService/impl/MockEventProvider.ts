@@ -11,7 +11,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "1",
     featured: false,
-    name: "ASDF",
   },
   {
     end_timestamp: new Date(),
@@ -22,7 +21,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "2",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -33,7 +31,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "3",
     featured: false,
-    name: "casdf",
   },
   {
     end_timestamp: new Date(),
@@ -44,7 +41,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "4",
     featured: false,
-    name: "ASDFASDFasfdgsdfg",
   },
   {
     end_timestamp: new Date(),
@@ -55,7 +51,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "5",
     featured: false,
-    name: ";lgksjdfg;ljk",
   },
   {
     end_timestamp: new Date(),
@@ -66,7 +61,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "6",
     featured: false,
-    name: "ghjsadf",
   },
   {
     end_timestamp: new Date(),
@@ -77,7 +71,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "7",
     featured: false,
-    name: "caleb",
   },
   {
     end_timestamp: new Date(),
@@ -88,7 +81,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "8",
     featured: false,
-    name: "test",
   },
   {
     end_timestamp: new Date(),
@@ -99,7 +91,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "9",
     featured: false,
-    name: "yoyo",
   },
   {
     end_timestamp: new Date(),
@@ -110,7 +101,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "10",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -121,7 +111,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "11",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -132,7 +121,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "12",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -143,7 +131,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "13",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -154,7 +141,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "14",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -165,7 +151,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "15",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -176,7 +161,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "16",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -187,7 +171,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "17",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -198,7 +181,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "18",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -209,7 +191,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "19",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -220,7 +201,6 @@ const events: IEvent[] = [
     description: "1",
     event_id: "20",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -229,9 +209,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "1",
+    event_id: "21",
     featured: false,
-    name: "ASDF",
   },
   {
     end_timestamp: new Date(),
@@ -240,9 +219,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "2",
+    event_id: "22",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -251,9 +229,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "3",
+    event_id: "23",
     featured: false,
-    name: "casdf",
   },
   {
     end_timestamp: new Date(),
@@ -262,9 +239,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "4",
+    event_id: "24",
     featured: false,
-    name: "ASDFASDFasfdgsdfg",
   },
   {
     end_timestamp: new Date(),
@@ -273,9 +249,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "5",
+    event_id: "25",
     featured: false,
-    name: ";lgksjdfg;ljk",
   },
   {
     end_timestamp: new Date(),
@@ -284,9 +259,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "6",
+    event_id: "26",
     featured: false,
-    name: "ghjsadf",
   },
   {
     end_timestamp: new Date(),
@@ -295,9 +269,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "7",
+    event_id: "27",
     featured: false,
-    name: "caleb",
   },
   {
     end_timestamp: new Date(),
@@ -306,9 +279,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "8",
+    event_id: "28",
     featured: false,
-    name: "test",
   },
   {
     end_timestamp: new Date(),
@@ -317,9 +289,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "9",
+    event_id: "29",
     featured: false,
-    name: "yoyo",
   },
   {
     end_timestamp: new Date(),
@@ -328,9 +299,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "10",
+    event_id: "30",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -339,9 +309,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "11",
+    event_id: "31",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -350,9 +319,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "12",
+    event_id: "32",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -361,9 +329,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "13",
+    event_id: "33",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -372,9 +339,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "14",
+    event_id: "34",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -383,9 +349,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "15",
+    event_id: "35",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -394,9 +359,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "16",
+    event_id: "36",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -405,9 +369,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "17",
+    event_id: "37",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -416,9 +379,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "18",
+    event_id: "38",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -427,9 +389,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "19",
+    event_id: "39",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -438,9 +399,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "20",
+    event_id: "40",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -449,9 +409,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "1",
+    event_id: "41",
     featured: false,
-    name: "ASDF",
   },
   {
     end_timestamp: new Date(),
@@ -460,9 +419,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "2",
+    event_id: "42",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -471,9 +429,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "3",
+    event_id: "43",
     featured: false,
-    name: "casdf",
   },
   {
     end_timestamp: new Date(),
@@ -482,9 +439,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "4",
+    event_id: "44",
     featured: false,
-    name: "ASDFASDFasfdgsdfg",
   },
   {
     end_timestamp: new Date(),
@@ -493,9 +449,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "5",
+    event_id: "45",
     featured: false,
-    name: ";lgksjdfg;ljk",
   },
   {
     end_timestamp: new Date(),
@@ -504,9 +459,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "6",
+    event_id: "46",
     featured: false,
-    name: "ghjsadf",
   },
   {
     end_timestamp: new Date(),
@@ -515,9 +469,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "7",
+    event_id: "47",
     featured: false,
-    name: "caleb",
   },
   {
     end_timestamp: new Date(),
@@ -526,9 +479,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "8",
+    event_id: "48",
     featured: false,
-    name: "test",
   },
   {
     end_timestamp: new Date(),
@@ -537,9 +489,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "9",
+    event_id: "49",
     featured: false,
-    name: "yoyo",
   },
   {
     end_timestamp: new Date(),
@@ -548,9 +499,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "10",
+    event_id: "50",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -559,9 +509,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "11",
+    event_id: "51",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -570,9 +519,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "12",
+    event_id: "52",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -581,9 +529,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "13",
+    event_id: "53",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -592,9 +539,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "14",
+    event_id: "54",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -603,9 +549,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "15",
+    event_id: "55",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -614,9 +559,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "16",
+    event_id: "56",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -625,9 +569,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "17",
+    event_id: "57",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -636,9 +579,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "18",
+    event_id: "58",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -647,9 +589,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "19",
+    event_id: "59",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -658,9 +599,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "20",
+    event_id: "60",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -669,9 +609,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "1",
+    event_id: "61",
     featured: false,
-    name: "ASDF",
   },
   {
     end_timestamp: new Date(),
@@ -680,9 +619,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "2",
+    event_id: "62",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -691,9 +629,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "3",
+    event_id: "63",
     featured: false,
-    name: "casdf",
   },
   {
     end_timestamp: new Date(),
@@ -702,9 +639,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "4",
+    event_id: "64",
     featured: false,
-    name: "ASDFASDFasfdgsdfg",
   },
   {
     end_timestamp: new Date(),
@@ -713,9 +649,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "5",
+    event_id: "65",
     featured: false,
-    name: ";lgksjdfg;ljk",
   },
   {
     end_timestamp: new Date(),
@@ -724,9 +659,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "6",
+    event_id: "66",
     featured: false,
-    name: "ghjsadf",
   },
   {
     end_timestamp: new Date(),
@@ -735,9 +669,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "7",
+    event_id: "67",
     featured: false,
-    name: "caleb",
   },
   {
     end_timestamp: new Date(),
@@ -746,9 +679,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "8",
+    event_id: "68",
     featured: false,
-    name: "test",
   },
   {
     end_timestamp: new Date(),
@@ -757,9 +689,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "9",
+    event_id: "69",
     featured: false,
-    name: "yoyo",
   },
   {
     end_timestamp: new Date(),
@@ -768,9 +699,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "10",
+    event_id: "70",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -779,9 +709,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "11",
+    event_id: "71",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -790,9 +719,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "12",
+    event_id: "72",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -801,9 +729,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "13",
+    event_id: "73",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -812,9 +739,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "14",
+    event_id: "74",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -823,9 +749,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "15",
+    event_id: "75",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -834,9 +759,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "16",
+    event_id: "76",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -845,9 +769,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "17",
+    event_id: "77",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -856,9 +779,8 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "18",
+    event_id: "78",
     featured: false,
-    name: "ASDFASDF",
   },
   {
     end_timestamp: new Date(),
@@ -867,25 +789,22 @@ const events: IEvent[] = [
     user_id: "1",
     category_id: "1",
     description: "1",
-    event_id: "19",
+    event_id: "79",
     featured: false,
-    name: "ASDFASDF",
-  },
-  {
-    end_timestamp: new Date(),
-    start_timestamp: new Date(),
-    title: "Asdf",
-    user_id: "1",
-    category_id: "1",
-    description: "1",
-    event_id: "20",
-    featured: false,
-    name: "ASDFASDF",
   },
 ];
 
 export class MockEventProvider implements IEventProvider {
-  async ProvideEvents(page: number, limit: number) {
-    return events.slice(page, limit);
+  async ProvideEvents(page: number, limit: number): Promise<IEvent[]> {
+    return new Promise((resolve) => {
+      resolve(
+        events.slice(
+          page * limit,
+          page * limit + limit >= events.length
+            ? events.length - 1
+            : page * limit + limit
+        )
+      );
+    });
   }
 }

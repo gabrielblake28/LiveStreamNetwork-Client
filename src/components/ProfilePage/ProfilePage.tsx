@@ -3,12 +3,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import "./ProfilePage.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import ProfilePageSettings from "./ProfilePageSettings";
 import ProfilePageProfile from "./ProfilePageProfile";
 import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
-import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
+import { UpcomingEventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 
 const tabsTheme = createTheme({
   palette: {
@@ -33,23 +33,37 @@ const tabsTheme = createTheme({
 export default function ProfilePage() {
   const userInfo = useRecoilValue(CurrentUserData);
   const [value, setValue] = useState<string>("profile");
+  const ref = useRef<HTMLDivElement>(null);
+  const [show, setShow] = useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   const ActiveComponent = (value) => {
-    if (value === "settings") {
+    if (value === "notifications") {
       return <ProfilePageSettings />;
     } else if (value === "events") {
       return (
-        <InfiniteScrollContainer
-          EventProvider={new EventProvider(userInfo?.user_id)}
-        />
+        <>
+          {show && (
+            <InfiniteScrollContainer
+              EventProvider={new UpcomingEventProvider(userInfo.user_id || "0")}
+              ScrollParent={ref?.current!}
+            />
+          )}
+        </>
       );
     }
   };
 
+  useEffect(() => {
+    if (ref?.current) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [ref]);
   return (
     <div className="profile-page-container">
       <div className="profile-page-header-container">
@@ -111,17 +125,17 @@ export default function ProfilePage() {
                         fontSize: "12px",
                       }}
                     >
-                      Settings
+                      Notifications
                     </Typography>
                   }
-                  value="settings"
+                  value="notifications"
                 />
               </Tabs>
             </ThemeProvider>
           </div>
         </div>
       </div>
-      <div className="profile-page-content-container">
+      <div className="profile-page-content-container" ref={ref}>
         {ActiveComponent(value)}
       </div>
     </div>

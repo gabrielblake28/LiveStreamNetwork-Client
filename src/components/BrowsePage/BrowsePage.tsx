@@ -1,18 +1,26 @@
+import { Upcoming } from "@mui/icons-material";
 import { Typography } from "@mui/material";
-import { EventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
+import { IEventProvider } from "../../Service/InfiniteScrollService/def/IEventProvider";
+import { UpcomingEventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
 
 import "./BrowsePage.css";
 
 type BrowsePageProps = {
   ParentRef?: HTMLDivElement;
-  EventProvider: EventProvider;
 };
 
-export default function BrowsePage({
-  ParentRef,
-  EventProvider,
-}: BrowsePageProps) {
+export default function BrowsePage({ ParentRef }: BrowsePageProps) {
+  let userData = useRecoilValue(CurrentUserData);
+  const [eventProvider, setEventProvider] = useState<IEventProvider>(
+    new UpcomingEventProvider("0")
+  );
+  useEffect(() => {
+    setEventProvider(new UpcomingEventProvider(userData.user_id));
+  }, [userData]);
   return (
     <div className="browse-page-container">
       <div className="browse-page-header">
@@ -29,7 +37,7 @@ export default function BrowsePage({
       <div className="browse-page-content">
         <InfiniteScrollContainer
           ScrollParent={ParentRef}
-          EventProvider={EventProvider}
+          EventProvider={eventProvider}
         />
       </div>
     </div>
