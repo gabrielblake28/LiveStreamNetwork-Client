@@ -4,9 +4,7 @@ import { useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import "./ProfilePage.css";
 import { useEffect, useRef, useState } from "react";
-
 import ProfilePageSettings from "./ProfilePageSettings";
-import ProfilePageProfile from "./ProfilePageProfile";
 import { InfiniteScrollContainer } from "../InfiniteScroll/InfiniteScrollContainer";
 import { UpcomingEventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 
@@ -32,7 +30,7 @@ const tabsTheme = createTheme({
 
 export default function ProfilePage() {
   const userInfo = useRecoilValue(CurrentUserData);
-  const [value, setValue] = useState<string>("profile");
+  const [value, setValue] = useState<string>("events");
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
 
@@ -41,7 +39,7 @@ export default function ProfilePage() {
   };
 
   const ActiveComponent = (value) => {
-    if (value === "notifications") {
+    if (value === "settings") {
       return <ProfilePageSettings />;
     } else if (value === "events") {
       return (
@@ -125,10 +123,10 @@ export default function ProfilePage() {
                         fontSize: "12px",
                       }}
                     >
-                      Notifications
+                      Settings
                     </Typography>
                   }
-                  value="notifications"
+                  value="settings"
                 />
               </Tabs>
             </ThemeProvider>

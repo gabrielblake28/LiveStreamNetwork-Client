@@ -1,4 +1,3 @@
-import { number } from "prop-types";
 import { CarouselMovement } from "../def/CarouselMovement";
 import { ICarouselController } from "../def/ICarouselController";
 

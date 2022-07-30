@@ -1,5 +1,4 @@
-import { Avatar, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
@@ -8,8 +7,6 @@ type ActiveSubProps = {
   handleClose: Function;
   data: IEvent;
 };
-
-const eventAPI = new EventAPI();
 
 export default function ActiveSubCard({ handleClose, data }: ActiveSubProps) {
 

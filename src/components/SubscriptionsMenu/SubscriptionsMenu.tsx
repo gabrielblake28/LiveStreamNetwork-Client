@@ -1,4 +1,3 @@
-import { DataArray } from "@mui/icons-material";
 import { Menu, Typography } from "@mui/material";
 import { IEvent } from "../../API/Events/IEvent";
 import ActiveSubCard from "./ActiveSubCard";

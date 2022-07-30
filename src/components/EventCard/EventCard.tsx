@@ -41,7 +41,7 @@ export default function EventCard({ Event }: EventCardProps) {
         </Card>
       </div>
       <div className="event-footer__panel-container">
-        <div className="event-footer__panel-left">
+        <div className="event_footer__panel event-footer__panel-left">
           <div className="event-avatar">
             <Link to="/user" state={Event?.user_id}>
               <IconButton style={{ color: "#A970FF" }} size="small">
@@ -55,6 +55,8 @@ export default function EventCard({ Event }: EventCardProps) {
               </IconButton>
             </Link>
           </div>
+        </div>
+        <div className="event_footer__panel event-footer__panel-center">
           <div className="title-creator-timestamp">
             <Link
               to="event"
@@ -62,7 +64,7 @@ export default function EventCard({ Event }: EventCardProps) {
               style={{ textDecoration: "none" }}
             >
               <div className="event-title">
-              {/* fsadfasdfasdfasdfasdfsadfasdfasdfasdfasdfasdfgfdhdfgjjsdtjretjthdfghasrgfgdhdfgjgadg */}
+                {/* asdfasdfasdfasdfasdfasdfasdfadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf */}
                 {Event?.title}
               </div>
             </Link>
@@ -88,16 +90,16 @@ export default function EventCard({ Event }: EventCardProps) {
             )}`}</div>
           </div>
         </div>
-        {Event.user_id == userInfo.user_id ? (
-          <></>
-        ) : (
-          <div className="event-footer__panel-right">
+        <div className="event_footer__panel  event-footer__panel-right">
+          {Event.user_id == userInfo.user_id ? (
+            <></>
+          ) : (
             <SubscriptionComponent
               EventId={Event?.event_id!}
               SubscriptionId={Event?.subscription_id}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

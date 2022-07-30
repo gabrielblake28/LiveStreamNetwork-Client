@@ -1,4 +1,4 @@
-import { NotificationsActive, SubscriptTwoTone } from "@mui/icons-material";
+import { NotificationsActive } from "@mui/icons-material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";

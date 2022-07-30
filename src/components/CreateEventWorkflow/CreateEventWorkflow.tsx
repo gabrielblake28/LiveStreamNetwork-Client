@@ -1,11 +1,8 @@
-import { createTheme, IconButton, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import "./CreateEventWorkflow.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
 import { NavButtonStatus } from "../NavButtonStatus/NavButtonStatus";
-import { useRecoilValue } from "recoil";
-import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
 import CreateEventComponent from "./CreateEventComponent";
 import { IEvent } from "../../API/Events/IEvent";
 

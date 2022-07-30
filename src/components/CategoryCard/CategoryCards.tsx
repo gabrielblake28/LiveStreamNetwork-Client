@@ -1,9 +1,5 @@
 import { Card, CardActionArea, CardMedia, Typography } from "@mui/material";
-// import CategoryCardData from "./CategoryCardData";
-import { CategoryCardData } from "./CategoryCardData";
-import otv from "../../assets/otv.jpg";
 import "./CategoryCard.css";
-import { array } from "prop-types";
 
 type CategoryProps = {
   category: string;

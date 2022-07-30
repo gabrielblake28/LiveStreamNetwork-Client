@@ -1,4 +1,3 @@
-import { IEvent } from "../../../API/Events/IEvent";
 import { CarouselMovement } from "./CarouselMovement";
 
 export interface ICarouselController {

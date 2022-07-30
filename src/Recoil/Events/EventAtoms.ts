@@ -1,9 +1,7 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 import { IEvent } from "../../API/Events/IEvent";
-import { EventAPI } from "../../API/Events/EventAPI";
 import { NavButtonStatus } from "../../components/NavButtonStatus/NavButtonStatus";
 
-const eventApi = new EventAPI();
 
 export const homeIconState = atom({
   key: "homeIconState",
