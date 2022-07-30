@@ -1,7 +1,5 @@
 import {
   ClickAwayListener,
-  Divider,
-  IconButton,
   InputBase,
   Paper,
 } from "@mui/material";

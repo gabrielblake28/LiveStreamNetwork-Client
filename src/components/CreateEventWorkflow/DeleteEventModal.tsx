@@ -1,4 +1,4 @@
-import { Button, Divider, Modal, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { EventAPI } from "../../API/Events/EventAPI";
 import "./CreateEventWorkflow.css";
 

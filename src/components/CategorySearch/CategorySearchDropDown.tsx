@@ -1,4 +1,3 @@
-import CategorySearchResultsCard from "./CategorySearchResultsCard";
 import "./CategorySearchBar.css";
 import EventsSearchCard from "../SearchBar/SearchCards/EventsSearchCard";
 import { SearchResult } from "../../API/Search/SearchResult";

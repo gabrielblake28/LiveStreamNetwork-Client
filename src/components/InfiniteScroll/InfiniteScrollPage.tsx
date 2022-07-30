@@ -1,8 +1,7 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {useLayoutEffect, useRef, useState } from "react";
 import { IEvent } from "../../API/Events/IEvent";
 import EventCard from "../EventCard/EventCard";
 import { ScreenSizeConstants } from "../../Service/CarouselService/impl/CarouselController";
-import { useWindowWidth } from "../CustomCarousel/CustomCarousel";
 import { InfiniteScrollController } from "../../Service/InfiniteScrollService/impl/InfiniteScrollController";
 
 type InfiniteScrollPageProps = {

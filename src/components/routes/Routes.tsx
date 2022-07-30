@@ -1,7 +1,4 @@
 import { Routes, Route } from "react-router";
-import { useRecoilValue } from "recoil";
-import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
-import { UpcomingEventProvider } from "../../Service/InfiniteScrollService/impl/EventProvider";
 import EventDetailsPage from "../EventDetailsPage/EventDetailsPage";
 import EventScrollPage from "../EventLandingPage/EventLandingPage";
 import ProfilePage from "../ProfilePage/ProfilePage";

@@ -1,6 +1,6 @@
 import { Avatar, IconButton, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+
 import { IUser } from "../../../API/Users/IUser";
 import "./SearchCards.css";
 
@@ -13,7 +13,6 @@ export default function UsersSearchCard({
   SearchResult,
   setShowSearchDropDown
 }: UsersSearchCardProps) {
-  // const setShowSearchDropDown = useSetRecoilState(ShowSearchDropDown);
   return (
     <Link
       onClick={() => {

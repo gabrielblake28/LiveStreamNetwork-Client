@@ -1,5 +1,4 @@
 import { Typography } from "@mui/material";
-import { useEffect } from "react";
 import UserStreamEmbed from "./UserStreamEmbed";
 
 type userPageProfileProps = {

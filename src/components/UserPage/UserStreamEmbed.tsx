@@ -1,4 +1,4 @@
-import { Box, CardMedia } from "@mui/material";
+import {  CardMedia } from "@mui/material";
 
 type twitchStreamEmbedProps = {
   stream_embed_name: string;
@@ -14,7 +14,6 @@ export default function twitchStreamEmbed({
         src={`https://player.twitch.tv/?channel=${stream_embed_name}&parent=localhost&autoplay=true&muted=true`}
         height="400"
         title="User's Stream"
-        // controls
       />
     </div>
   );

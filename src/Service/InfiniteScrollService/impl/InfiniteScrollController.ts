@@ -1,5 +1,3 @@
-import { TrendingUpOutlined } from "@mui/icons-material";
-import { element } from "prop-types";
 import { IEvent } from "../../../API/Events/IEvent";
 import { ScreenSizeConstants } from "../../CarouselService/impl/CarouselController";
 import { ElementverticalPosition } from "../def/ElementPosition";
