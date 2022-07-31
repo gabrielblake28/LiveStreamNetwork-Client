@@ -9,7 +9,7 @@ export class EventAPI implements IEventAPI {
     this.query = axios.create({
       baseURL:
         process.env.NODE_ENV == "production"
-          ? ""
+          ? "http://localhost:3500/event"
           : "http://localhost:3500/event",
     });
   }

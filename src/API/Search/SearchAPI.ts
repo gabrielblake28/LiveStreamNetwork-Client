@@ -8,7 +8,7 @@ export class SearchAPI implements ISearchAPI {
     this.query = axios.create({
       baseURL:
         process.env.NODE_ENV == "production"
-          ? ""
+          ? "http://localhost:3500/search"
           : "http://localhost:3500/search",
     });
   }

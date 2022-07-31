@@ -4,5 +4,6 @@
     "module": "esnext",
     "moduleResolution": "node"
   },
+  "exclude": ["/src/**.*spec.*", "/cypress/**"],
   "include": ["vite.config.ts"]
 }

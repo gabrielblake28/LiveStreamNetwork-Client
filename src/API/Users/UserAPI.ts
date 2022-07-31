@@ -8,7 +8,7 @@ export class UserAPI implements IUserAPI {
     this.query = axios.create({
       baseURL:
         process.env.NODE_ENV == "production"
-          ? ""
+          ? "http://localhost:3500/user"
           : "http://localhost:3500/user",
     });
   }

@@ -10,7 +10,7 @@ export class SubscriptionAPI implements ISubscriptionAPI {
     this.query = axios.create({
       baseURL:
         process.env.NODE_ENV == "production"
-          ? ""
+          ? "http://localhost:3500/subscription"
           : "http://localhost:3500/subscription",
     });
   }

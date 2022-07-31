@@ -76,6 +76,16 @@ export default function CustomCarousel({
     );
   }, [index]);
 
+  const renderSlides = () => {
+    return slides.map((slide, index) => {
+      return (
+        <div className="slider-class">
+          <EventCard key={index} Event={slide} />
+        </div>
+      );
+    });
+  };
+
   const renderProgress = (): React.ReactNode[] => {
     const progress: React.ReactNode[] = [];
 
@@ -143,13 +153,7 @@ export default function CustomCarousel({
             transform: `translateX(${slideTransform}%)`,
           }}
         >
-          {slides.map((slide, index) => {
-            return (
-              <div className="slider-class">
-                <EventCard key={index} Event={slide} />
-              </div>
-            );
-          })}
+          {renderSlides()}
         </div>
         <button
           style={{

@@ -2,12 +2,15 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  Modal,
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { use } from "chai";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { CurrentUserData } from "../../Recoil/Users/UserAtoms";
+import PhoneVerification from "../PhoneVerification/PhoneVerification";
 
 const checkboxTheme = createTheme({
   palette: {
@@ -23,6 +26,11 @@ const checkboxTheme = createTheme({
 export default function ProfilePageSettings() {
   const [showDetails, setShowDetails] = useState(false);
   const userInfo = useRecoilValue(CurrentUserData);
+  const [phoneVerificationOpen, setPhoneVerificationOpen] = useState(false);
+
+  const handlePhoneVerificationOpen = () => setPhoneVerificationOpen(true);
+  const handlePhoneVerificationClose = () => setPhoneVerificationOpen(false);
+
   return (
     <ThemeProvider theme={checkboxTheme}>
       <div className="profile-page-settings-container">
@@ -96,7 +104,6 @@ export default function ProfilePageSettings() {
                           userInfo.phone
                         ) : (
                           <Typography
-                            onClick={() => {}}
                             style={{
                               color: "#EB4034",
                               fontSize: "14px",
@@ -120,7 +127,9 @@ export default function ProfilePageSettings() {
                           "*** *** ****"
                         ) : (
                           <Typography
-                            onClick={() => {}}
+                            onClick={() => {
+                              handlePhoneVerificationOpen();
+                            }}
                             style={{
                               color: "#EB4034",
                               fontSize: "14px",
@@ -203,6 +212,9 @@ export default function ProfilePageSettings() {
             </div>
           </div>
         </div>
+        <Modal open={phoneVerificationOpen}>
+          <PhoneVerification HandleClose={handlePhoneVerificationClose} />
+        </Modal>
       </div>
     </ThemeProvider>
   );
