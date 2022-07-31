@@ -32,6 +32,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { IconState } from "../../Recoil/Events/EventAtoms";
 import { EventAPI } from "../../API/Events/EventAPI";
 import { IEvent } from "../../API/Events/IEvent";
+import { access } from "fs";
 
 const eventAPI = new EventAPI();
 const userAPI = new UserAPI();
@@ -57,24 +58,29 @@ function useAuth(): boolean {
   const isLoggedIn = useRecoilValue(Authorized);
   const setIsLoggedIn = useSetRecoilState(Authorized);
   const setUserData = useSetRecoilState(CurrentUserData);
-  let accessKey = "";
 
   useEffect(() => {
-    if (localStorage.getItem("evently_access_token")) {
-      accessKey = localStorage.getItem("evently_access_token") || "";
-      setIsLoggedIn(true);
-    } else if (cookies.get("evently_access_token")) {
-      accessKey = cookies.get("evently_access_token");
-      localStorage.setItem("evently_access_token", accessKey);
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
+    const access_token =
+      localStorage.getItem("evently_access_token") ||
+      cookies.get("evently_access_token") ||
+      "";
+    const refresh_token =
+      localStorage.getItem("evently_refresh_token") ||
+      cookies.get("evently_refresh_token") ||
+      "";
 
-    if (isLoggedIn) {
-      const userData = userAPI.GetOrCreateUser(accessKey).then((response) => {
-        setUserData(response as IUser);
-      });
+    if (!isLoggedIn) {
+      userAPI
+        .GetOrCreateUser({ access_token, refresh_token })
+        .then((response) => {
+          setUserData(response as IUser);
+          localStorage.setItem("evently_access_token", access_token);
+          localStorage.setItem("evently_refresh_token", refresh_token);
+          setIsLoggedIn(true);
+        })
+        .catch(() => {
+          setIsLoggedIn(false);
+        });
     }
   }, [isLoggedIn]);
 
