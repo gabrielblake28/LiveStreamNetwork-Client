@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "test": "set NODE_ENV=test&&nyc --reporter=html mocha",
     "test-w": "set NODE_ENV=test&& mocha --watch",
-    "prod": "set NODE_ENV=development && serve -s dist",
+    "prod": "set NODE_ENV=production && serve -s dist",
     "cypress:open": "cypress open"
   },
   "dependencies": {
