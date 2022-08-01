@@ -159,7 +159,6 @@ export default function TopNav({ setOpen }: TopNavProps) {
                 <Typography
                   sx={{
                     color: "#ffffff",
-                    // fontFamily: "Source Sans Pro",
                     fontSize: "12px",
                   }}
                 >
@@ -309,10 +308,10 @@ export default function TopNav({ setOpen }: TopNavProps) {
             >
               <Button
                 sx={{
-                  backgroundColor: "#CF5579",
+                  backgroundColor: "#eb4034",
                   ml: 1,
                   "&.MuiButtonBase-root:hover": {
-                    bgcolor: "#CF5579",
+                    bgcolor: "#eb4034",
                   },
                 }}
                 variant="contained"

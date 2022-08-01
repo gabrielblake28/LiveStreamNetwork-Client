@@ -6,7 +6,6 @@ export interface IEvent {
   image?: string;
   featured: boolean;
   user_id: string;
-  category_id: string;
   event_id?: string;
   profile_image_url?: string;
   display_name?: string;
