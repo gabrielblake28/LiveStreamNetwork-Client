@@ -22,17 +22,6 @@ export default function BrowsePage({ ParentRef }: BrowsePageProps) {
   }, [userData]);
   return (
     <div className="browse-page-container">
-      <div className="browse-page-header">
-        <Typography
-          sx={{
-            color: "#fff",
-            fontSize: "30px",
-            fontFamily: "Source Sans Pro",
-          }}
-        >
-          Event Catalog
-        </Typography>
-      </div>
       <div className="browse-page-content">
         <InfiniteScrollContainer
           ScrollParent={ParentRef}
