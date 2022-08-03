@@ -489,7 +489,6 @@ export default function CreateEventComponent({
                     title: eventTitle,
                     description: eventDescription,
                     featured: false,
-                    category_id: "",
                     user_id: Event?.user_id as string,
                     start_timestamp: startTime!,
                     end_timestamp: endTime!,

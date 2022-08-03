@@ -1,1 +1,1 @@
-web: serve -s dist
+web: set NODE_ENV=production &&  serve -s dist
