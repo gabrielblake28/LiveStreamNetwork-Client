@@ -3,8 +3,8 @@ import { IEventPayload } from "./IEventPayload";
 
 export default interface IEventAPI {
   CreateEvent(resource: IEventPayload): Promise<string>;
-  GetEvent(id: string): Promise<IEvent>;
-  UpdateEvent(id: string, resource: IEvent): Promise<IEvent>;
+  GetEvent(id: string, user_id: string): Promise<IEvent>;
+  UpdateEvent(id: string, resource: IEventPayload): Promise<IEvent>;
   DeleteEvent(id: string): Promise<void>;
   GetLiveEvents(
     limit: number,
