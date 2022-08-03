@@ -12,6 +12,7 @@ export interface IEvent {
   display_name?: string;
   email?: string;
   subscription_id?: string;
+  aws_image_key?: string;
 }
 
 export function toFormData(formData: FormData, event: IEvent): FormData {

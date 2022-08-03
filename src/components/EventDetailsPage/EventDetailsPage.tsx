@@ -15,32 +15,30 @@ const userApi = new UserAPI();
 const eventApi = new EventAPI();
 
 export default function EventDetailsPage() {
-  const [userName, setUserName] = useState("");
-  const [eventUserInfo, setEventUserInfo] = useState<IUser>();
-  // const [eventUserId, setEventUserId] = useState("");
-
   const location = useLocation();
-  const Event = location.state as IEvent;
+  const event = location.state as IEvent;
   const userInfo = useRecoilValue(CurrentUserData);
+  const [eventData, setEventData] = useState<IEvent>();
 
   useEffect(() => {
-    userApi.GetUser(Event?.user_id as string).then((response) => {
-      setUserName(response.display_name);
-      setEventUserInfo(response);
-    });
-  }, [Event]);
+    if (event.event_id && userInfo.user_id) {
+      eventApi.GetEvent(event.event_id, userInfo.user_id).then((response) => {
+        setEventData(response);
+      });
+    }
+  }, [event, userInfo]);
 
-  return Event ? (
+  return event ? (
     <div className="event-details-page-container">
       <div className="event-details-page-content">
         <div className="event-details-page-header-wrapper">
           <div className="event-details-page-header">
             <div className="event-details-header-display-column">
               <div className="event-details-page-header-avatar">
-                <Link to="/user" state={eventUserInfo?.user_id}>
+                <Link to="/user" state={eventData?.user_id}>
                   <IconButton style={{ color: "#A970FF" }} size="small">
                     <Avatar
-                      src={eventUserInfo?.profile_image_url}
+                      src={eventData?.profile_image_url}
                       sx={{
                         width: "40px",
                         height: "40px",
@@ -58,33 +56,33 @@ export default function EventDetailsPage() {
                       fontSize: "20px",
                     }}
                   >
-                    {Event?.title}
+                    {event?.title}
                   </Typography>
                 </div>
                 <Link
                   to="/user"
-                  state={eventUserInfo?.user_id}
+                  state={eventData?.user_id}
                   style={{ textDecoration: "none" }}
                 >
                   <Typography
                     variant="body2"
                     style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
                   >
-                    {Event.display_name || userName}
+                    {event.display_name}
                   </Typography>
                 </Link>
                 <Typography
                   variant="caption"
                   style={{ fontFamily: "Source Sans Pro", color: "#aaaaaa" }}
                 >
-                  {`${new Date(Event?.start_timestamp).toLocaleDateString(
+                  {`${new Date(event?.start_timestamp).toLocaleDateString(
                     "en-US",
                     {
                       weekday: "short",
                       month: "long",
                       day: "numeric",
                     }
-                  )}, ${new Date(Event?.start_timestamp).toLocaleTimeString(
+                  )}, ${new Date(event?.start_timestamp).toLocaleTimeString(
                     "en-US",
                     {
                       hour: "numeric",
@@ -99,16 +97,16 @@ export default function EventDetailsPage() {
               </div>
             </div>
 
-            {Event.user_id != userInfo.user_id ? (
+            {event.user_id != userInfo.user_id ? (
               <div className="event-details-page-notification-button">
                 <SubscriptionComponent
-                  EventId={Event.event_id as string}
-                  SubscriptionId={Event.subscription_id}
+                  EventId={event.event_id as string}
+                  SubscriptionId={event.subscription_id}
                 />
               </div>
             ) : (
               <div className="event-details-page-edit-event-button">
-                <EditDeleteEventComponent Event={Event} />
+                <EditDeleteEventComponent Event={event} />
               </div>
             )}
           </div>
@@ -117,7 +115,7 @@ export default function EventDetailsPage() {
           <div className="event-details-page-image">
             <img
               style={{ borderRadius: "8px" }}
-              src={Event?.image}
+              src={event?.image}
               height={275}
               width={500}
             />
@@ -138,7 +136,7 @@ export default function EventDetailsPage() {
               vel turpis nunc eget. Sit amet facilisis magna etiam tempor orci
               eu lobortis. Diam maecenas ultricies mi eget mauris pharetra.
               Turpis in eu mi bibendum neque egestas congue quisque */}
-              {Event?.description}
+              {event?.description}
             </Typography>
           </div>
         </div>

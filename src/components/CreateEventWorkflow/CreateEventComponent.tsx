@@ -58,8 +58,8 @@ export default function CreateEventComponent({
 }: CreateEventComponentProps) {
   const [eventCategory, setEventCategory] = useState("");
   const [eventTitle, setEventTitle] = useState("");
-  const [startTime, setStartTime] = useState<Date | undefined>(undefined);
-  const [endTime, setEndTime] = useState<Date | undefined>(undefined);
+  const [startTime, setStartTime] = useState<Date>(new Date());
+  const [endTime, setEndTime] = useState<Date>(new Date());
   const [eventDescription, setEventDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | undefined>(
@@ -345,7 +345,7 @@ export default function CreateEventComponent({
                   objectFit: "cover",
                   borderRadius: "4px",
                 }}
-                src={Event ? (Event.image) : imagePreview}
+                src={Event ? Event.image : imagePreview}
                 onClick={() => {
                   setImage(null);
                   setImagePreview(undefined);
@@ -484,16 +484,18 @@ export default function CreateEventComponent({
               }}
               variant="contained"
               onClick={() => {
-                // eventAPI.UpdateEvent(Event?.event_id as string, {
-                //   eventTitle,
-                //   eventDescription,
-                //   image,
-                //   featured: false,
-                //   category_id: "",
-                //   user_id: Event?.user_id as string,
-                //   startTime,
-                //   endTime,
-                // });
+                eventAPI.UpdateEvent(Event?.event_id as string, {
+                  event: {
+                    title: eventTitle,
+                    description: eventDescription,
+                    featured: false,
+                    category_id: "",
+                    user_id: Event?.user_id as string,
+                    start_timestamp: startTime!,
+                    end_timestamp: endTime!,
+                  },
+                  image: image as File,
+                });
               }}
             >
               <Typography
