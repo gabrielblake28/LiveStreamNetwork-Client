@@ -26,13 +26,21 @@ export class EventAPI implements IEventAPI {
     return result.data;
   }
 
-  async GetEvent(id: string): Promise<IEvent> {
-    const result = await this.query.get(`/${id}`);
+  async GetEvent(id: string, user_id: string): Promise<IEvent> {
+    const result = await this.query.get(`/${id}`, { params: { user_id } });
     return result.data;
   }
 
-  async UpdateEvent(id: string, resource: IEvent): Promise<IEvent> {
-    const result = await this.query.put(`/${id}`, resource);
+  async UpdateEvent(id: string, resource: IEventPayload): Promise<IEvent> {
+    const formData = new FormData();
+
+    toFormData(formData, Object.assign({}, resource.event, { event_id: id }));
+    formData.append("file", resource.image);
+
+    const result = await this.query.put(`/${id}`, formData, {
+      headers: { ContentType: "multipart/form-data" },
+    });
+
     return result.data;
   }
 
