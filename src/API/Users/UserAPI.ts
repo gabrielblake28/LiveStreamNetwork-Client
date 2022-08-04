@@ -8,7 +8,7 @@ export class UserAPI implements IUserAPI {
     this.query = axios.create({
       baseURL:
         process.env.NODE_ENV == "production"
-          ? "http://localhost:3500/user"
+          ? "https://lsn-server1.herokuapp.com/user"
           : "http://localhost:3500/user",
     });
   }
@@ -22,10 +22,15 @@ export class UserAPI implements IUserAPI {
     refresh_token,
   }: TwitchAuthPayload): Promise<IUser> {
     return await (
-      await axios.post("http://localhost:3500/auth", {
-        access_token,
-        refresh_token,
-      })
+      await axios.post(
+        process.env.NODE_ENV == "production"
+          ? "https://lsn-server1.herokuapp.com/auth"
+          : "http://localhost:3500/auth",
+        {
+          access_token,
+          refresh_token,
+        }
+      )
     ).data;
   }
 }
