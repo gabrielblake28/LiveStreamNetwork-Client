@@ -54,6 +54,10 @@ type TopNavProps = {
   setOpen: Function;
 };
 
+const redirectURL =
+  process.env.NODE_ENV == "production"
+    ? "https://lsn-server1.herokuapp.com/auth/twitch/callback"
+    : "http://localhost:3500/auth/twitch/callback";
 function useAuth(): boolean {
   const isLoggedIn = useRecoilValue(Authorized);
   const setIsLoggedIn = useSetRecoilState(Authorized);
@@ -310,7 +314,7 @@ export default function TopNav({ setOpen }: TopNavProps) {
               style={{
                 textDecoration: "none",
               }}
-              href="https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=http://localhost:3500/auth/twitch/callback&scope=user:read:email"
+              href={`https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=cyg0w4xnvmd6qc81l3q6i31zsppy40&redirect_uri=${redirectURL}&scope=user:read:email`}
             >
               <Button
                 sx={{
