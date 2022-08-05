@@ -8,7 +8,7 @@ export class UserAPI implements IUserAPI {
     this.query = axios.create({
       baseURL:
         process.env.NODE_ENV == "production"
-          ? "https://lsn-server1.herokuapp.com/user"
+          ? "https://www.api.livestreamnetwork.tv/user"
           : "http://localhost:3500/user",
     });
   }
@@ -24,7 +24,7 @@ export class UserAPI implements IUserAPI {
     return await (
       await axios.post(
         process.env.NODE_ENV == "production"
-          ? "https://lsn-server1.herokuapp.com/auth"
+          ? "https://www.api.livestreamnetwork.tv/auth"
           : "http://localhost:3500/auth",
         {
           access_token,
