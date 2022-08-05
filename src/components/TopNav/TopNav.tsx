@@ -92,8 +92,16 @@ function useAuth(): boolean {
 }
 
 function ClearDataOnLogout() {
-  cookies.remove("evently_access_token");
-  cookies.remove("evently_refresh_token");
+  cookies.remove("evently_access_token", {
+    domain: ".livestreamnetwork.tv",
+    secure: true,
+    sameSite: "none",
+  });
+  cookies.remove("evently_refresh_token", {
+    domain: ".livestreamnetwork.tv",
+    secure: true,
+    sameSite: "none",
+  });
   localStorage.removeItem("evently_access_token");
   localStorage.removeItem("evently_refresh_token");
   window.location.replace(
