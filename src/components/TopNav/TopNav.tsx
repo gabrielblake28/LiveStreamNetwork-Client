@@ -96,11 +96,7 @@ function ClearDataOnLogout() {
   cookies.remove("evently_refresh_token");
   localStorage.removeItem("evently_access_token");
   localStorage.removeItem("evently_refresh_token");
-  window.location.replace(
-    process.env.NODE_ENV == "production"
-      ? "https://livestreamnetwork.tv"
-      : "http://localhost:3000"
-  );
+  window.location.reload();
 }
 
 export default function TopNav({ setOpen }: TopNavProps) {
