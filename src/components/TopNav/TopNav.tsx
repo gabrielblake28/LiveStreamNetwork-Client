@@ -98,7 +98,7 @@ function ClearDataOnLogout() {
   localStorage.removeItem("evently_refresh_token");
   window.location.replace(
     process.env.NODE_ENV == "production"
-      ? "https://livestreamnetwork.tv"
+      ? "https://www.livestreamnetwork.tv/"
       : "http://localhost:3000"
   );
 }
