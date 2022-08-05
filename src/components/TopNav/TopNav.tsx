@@ -56,7 +56,7 @@ type TopNavProps = {
 
 const redirectURL =
   process.env.NODE_ENV == "production"
-    ? "https://lsn-server1.herokuapp.com/auth/twitch/callback"
+    ? "http://lsn-server1.herokuapp.com/auth/twitch/callback"
     : "http://localhost:3500/auth/twitch/callback";
 function useAuth(): boolean {
   const isLoggedIn = useRecoilValue(Authorized);
